@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
+<meta name="description" content="A color describe using the Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.) The model uses integal values instead of reals, except when converting from and to {EV_COLOR}. The `hue', `saturation', and `brightness' are {NATURAL_8} values. For ease of use, though, the setter feature take {INTEGER_32} values."/>
+<meta name="author" content="Jimmy J. Johnson"/>
+<meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
+<meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<title>hsb_color Flat contracts</title>
+<link rel="stylesheet" href="../default.css" type="text/css">
+<script type="text/javascript" src="../goto.html"></script>
+</head>
+<body>
+<pre></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="hsb_color_chart.html">Chart</a>
+<a class="nav class" href="hsb_color_links.html">Relations</a>
+<a class="nav class" href="hsb_color.html">Text</a>
+<a class="nav class" href="hsb_color_short.html">Contracts</a>
+<span class="nav class selected">Flat contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
+</div></form><pre><span class="ekeyword">note</span>
+	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;</span><span class="estring">[</span>
+		<span class="estring">A color describe using the Hue-Saturation-Brightness model.</span>
+		<span class="estring">(This is same as HSL but I like the term &quot;brightness&quot; better</span>
+		<span class="estring">than &quot;lightness&quot;.)</span>
+		<span class="estring">The model uses integal values instead of reals, except when</span>
+		<span class="estring">converting from and to </span><span class="neclass">EV_COLOR</span><span class="estring">.</span>
+		<span class="estring">The </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a><span class="estring">, </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a><span class="estring">, and </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_brightness">brightness</a><span class="estring"> are </span><span class="neclass">NATURAL_8</span><span class="estring"> values.</span>
+		<span class="estring">For ease of use, though, the setter feature take </span><span class="neclass">INTEGER_32</span><span class="estring"> values.</span>
+	<span class="estring">]</span><span class="estring">&quot;</span>
+	<span class="eitag">author</span><span class="esymbol">:</span> <span class="estring">&quot;Jimmy J. Johnson&quot;</span>
+	<span class="eitag">date</span><span class="esymbol">:</span> <span class="estring">&quot;11/11/23&quot;</span>
+	<span class="eitag">copyright</span><span class="esymbol">:</span> <span class="estring">&quot;Copyright (c) 2023, Jimmy J. Johnson&quot;</span>
+	<span class="eitag">license</span><span class="esymbol">:</span> <span class="estring">&quot;Eiffel Forum v2 (</span><a class="estring" href="http://www.eiffel.com/licensing/forum.txt">http://www.eiffel.com/licensing/forum.txt</a><span class="estring">)&quot;</span>
+
+<span class="ekeyword">class</span> <span class="ekeyword">interface</span>
+	<a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+
+<span class="ekeyword">create</span> 
+	<a name="f_default_create"></a><span class="nefeature">default_create</span>
+			<span class="ecomment">--</span><span class="ecomment"> Process instances of classes with no creation clause.</span>
+			<span class="ecomment">--</span><span class="ecomment"> (Default: do nothing.)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+
+	<a name="f_set"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_lightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the corresponding attributes</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">valid_hue</span><span class="esymbol">:</span> <span class="elocal">a_hue</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_hue</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_saturation</span><span class="esymbol">:</span> <span class="elocal">a_saturation</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_saturation</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_lightness</span><span class="esymbol">:</span> <span class="elocal">a_lightness</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_lightness</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+
+	<a name="f_set_with_ev_color"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_ev_color">set_with_ev_color</a> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Create an instance equivalent to `a_color</span>
+
+	<a name="f_set_with_rgb"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_rgb">set_with_rgb</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Create and instance using RGB colors</span>
+			<span class="ecomment">--</span><span class="ecomment"> Color might be slightly off, because this creates an</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><span class="neclass">EV_COLOR</span><span class="ecomment"> then calls </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_ev_color">set_with_ev_color</a><span class="ecomment">. &nbsp;If Current</span>
+			<span class="ecomment">--</span><span class="ecomment"> is then converted to an EV_COLOR the result may be</span>
+			<span class="ecomment">--</span><span class="ecomment"> slightly different than expected due to rounding.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">red_in_range</span><span class="esymbol">:</span> <span class="elocal">a_red</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_red</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+			<span class="etag">green_in_range</span><span class="esymbol">:</span> <span class="elocal">a_green</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_green</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+			<span class="etag">blue_in_range</span><span class="esymbol">:</span> <span class="elocal">a_blue</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_blue</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access</span>
+
+	<a name="f_brightness"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_brightness">brightness</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The brightness relative to the brightness of a similarly</span>
+			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards white</span>
+
+	<a name="f_complement"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_complement">complement</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A color that is opposite hue</span>
+			<span class="ecomment">--</span><span class="ecomment"> Keep </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a><span class="ecomment"> the same.</span>
+
+	<a name="f_generating_type"></a><span class="nefeature">generating_type</span><span class="esymbol">:</span> <span class="neclass">TYPE</span> <span class="esymbol">[</span><span class="ekeyword">detachable</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">]</span>
+			<span class="ecomment">--</span><span class="ecomment"> Type of current object</span>
+			<span class="ecomment">--</span><span class="ecomment"> (type of which it is a direct instance)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">generating_type_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_generator"></a><span class="nefeature">generator</span><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> Name of current object's generating class</span>
+			<span class="ecomment">--</span><span class="ecomment"> (base class of the type of which it is a direct instance)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">generator_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">generator_not_empty</span><span class="esymbol">:</span> <span class="ekeyword">not</span> <span class="ekeyword">Result</span><span class="edot">.</span><span class="nefeature">is_empty</span>
+
+	<a name="f_hue"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> Describes the dominant color family of a spcific color.</span>
+
+	<a name="f_max_value"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">255</span>
+			<span class="ecomment">--</span><span class="ecomment"> The maximum value for the </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
+
+	<a name="f_min_value"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">0</span>
+			<span class="ecomment">--</span><span class="ecomment"> The minimum value for the </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
+
+	<a name="f_name"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_name">name</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The name, if known, of Current; &quot;Unknown&quot; if not</span>
+
+	<a name="f_saturation"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The colorfullness relative to te brightness of a similarly</span>
+			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards a pure hue.</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Comparison</span>
+
+	<a name="f_deep_equal"></a><span class="ekeyword">frozen</span> <span class="nefeature">deep_equal</span> <span class="esymbol">(</span><span class="elocal">a</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <span class="neclass">ANY</span><span class="esymbol">;</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="ekeyword">like</span> arg #<span class="enumber">1</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Are </span><span class="equoted">a</span><span class="ecomment"> and </span><span class="equoted">b</span><span class="ecomment"> either both void</span>
+			<span class="ecomment">--</span><span class="ecomment"> or attached to isomorphic object structures?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+			<span class="etag">shallow_implies_deep</span><span class="esymbol">:</span> <span class="nefeature">standard_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">)</span> <span class="ekeyword">implies</span> <span class="ekeyword">Result</span>
+			<span class="etag">both_or_none_void</span><span class="esymbol">:</span> <span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span> <span class="ekeyword">implies</span> <span class="esymbol">(</span><span class="ekeyword">Result</span> <span class="esymbol">=</span> <span class="esymbol">(</span><span class="elocal">b</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span><span class="esymbol">)</span>
+			<span class="etag">same_type</span><span class="esymbol">:</span> <span class="esymbol">(</span><span class="ekeyword">Result</span> <span class="ekeyword">and</span> <span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span><span class="esymbol">)</span> <span class="ekeyword">implies</span> <span class="esymbol">(</span><span class="elocal">b</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span> <span class="ekeyword">and then</span> <span class="elocal">a</span><span class="edot">.</span><span class="nefeature">same_type</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">b</span><span class="esymbol">)</span><span class="esymbol">)</span>
+			<span class="etag">symmetric</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="nefeature">deep_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">b</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="esymbol">)</span>
+
+	<a name="f_equal"></a><span class="ekeyword">frozen</span> <span class="nefeature">equal</span> <span class="esymbol">(</span><span class="elocal">a</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <span class="neclass">ANY</span><span class="esymbol">;</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="ekeyword">like</span> arg #<span class="enumber">1</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Are </span><span class="equoted">a</span><span class="ecomment"> and </span><span class="equoted">b</span><span class="ecomment"> either both void or attached</span>
+			<span class="ecomment">--</span><span class="ecomment"> to objects considered equal?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+			<span class="etag">definition</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">=</span> <span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span> <span class="ekeyword">and</span> <span class="elocal">b</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span> <span class="ekeyword">or else</span> <span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span> <span class="ekeyword">and</span> <span class="elocal">b</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span> <span class="ekeyword">and then</span> <span class="elocal">a</span><span class="edot">.</span><span class="nefeature">is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">b</span><span class="esymbol">)</span><span class="esymbol">)</span>
+
+	<a name="f_is_deep_equal"></a><span class="ekeyword">frozen</span> <span class="nefeature">is_deep_equal</span> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><span class="esymbol">≡≡≡</span><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Are </span><span class="equoted">Current</span><span class="ecomment"> and </span><span class="equoted">other</span><span class="ecomment"> attached to isomorphic object structures?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">shallow_implies_deep</span><span class="esymbol">:</span> <span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span> <span class="ekeyword">implies</span> <span class="ekeyword">Result</span>
+			<span class="etag">same_type</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="nefeature">same_type</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span>
+			<span class="etag">symmetric</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="elocal">other</span><span class="edot">.</span><span class="nefeature">is_deep_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
+
+	<a name="f_is_equal"></a><span class="nefeature">is_equal</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Is </span><span class="equoted">other</span><span class="ecomment"> attached to an object considered</span>
+			<span class="ecomment">--</span><span class="ecomment"> equal to current object?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">symmetric</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="elocal">other</span> <span class="esymbol">~</span> <span class="ekeyword">Current</span>
+			<span class="etag">consistent</span><span class="esymbol">:</span> <span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span> <span class="ekeyword">implies</span> <span class="ekeyword">Result</span>
+
+	<a name="f_standard_equal"></a><span class="ekeyword">frozen</span> <span class="nefeature">standard_equal</span> <span class="esymbol">(</span><span class="elocal">a</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <span class="neclass">ANY</span><span class="esymbol">;</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="ekeyword">like</span> arg #<span class="enumber">1</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Are </span><span class="equoted">a</span><span class="ecomment"> and </span><span class="equoted">b</span><span class="ecomment"> either both void or attached to</span>
+			<span class="ecomment">--</span><span class="ecomment"> field-by-field identical objects of the same type?</span>
+			<span class="ecomment">--</span><span class="ecomment"> Always uses default object comparison criterion.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+			<span class="etag">definition</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">=</span> <span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span> <span class="ekeyword">and</span> <span class="elocal">b</span> <span class="esymbol">=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span> <span class="ekeyword">or else</span> <span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">a</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span> <span class="ekeyword">and</span> <span class="elocal">b</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span><span class="esymbol">)</span> <span class="ekeyword">and then</span> <span class="elocal">a</span><span class="edot">.</span><span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">b</span><span class="esymbol">)</span><span class="esymbol">)</span>
+
+	<a name="f_standard_is_equal"></a><span class="ekeyword">frozen</span> <span class="nefeature">standard_is_equal</span> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><span class="esymbol">≜</span><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Is </span><span class="equoted">other</span><span class="ecomment"> attached to an object of the same type</span>
+			<span class="ecomment">--</span><span class="ecomment"> as current object, and field-by-field identical to it?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">same_type</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="nefeature">same_type</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span>
+			<span class="etag">symmetric</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="ekeyword">implies</span> <span class="elocal">other</span><span class="edot">.</span><span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Status report</span>
+
+	<a name="f_conforms_to"></a><span class="nefeature">conforms_to</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <span class="neclass">ANY</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Does type of current object conform to type</span>
+			<span class="ecomment">--</span><span class="ecomment"> of </span><span class="equoted">other</span><span class="ecomment"> (as per Eiffel: The Language, chapter 13)?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_same_type"></a><span class="nefeature">same_type</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <span class="neclass">ANY</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">BOOLEAN</span>
+			<span class="ecomment">--</span><span class="ecomment"> Is type of current object identical to type of </span><span class="equoted">other</span><span class="ecomment">?</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">definition</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">=</span> <span class="esymbol">(</span><span class="nefeature">conforms_to</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span> <span class="ekeyword">and</span> <span class="elocal">other</span><span class="edot">.</span><span class="nefeature">conforms_to</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span><span class="esymbol">)</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Element change</span>
+
+	<a name="f_set"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_lightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the corresponding attributes</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">valid_hue</span><span class="esymbol">:</span> <span class="elocal">a_hue</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_hue</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_saturation</span><span class="esymbol">:</span> <span class="elocal">a_saturation</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_saturation</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_lightness</span><span class="esymbol">:</span> <span class="elocal">a_lightness</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_lightness</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+
+	<a name="f_set_brightness"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_brightness">set_brightness</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the </span><span class="equoted">lightness</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+
+	<a name="f_set_hue"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_hue">set_hue</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a>
+		<span class="ekeyword">require</span>
+			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+
+	<a name="f_set_saturation"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_saturation">set_saturation</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a>
+		<span class="ekeyword">require</span>
+			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+
+	<a name="f_set_with_ev_color"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_ev_color">set_with_ev_color</a> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Create an instance equivalent to `a_color</span>
+
+	<a name="f_set_with_rgb"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_rgb">set_with_rgb</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Create and instance using RGB colors</span>
+			<span class="ecomment">--</span><span class="ecomment"> Color might be slightly off, because this creates an</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><span class="neclass">EV_COLOR</span><span class="ecomment"> then calls </span><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_set_with_ev_color">set_with_ev_color</a><span class="ecomment">. &nbsp;If Current</span>
+			<span class="ecomment">--</span><span class="ecomment"> is then converted to an EV_COLOR the result may be</span>
+			<span class="ecomment">--</span><span class="ecomment"> slightly different than expected due to rounding.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">red_in_range</span><span class="esymbol">:</span> <span class="elocal">a_red</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_red</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+			<span class="etag">green_in_range</span><span class="esymbol">:</span> <span class="elocal">a_green</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_green</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+			<span class="etag">blue_in_range</span><span class="esymbol">:</span> <span class="elocal">a_blue</span> <span class="esymbol">&gt;=</span> <span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="ekeyword">and then</span> <span class="elocal">a_blue</span> <span class="esymbol">&lt;=</span> <span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Duplication</span>
+
+	<a name="f_copy"></a><span class="nefeature">copy</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Update current object using fields of object attached</span>
+			<span class="ecomment">--</span><span class="ecomment"> to </span><span class="equoted">other</span><span class="ecomment">, so as to yield equal objects.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">type_identity</span><span class="esymbol">:</span> <span class="nefeature">same_type</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">is_equal</span><span class="esymbol">:</span> <span class="ekeyword">Current</span> <span class="esymbol">~</span> <span class="elocal">other</span>
+
+	<a name="f_deep_copy"></a><span class="ekeyword">frozen</span> <span class="nefeature">deep_copy</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Effect equivalent to that of:</span>
+			<span class="ecomment">--</span><span class="ecomment">		</span><span class="nefeature">copy</span><span class="ecomment"> (</span><span class="equoted">other</span><span class="ecomment"> . </span><span class="nefeature">deep_twin</span><span class="ecomment">)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">deep_equal</span><span class="esymbol">:</span> <span class="nefeature">deep_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">,</span> <span class="elocal">other</span><span class="esymbol">)</span>
+
+	<a name="f_deep_twin"></a><span class="ekeyword">frozen</span> <span class="nefeature">deep_twin</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> New object structure recursively duplicated from Current.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">deep_twin_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">deep_equal</span><span class="esymbol">:</span> <span class="nefeature">deep_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">,</span> <span class="ekeyword">Result</span><span class="esymbol">)</span>
+
+	<a name="f_standard_copy"></a><span class="ekeyword">frozen</span> <span class="nefeature">standard_copy</span> <span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Copy every field of </span><span class="equoted">other</span><span class="ecomment"> onto corresponding field</span>
+			<span class="ecomment">--</span><span class="ecomment"> of current object.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">require</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">other_not_void</span><span class="esymbol">:</span> <span class="elocal">other</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">type_identity</span><span class="esymbol">:</span> <span class="nefeature">same_type</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">is_standard_equal</span><span class="esymbol">:</span> <span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">other</span><span class="esymbol">)</span>
+
+	<a name="f_standard_twin"></a><span class="ekeyword">frozen</span> <span class="nefeature">standard_twin</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> New object field-by-field identical to </span><span class="equoted">other</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Always uses default copying semantics.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">standard_twin_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">equal</span><span class="esymbol">:</span> <span class="nefeature">standard_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Result</span><span class="esymbol">,</span> <span class="ekeyword">Current</span><span class="esymbol">)</span>
+
+	<a name="f_twin"></a><span class="ekeyword">frozen</span> <span class="nefeature">twin</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> New object equal to </span><span class="equoted">Current</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><span class="nefeature">twin</span><span class="ecomment"> calls </span><span class="nefeature">copy</span><span class="ecomment">; to change copying/twinning semantics, redefine </span><span class="nefeature">copy</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">twin_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+			<span class="etag">is_equal</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">~</span> <span class="ekeyword">Current</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Basic operations</span>
+
+	<a name="f_add"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_add">add</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Modify Current by adding </span><span class="equoted">a_other</span><span class="ecomment"> to it</span>
+
+	<a name="f_default"></a><span class="ekeyword">frozen</span> <span class="nefeature">default</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> Default value of object's type</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+
+	<a name="f_default_pointer"></a><span class="ekeyword">frozen</span> <span class="nefeature">default_pointer</span><span class="esymbol">:</span> <span class="neclass">POINTER</span>
+			<span class="ecomment">--</span><span class="ecomment"> Default value of type </span><span class="equoted">POINTER</span>
+			<span class="ecomment">--</span><span class="ecomment"> (Avoid the need to write </span><span class="equoted">p</span><span class="ecomment">.</span><span class="nefeature">default</span><span class="ecomment"> for</span>
+			<span class="ecomment">--</span><span class="ecomment"> some </span><span class="equoted">p</span><span class="ecomment"> of type </span><span class="equoted">POINTER</span><span class="ecomment">.)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+
+	<a name="f_default_rescue"></a><span class="nefeature">default_rescue</span>
+			<span class="ecomment">--</span><span class="ecomment"> Process exception for routines with no Rescue clause.</span>
+			<span class="ecomment">--</span><span class="ecomment"> (Default: do nothing.)</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+
+	<a name="f_do_nothing"></a><span class="ekeyword">frozen</span> <span class="nefeature">do_nothing</span>
+			<span class="ecomment">--</span><span class="ecomment"> Execute a null action.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+
+	<a name="f_sum"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color_flatshort.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A new object that is the sum of Current and </span><span class="equoted">a_other</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Output</span>
+
+	<a name="f_io"></a><span class="nefeature">Io</span><span class="esymbol">:</span> <span class="neclass">STD_FILES</span>
+			<span class="ecomment">--</span><span class="ecomment"> Handle to standard file setup</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+			<span class="etag">io_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_out"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_out">out</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> String representation of Current</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">out_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+
+	<a name="f_out_in_degrees"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_out_in_degrees">out_in_degrees</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> String representation of Current in degrees and percent</span>
+
+	<a name="f_out_in_rgb"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_out_in_rgb">out_in_rgb</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> String representation in 8-bit RGB values</span>
+
+	<a name="f_print"></a><span class="nefeature">print</span> <span class="esymbol">(</span><span class="elocal">o</span><span class="esymbol">:</span> <span class="ekeyword">detachable</span> <span class="neclass">ANY</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Write terse external representation of </span><span class="equoted">o</span>
+			<span class="ecomment">--</span><span class="ecomment"> on standard output.</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+
+	<a name="f_tagged_out"></a><span class="ekeyword">frozen</span> <span class="nefeature">tagged_out</span><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> New string containing terse printable representation</span>
+			<span class="ecomment">--</span><span class="ecomment"> of current object</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">tagged_out_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Platform</span>
+
+	<a name="f_operating_environment"></a><span class="nefeature">Operating_environment</span><span class="esymbol">:</span> <span class="neclass">OPERATING_ENVIRONMENT</span>
+			<span class="ecomment">--</span><span class="ecomment"> Objects available from the operating system</span>
+			<span class="ecomment">--</span> <span class="ecomment">(from </span><span class="neclass">ANY</span><span class="ecomment">)</span>
+		<span class="ekeyword">ensure</span> <span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+			<span class="etag">instance_free</span><span class="esymbol">:</span> <span class="ekeyword">class</span>
+			<span class="etag">operating_environment_not_void</span><span class="esymbol">:</span> <span class="ekeyword">Result</span> <span class="esymbol">/=</span> <span class="ekeyword">Void</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Query</span>
+
+	<a name="f_as_ev_color"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_as_ev_color">as_ev_color</a><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span>
+			<span class="ecomment">--</span><span class="ecomment"> Current converted to an </span><span class="neclass">EV_COLOR</span>
+
+	<a name="f_as_grayscale"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_as_grayscale">as_grayscale</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A new color that is the grayscale version of Current</span>
+
+	<a name="f_as_rgb"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_as_rgb">as_rgb</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="elocal">red</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">green</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span>
+			<span class="ecomment">--</span><span class="ecomment"> The equivalent color in RGB format</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><a class="ecomment" href="https://www.baeldung.com/cs/convert-color-hsl-rgb">https://www.baeldung.com/cs/convert-color-hsl-rgb</a>
+
+	<a name="f_to_grayscale"></a><a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_to_grayscale">to_grayscale</a>
+			<span class="ecomment">--</span><span class="ecomment"> Convert Current to its grayscale</span>
+			<span class="ecomment">--</span><span class="ecomment"> Uses the BT.709 formula.</span>
+	
+<span class="ekeyword">invariant</span>
+	<span class="etag">valid_hue</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_hue">hue</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a>
+	<span class="etag">valid_saturation</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_saturation">saturation</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a>
+	<span class="etag">valid_lightness</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_brightness">brightness</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_brightness">brightness</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color_flatshort.html#f_max_value">Max_value</a>
+
+		<span class="ecomment">--</span> <span class="ecomment">from </span><span class="neclass">ANY</span>
+	<span class="etag">reflexive_equality</span><span class="esymbol">:</span> <span class="nefeature">standard_is_equal</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
+	<span class="etag">reflexive_conformance</span><span class="esymbol">:</span> <span class="nefeature">conforms_to</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
+
+<span class="ekeyword">end</span> <span class="ecomment">--</span> <span class="ecomment">class </span><a class="eclass" href="../jj_colors/hsb_color_flatshort.html">HSB_COLOR</a></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="hsb_color_chart.html">Chart</a>
+<a class="nav class" href="hsb_color_links.html">Relations</a>
+<a class="nav class" href="hsb_color.html">Text</a>
+<a class="nav class" href="hsb_color_short.html">Contracts</a>
+<span class="nav class selected">Flat contracts</span>
+<span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
+</div></form><pre></pre>
+<p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>
+</body>
+</html>
+

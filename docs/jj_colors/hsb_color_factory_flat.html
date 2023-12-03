@@ -1,0 +1,855 @@
+<HTML><HEAD>
+<meta name="description" content="TTCan be used as a factory for some {HSB_COLOR} objects. TTThese features return a new object when called, so that TTthe basic colors are unchanged.  TTThe names of the colors were taken from a Wipipedia article TTat:  https://en.wikipedia.org/wiki/Tertiary_color"/>
+<meta name="author" content="Jimmy J. Johnson"/>
+<meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
+<meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<TITLE>hsb_color_factory Flat</TITLE></HEAD>
+<BODY BGCOLOR="white">
+<P ALIGN="CENTER">Automatic generation produced by ISE Eiffel</P>
+<PRE><TABLE BORDER="1" ALIGN="CENTER"><TR><TD><A HREF="../class_list.html">Classes</A></TD><TD><A HREF="../cluster_list.html">Clusters</A></TD><TD><A HREF="../cluster_hierarchy.html">Cluster hierarchy</A></TD><TD><A HREF="hsb_color_factory_chart.html">Chart</A></TD><TD><A HREF="hsb_color_factory_links.html">Relations</A></TD><TD><A HREF="hsb_color_factory.html">Text</A></TD><TD>Flat</TD><TD><A HREF="hsb_color_factory_short.html">Contracts</A></TD><TD><A HREF="hsb_color_factory_flatshort.html">Flat contracts</A></TD></TR></TABLE><B>note</B>
+    description: "[
+        		Can be used as a factory for some <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A> objects.
+        		These features return a new object when called, so that
+        		the basic colors are unchanged.
+        
+        		The names of the colors were taken from a Wipipedia article
+        		at:  <a href="https://en.wikipedia.org/wiki/Tertiary_color">https://en.wikipedia.org/wiki/Tertiary_color</a>
+    ]"
+    author: "Jimmy J. Johnson"
+    date: "11/11/23"
+    copyright: "Copyright (c) 2023, Jimmy J. Johnson"
+    license: "Eiffel Forum v2 (<a href="http://www.eiffel.com/licensing/forum.txt">http://www.eiffel.com/licensing/forum.txt</a>)"
+
+<B>class</B> 
+    <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+
+<B>create</B> 
+    <A HREF="../jj_colors/hsb_color_factory_flat.html#f_default_create">default_create</A>
+
+<B>feature</B> {NONE} <FONT COLOR="red">--</FONT><FONT COLOR="red"> Initialization</FONT>
+
+    <A NAME="f_default_create"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_default_create">default_create</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Set up the object</FONT>
+        <B>do</B>
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Access</FONT>
+
+    <A NAME="f_generating_type">generating_type: TYPE [<B>detachable</B> <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>]
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Type of current object</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> (type of which it is a direct instance)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            generating_type_not_void: <B>Result</B> /= <B>Void</B>
+        <B>end</B></A>
+
+    <A NAME="f_generator">generator: STRING_8
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Name of current object's generating class</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> (base class of the type of which it is a direct instance)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            generator_not_void: <B>Result</B> /= <B>Void</B>
+            generator_not_empty: <B>not</B> <B>Result</B>.is_empty
+        <B>end</B></A>
+
+    <A NAME="f_max_value"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>: INTEGER_32
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> The largest value that can be used to create colors</FONT>
+        <B>once</B>
+            <B>Result</B> := {<A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>}.<A HREF="../jj_colors/hsb_color_flat.html#f_max_value">max_value</A>.to_integer_32
+        <B>end</B></A>
+
+    <A NAME="f_mid_value"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>: INTEGER_32
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> The middle value of the interval:</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red">   [</FONT>{<A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>}.<A HREF="../jj_colors/hsb_color_flat.html#f_min_value">min_value</A><FONT COLOR="red">, </FONT>{<A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>}.<A HREF="../jj_colors/hsb_color_flat.html#f_max_value">max_value</A><FONT COLOR="red">]</FONT>
+        <B>once</B>
+            <B>Result</B> := {<A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>}.<A HREF="../jj_colors/hsb_color_flat.html#f_max_value">max_value</A> // 2 + {<A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>}.<A HREF="../jj_colors/hsb_color_flat.html#f_max_value">max_value</A> \\ 2.to_integer_32
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Comparison</FONT>
+
+    <A NAME="f_deep_equal"><B>frozen</B> deep_equal (a: <B>detachable</B> ANY; b: <B>like</B> arg #1): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Are </FONT><I>a</I><FONT COLOR="red"> and </FONT><I>b</I><FONT COLOR="red"> either both void</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> or attached to isomorphic object structures?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> a = <B>Void</B> <B>then</B>
+                <B>Result</B> := b = <B>Void</B>
+            <B>else</B>
+                <B>Result</B> := b /= <B>Void</B> <B>and then</B> a.is_deep_equal (b)
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            shallow_implies_deep: standard_equal (a, b) <B>implies</B> <B>Result</B>
+            both_or_none_void: (a = <B>Void</B>) <B>implies</B> (<B>Result</B> = (b = <B>Void</B>))
+            same_type: (<B>Result</B> <B>and</B> (a /= <B>Void</B>)) <B>implies</B> (b /= <B>Void</B> <B>and then</B> a.same_type (b))
+            symmetric: <B>Result</B> <B>implies</B> deep_equal (b, a)
+        <B>end</B></A>
+
+    <A NAME="f_equal"><B>frozen</B> equal (a: <B>detachable</B> ANY; b: <B>like</B> arg #1): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Are </FONT><I>a</I><FONT COLOR="red"> and </FONT><I>b</I><FONT COLOR="red"> either both void or attached</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> to objects considered equal?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> a = <B>Void</B> <B>then</B>
+                <B>Result</B> := b = <B>Void</B>
+            <B>else</B>
+                <B>Result</B> := b /= <B>Void</B> <B>and then</B> a.is_equal (b)
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            definition: <B>Result</B> = (a = <B>Void</B> <B>and</B> b = <B>Void</B>) <B>or else</B> ((a /= <B>Void</B> <B>and</B> b /= <B>Void</B>) <B>and then</B> a.is_equal (b))
+        <B>end</B></A>
+
+    <A NAME="f_is_deep_equal"><B>frozen</B> is_deep_equal <B>alias</B> "≡≡≡" (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Are </FONT><I>Current</I><FONT COLOR="red"> and </FONT><I>other</I><FONT COLOR="red"> attached to isomorphic object structures?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            shallow_implies_deep: standard_is_equal (other) <B>implies</B> <B>Result</B>
+            same_type: <B>Result</B> <B>implies</B> same_type (other)
+            symmetric: <B>Result</B> <B>implies</B> other.is_deep_equal (<B>Current</B>)
+        <B>end</B></A>
+
+    <A NAME="f_is_equal">is_equal (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Is </FONT><I>other</I><FONT COLOR="red"> attached to an object considered</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> equal to current object?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            symmetric: <B>Result</B> <B>implies</B> other ~ <B>Current</B>
+            consistent: standard_is_equal (other) <B>implies</B> <B>Result</B>
+        <B>end</B></A>
+
+    <A NAME="f_standard_equal"><B>frozen</B> standard_equal (a: <B>detachable</B> ANY; b: <B>like</B> arg #1): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Are </FONT><I>a</I><FONT COLOR="red"> and </FONT><I>b</I><FONT COLOR="red"> either both void or attached to</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> field-by-field identical objects of the same type?</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Always uses default object comparison criterion.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> a = <B>Void</B> <B>then</B>
+                <B>Result</B> := b = <B>Void</B>
+            <B>else</B>
+                <B>Result</B> := b /= <B>Void</B> <B>and then</B> a.standard_is_equal (b)
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            definition: <B>Result</B> = (a = <B>Void</B> <B>and</B> b = <B>Void</B>) <B>or else</B> ((a /= <B>Void</B> <B>and</B> b /= <B>Void</B>) <B>and then</B> a.standard_is_equal (b))
+        <B>end</B></A>
+
+    <A NAME="f_standard_is_equal"><B>frozen</B> standard_is_equal <B>alias</B> "≜" (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Is </FONT><I>other</I><FONT COLOR="red"> attached to an object of the same type</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> as current object, and field-by-field identical to it?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            same_type: <B>Result</B> <B>implies</B> same_type (other)
+            symmetric: <B>Result</B> <B>implies</B> other.standard_is_equal (<B>Current</B>)
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Status report</FONT>
+
+    <A NAME="f_conforms_to">conforms_to (other: ANY): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Does type of current object conform to type</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> of </FONT><I>other</I><FONT COLOR="red"> (as per Eiffel: The Language, chapter 13)?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>external</B>
+            "built_in"
+        <B>end</B></A>
+
+    <A NAME="f_same_type">same_type (other: ANY): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Is type of current object identical to type of </FONT><I>other</I><FONT COLOR="red">?</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            definition: <B>Result</B> = (conforms_to (other) <B>and</B> other.conforms_to (<B>Current</B>))
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Duplication</FONT>
+
+    <A NAME="f_clone"><B>frozen</B> clone (other: <B>detachable</B> ANY): <B>like</B> other
+        <B>obsolete</B> "Use `twin' instead. [2017-05-31]"
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Void if </FONT><I>other</I><FONT COLOR="red"> is void; otherwise new object</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> equal to </FONT><I>other</I>
+            <FONT COLOR="red">--</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> For non-void </FONT><I>other</I><FONT COLOR="red">, </FONT>clone<FONT COLOR="red"> calls </FONT>copy<FONT COLOR="red">;</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> to change copying/cloning semantics, redefine </FONT>copy<FONT COLOR="red">.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> other /= <B>Void</B> <B>then</B>
+                <B>Result</B> := other.twin
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            equal: <B>Result</B> ~ other
+        <B>end</B></A>
+
+    <A NAME="f_copy">copy (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>)
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Update current object using fields of object attached</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> to </FONT><I>other</I><FONT COLOR="red">, so as to yield equal objects.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+            type_identity: same_type (other)
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            is_equal: <B>Current</B> ~ other
+        <B>end</B></A>
+
+    <A NAME="f_deep_clone"><B>frozen</B> deep_clone (other: <B>detachable</B> ANY): <B>like</B> other
+        <B>obsolete</B> "Use `deep_twin' instead. [2017-05-31]"
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Void if </FONT><I>other</I><FONT COLOR="red"> is void: otherwise, new object structure</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> recursively duplicated from the one attached to </FONT><I>other</I>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> other /= <B>Void</B> <B>then</B>
+                <B>Result</B> := other.deep_twin
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            deep_equal: deep_equal (other, <B>Result</B>)
+        <B>end</B></A>
+
+    <A NAME="f_deep_copy"><B>frozen</B> deep_copy (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>)
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Effect equivalent to that of:</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red">		</FONT>copy<FONT COLOR="red"> (</FONT><I>other</I><FONT COLOR="red"> . </FONT>deep_twin<FONT COLOR="red">)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+        <B>do</B>
+            copy (other.deep_twin)
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            deep_equal: deep_equal (<B>Current</B>, other)
+        <B>end</B></A>
+
+    <A NAME="f_deep_twin"><B>frozen</B> deep_twin: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> New object structure recursively duplicated from Current.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            deep_twin_not_void: <B>Result</B> /= <B>Void</B>
+            deep_equal: deep_equal (<B>Current</B>, <B>Result</B>)
+        <B>end</B></A>
+
+    <A NAME="f_standard_clone"><B>frozen</B> standard_clone (other: <B>detachable</B> ANY): <B>like</B> other
+        <B>obsolete</B> "Use `standard_twin' instead. [2017-05-31]"
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Void if </FONT><I>other</I><FONT COLOR="red"> is void; otherwise new object</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> field-by-field identical to </FONT><I>other</I><FONT COLOR="red">.</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Always uses default copying semantics.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>if</B> other /= <B>Void</B> <B>then</B>
+                <B>Result</B> := other.standard_twin
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            equal: standard_equal (<B>Result</B>, other)
+        <B>end</B></A>
+
+    <A NAME="f_standard_copy"><B>frozen</B> standard_copy (other: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>)
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Copy every field of </FONT><I>other</I><FONT COLOR="red"> onto corresponding field</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> of current object.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>require</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            other_not_void: other /= <B>Void</B>
+            type_identity: same_type (other)
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            is_standard_equal: standard_is_equal (other)
+        <B>end</B></A>
+
+    <A NAME="f_standard_twin"><B>frozen</B> standard_twin: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> New object field-by-field identical to </FONT><I>other</I><FONT COLOR="red">.</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Always uses default copying semantics.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            standard_twin_not_void: <B>Result</B> /= <B>Void</B>
+            equal: standard_equal (<B>Result</B>, <B>Current</B>)
+        <B>end</B></A>
+
+    <A NAME="f_twin"><B>frozen</B> twin: <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> New object equal to </FONT><I>Current</I>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> </FONT>twin<FONT COLOR="red"> calls </FONT>copy<FONT COLOR="red">; to change copying/twinning semantics, redefine </FONT>copy<FONT COLOR="red">.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            twin_not_void: <B>Result</B> /= <B>Void</B>
+            is_equal: <B>Result</B> ~ <B>Current</B>
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Basic operations</FONT>
+
+    <A NAME="f_as_attached"><B>frozen</B> as_attached: <B>attached</B> <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+        <B>obsolete</B> "Remove calls to this feature. [2017-05-31]"
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Attached version of Current.</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> (Can be used during transitional period to convert</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> non-void-safe classes to void-safe ones.)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>Result</B> := <B>Current</B>
+        <B>end</B></A>
+
+    <A NAME="f_default"><B>frozen</B> default: <B>detachable</B> <A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Default value of object's type</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+        <B>end</B></A>
+
+    <A NAME="f_default_pointer"><B>frozen</B> default_pointer: POINTER
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Default value of type </FONT><I>POINTER</I>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> (Avoid the need to write </FONT><I>p</I><FONT COLOR="red">.</FONT>default<FONT COLOR="red"> for</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> some </FONT><I>p</I><FONT COLOR="red"> of type </FONT><I>POINTER</I><FONT COLOR="red">.)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+        <B>end</B></A>
+
+    <A NAME="f_default_rescue">default_rescue
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Process exception for routines with no Rescue clause.</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> (Default: do nothing.)</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+        <B>end</B></A>
+
+    <A NAME="f_do_nothing"><B>frozen</B> do_nothing
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Execute a null action.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+        <B>end</B></A>
+
+    <A NAME="f_extend"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_extend">extend</A> (a_color: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>; a_name: STRING_8)
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Add </FONT><I>a_color</I><FONT COLOR="red"> to the table, associating it with </FONT><I>a_name</I>
+        <B>require</B>
+            not_has_key: <B>not</B> <A HREF="../jj_colors/hsb_color_factory_flat.html#f_has">has</A> (a_name)
+        <B>do</B>
+            <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (a_color, a_name)
+        <B>end</B></A>
+    
+<B>feature</B> {NONE} <FONT COLOR="red">--</FONT><FONT COLOR="red"> Implementation</FONT>
+
+    <A NAME="f_table_imp"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>: <A HREF="../jj_colors/hsb_color_table_flat.html">HSB_COLOR_TABLE</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Holds the basic colors for lookup in features</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> </FONT><A HREF="../jj_colors/hsb_color_factory_flat.html#f_color">color</A><FONT COLOR="red"> and </FONT><I>color_name</I>
+        <B>once</B>
+            <B>create</B> <B>Result</B>;
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_red">red</A>, "red");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_green">green</A>, "green");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_blue">blue</A>, "blue");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_yellow">yellow</A>, "yellow");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_cyan">cyan</A>, "cyan");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_magenta">magenta</A>, "magenta");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_orange">orange</A>, "orange");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_chartreuse">chartreuse</A>, "chartreuse");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_spring">spring</A>, "spring");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_azure">azure</A>, "azure");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_violet">violet</A>, "violet");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_rose">rose</A>, "rose");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_vermilion">vermilion</A>, "vermilion");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_amber">amber</A>, "amber");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_lime">lime</A>, "lime");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_harlequin">harlequin</A>, "harlequin");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_erin">erin</A>, "erin");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_aquamarine">aquamarine</A>, "aquamarine");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_capri">capri</A>, "capri");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_cerulean">cerulean</A>, "cerulean");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_indigo">indigo</A>, "indigo");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_purple">purple</A>, "purple");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_cerise">cerise</A>, "ceris");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_crimson">crimson</A>, "crimson");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_scarlet">scarlet</A>, "scarlet");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_persimmon">persimmon</A>, "persimmon");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_orange_peel">orange_peel</A>, "orange peel");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_golden_yellow">golden_yellow</A>, "golden_yellow");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_lemon">lemon</A>, "lemon");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_spring_bud">spring_bud</A>, "spring bud");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_bright_green">bright_green</A>, "bright_green");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_neon_green">neon_green</A>, "neon green");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_jade">jade</A>, "jade");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_emerald">emerald</A>, "emarald");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_mint">mint</A>, "mint");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_turquiose">turquiose</A>, "turquoise");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_sky_blue">sky_blue</A>, "sky_blue");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_cornflower">cornflower</A>, "cornflower");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_cobalt">cobalt</A>, "cobalt");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_sapphire">sapphire</A>, "sapphire");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_iris">iris</A>, "iris");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_veronica">veronica</A>, "veronica");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_amethyst">amethyst</A>, "amethyst");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_phlox">phlox</A>, "phlox");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_fuchsia">fuchsia</A>, "fuchsia");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_deep_pink">deep_pink</A>, "deep pink");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_raspberry">raspberry</A>, "raspberry");
+            <B>Result</B>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_extend">extend</A> (<A HREF="../jj_colors/hsb_color_factory_flat.html#f_amaranth">amaranth</A>, "amaranth")
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Access (primary hues)</FONT>
+
+    <A NAME="f_blue"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_blue">blue</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 240 degrees = 170 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (170, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_green"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_green">green</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 120 degrees = 85 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (85, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_red"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_red">red</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 0 degrees = 0 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (0, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Access (quinary hues)</FONT>
+
+    <A NAME="f_amaranth"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_amaranth">amaranth</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 352.5 degrees = 249.6875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (250, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_amethyst"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_amethyst">amethyst</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 277.5 degrees = 196.5625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (197, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_bright_green"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_bright_green">bright_green</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 97.5 degrees = 69.0625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (69, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_cobalt"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_cobalt">cobalt</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 217.5 degrees = 154.0625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (154, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_cornflower"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_cornflower">cornflower</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 202.5 degrees = 143.4375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (143, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_deep_pink"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_deep_pink">deep_pink</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 322.5 degrees = 228.4375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (228, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_emerald"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_emerald">emerald</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 142.5 degrees = 180.9375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (101, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_fuchsia"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_fuchsia">fuchsia</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 307.5 degrees = 217.8125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (218, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_golden_yellow"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_golden_yellow">golden_yellow</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 52.5 degrees = 37.1875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (37, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_iris"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_iris">iris</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 247.5 degrees = 175.3125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (175, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_jade"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_jade">jade</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 127.5 degrees = 90.3125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (90, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_lemon"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_lemon">lemon</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 67.5 degrees = 47.8125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (48, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_mint"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_mint">mint</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 157.5 degrees = 111.5625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (112, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_neon_green"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_neon_green">neon_green</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 112 degrees = 79.6875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (80, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_orange_peel"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_orange_peel">orange_peel</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 37.5 degrees = 26.5625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (27, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_persimmon"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_persimmon">persimmon</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 22.5 degrees =15.9375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (16, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_phlox"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_phlox">phlox</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 292.5 degrees = 207.1875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (207, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_raspberry"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_raspberry">raspberry</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 337.5 degrees = 239.0625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (239, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_sapphire"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_sapphire">sapphire</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 232.5 degrees = 164.6875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (165, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_scarlet"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_scarlet">scarlet</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 7.5 degrees = 5.312 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (5, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_sky_blue"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_sky_blue">sky_blue</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 187.5 degrees = 132.8125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (133, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_spring_bud"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_spring_bud">spring_bud</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 82.5 degrees = 58.4375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (58, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_turquiose"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_turquiose">turquiose</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 172.5 degrees = 122.1875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (122, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_veronica"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_veronica">veronica</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 262.5 degrees = 185.9375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (186, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Access (secondary hues)</FONT>
+
+    <A NAME="f_cyan"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_cyan">cyan</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 180 degrees = 127.5 base 256</FONT>
+        <B>local</B>
+            stock_col: EV_STOCK_COLORS
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (127, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_magenta"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_magenta">magenta</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 300 degrees = 212.5 base 256</FONT>
+        <B>local</B>
+            stock_col: EV_STOCK_COLORS
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (213, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_yellow"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_yellow">yellow</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 60 degrees = 42.5 base 256</FONT>
+        <B>local</B>
+            stock_col: EV_STOCK_COLORS
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (42, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Access (tertiary hues)</FONT>
+
+    <A NAME="f_azure"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_azure">azure</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 210 degrees = 148.75 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (149, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_chartreuse"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_chartreuse">chartreuse</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 90 degrees = 63.75 base 256</FONT>
+        <B>local</B>
+            stock_col: EV_STOCK_COLORS
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (63, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_orange"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_orange">orange</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 30 degrees = 21.25 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (21, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_rose"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_rose">rose</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 330 degrees = 233.75 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (234, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_spring"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_spring">spring</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 150 degrees = 106.25 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (106, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_violet"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_violet">violet</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 270 degrees = 191.25 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (191, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Output</FONT>
+
+    <A NAME="f_io">Io: STD_FILES
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Handle to standard file setup</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>once</B>
+            <B>create</B> <B>Result</B>;
+            <B>Result</B>.set_output_default
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            io_not_void: <B>Result</B> /= <B>Void</B>
+        <B>end</B></A>
+
+    <A NAME="f_out">out: STRING_8
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> New string containing terse printable representation</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> of current object</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>do</B>
+            <B>Result</B> := tagged_out
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            out_not_void: <B>Result</B> /= <B>Void</B>
+        <B>end</B></A>
+
+    <A NAME="f_print">print (o: <B>detachable</B> ANY)
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Write terse external representation of </FONT><I>o</I>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> on standard output.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>local</B>
+            s: READABLE_STRING_8
+        <B>do</B>
+            <B>if</B> <B>attached</B> o <B>then</B>
+                s := o.out
+                <B>if</B> <B>attached</B> {READABLE_STRING_32} s <B>as</B> s32 <B>then</B>
+                    Io.put_string_32 (s32)
+                <B>elseif</B> <B>attached</B> {READABLE_STRING_8} s <B>as</B> s8 <B>then</B>
+                    Io.put_string (s8)
+                <B>else</B>
+                    Io.put_string_32 (s.as_string_32)
+                <B>end</B>
+            <B>end</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+        <B>end</B></A>
+
+    <A NAME="f_tagged_out"><B>frozen</B> tagged_out: STRING_8
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> New string containing terse printable representation</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> of current object</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>external</B>
+            "built_in"
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            tagged_out_not_void: <B>Result</B> /= <B>Void</B>
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Platform</FONT>
+
+    <A NAME="f_operating_environment">Operating_environment: OPERATING_ENVIRONMENT
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Objects available from the operating system</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>once</B>
+            <B>create</B> <B>Result</B>
+        <B>ensure</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+            instance_free: <B>class</B>
+            operating_environment_not_void: <B>Result</B> /= <B>Void</B>
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red"> Query</FONT>
+
+    <A NAME="f_color"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_color">color</A> (a_name: STRING_8): <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> The color associated with </FONT><I>a_name</I>
+        <B>require</B>
+            has_name: <A HREF="../jj_colors/hsb_color_factory_flat.html#f_has">has</A> (a_name)
+        <B>do</B>
+            <B>Result</B> := <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_color">color</A> (a_name.as_lower).twin
+        <B>end</B></A>
+
+    <A NAME="f_has"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_has">has</A> (a_name: STRING_8): BOOLEAN
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Does Current contain a color named </FONT><I>a_name</I><FONT COLOR="red">?</FONT>
+        <B>do</B>
+            <B>Result</B> := <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_has">has</A> (a_name)
+        <B>end</B></A>
+
+    <A NAME="f_name"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_name">name</A> (a_color: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>): STRING_8
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Reverse lookup for the name of a color equivalent</FONT>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> to </FONT><I>a_color</I>
+        <B>local</B>
+            c: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            str: <B>detachable</B> STRING_8
+        <B>do</B>
+            <B>Result</B> := "Unknown"
+            <B>from</B>
+                <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_start">start</A>
+            <B>until</B>
+                <B>attached</B> str <B>or else</B> <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_is_after">is_after</A>
+            <B>loop</B>
+                c := <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_item_for_iteration">item_for_iteration</A>
+                <B>if</B> c ~ a_color <B>then</B>
+                    str := <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_key_for_iteration">key_for_iteration</A>
+                <B>end</B>;
+                <A HREF="../jj_colors/hsb_color_factory_flat.html#f_table_imp">Table_imp</A>.<A HREF="../jj_colors/hsb_color_table_flat.html#f_forth">forth</A>
+            <B>end</B>
+            <B>if</B> <B>attached</B> str <B>as</B> s <B>then</B>
+                <B>Result</B> := s
+            <B>end</B>
+        <B>end</B></A>
+    
+<B>feature</B> {NONE} <FONT COLOR="red">--</FONT><FONT COLOR="red"> Retrieval</FONT>
+
+    <A NAME="f_internal_correct_mismatch"><B>frozen</B> internal_correct_mismatch
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Called from runtime to perform a proper dynamic dispatch on </FONT><I>correct_mismatch</I>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> from MISMATCH_CORRECTOR.</FONT>
+            <FONT COLOR="red">--</FONT> <FONT COLOR="red">(from </FONT>ANY<FONT COLOR="red">)</FONT>
+        <B>local</B>
+            l_msg: STRING_32
+            l_exc: EXCEPTIONS
+        <B>do</B>
+            <B>if</B> <B>attached</B> {MISMATCH_CORRECTOR} <B>Current</B> <B>as</B> l_corrector <B>then</B>
+                l_corrector.correct_mismatch
+            <B>else</B>
+                <B>create</B> l_msg.make_from_string ("Mismatch: ".as_string_32)
+                <B>create</B> l_exc;
+                l_msg.append (generating_type.name_32);
+                l_exc.raise_retrieval_exception (l_msg)
+            <B>end</B>
+        <B>end</B></A>
+    
+<B>feature</B> <FONT COLOR="red">--</FONT><FONT COLOR="red">Access (quaternary hues)</FONT>
+
+    <A NAME="f_amber"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_amber">amber</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 45 degrees = 31.875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (31, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_aquamarine"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_aquamarine">aquamarine</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 165 degrees = 116.675 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (117, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_capri"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_capri">capri</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 195 degrees = 138.125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (138, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_cerise"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_cerise">cerise</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 315 degrees = 223.125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (223, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_cerulean"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_cerulean">cerulean</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 225 degrees = 159.375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (159, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_crimson"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_crimson">crimson</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 345 degrees = 244.375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (244, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_erin"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_erin">erin</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 135 degrees = 95.625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (95, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_harlequin"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_harlequin">harlequin</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 105 degrees = 74.375 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (74, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_indigo"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_indigo">indigo</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 255 degrees = 180.625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (181, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_lime"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_lime">lime</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 75 degrees = 53.125 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (53, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_purple"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_purple">purple</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 285 degrees = 201.875 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (202, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+
+    <A NAME="f_vermilion"><A HREF="../jj_colors/hsb_color_factory_flat.html#f_vermilion">vermilion</A>: <A HREF="../jj_colors/hsb_color_flat.html">HSB_COLOR</A>
+            <FONT COLOR="red">--</FONT><FONT COLOR="red"> Fully saturated color, 15 degrees = 10.625 base 256</FONT>
+        <B>do</B>
+            <B>create</B> <B>Result</B>.<A HREF="../jj_colors/hsb_color_flat.html#f_set">set</A> (10, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_max_value">Max_value</A>, <A HREF="../jj_colors/hsb_color_factory_flat.html#f_mid_value">Mid_value</A>)
+        <B>end</B></A>
+    
+<B>invariant</B>
+        <FONT COLOR="red">--</FONT> <FONT COLOR="red">from </FONT>ANY
+    reflexive_equality: standard_is_equal (<B>Current</B>)
+    reflexive_conformance: conforms_to (<B>Current</B>)
+
+<B>end</B> <FONT COLOR="red">--</FONT> <FONT COLOR="red">class </FONT><A HREF="../jj_colors/hsb_color_factory_flat.html">HSB_COLOR_FACTORY</A><TABLE BORDER="1" ALIGN="CENTER"><TR><TD><A HREF="../class_list.html">Classes</A></TD><TD><A HREF="../cluster_list.html">Clusters</A></TD><TD><A HREF="../cluster_hierarchy.html">Cluster hierarchy</A></TD><TD><A HREF="hsb_color_factory_chart.html">Chart</A></TD><TD><A HREF="hsb_color_factory_links.html">Relations</A></TD><TD><A HREF="hsb_color_factory.html">Text</A></TD><TD>Flat</TD><TD><A HREF="hsb_color_factory_short.html">Contracts</A></TD><TD><A HREF="hsb_color_factory_flatshort.html">Flat contracts</A></TD></TR></TABLE></PRE>
+<P ALIGN="CENTER"> &#045;&#045; Generated by ISE Eiffel &#045;&#045 </P>
+<P ALIGN="CENTER">For more details: <A HREF="http://www.eiffel.com">www.eiffel.com</A></P>
+</BODY>
+</HTML>
+

@@ -1,0 +1,29 @@
+<!--
+	classList = new Array (
+		"HSB_COLOR",
+		"HSB_COLOR_FACTORY",
+		"HSB_COLOR_TABLE"
+	);
+
+	locationList = new Array (
+		"jj_colors/hsb_color_chart.html",
+		"jj_colors/hsb_color_factory_chart.html",
+		"jj_colors/hsb_color_table_chart.html"
+	);
+
+	function indexOfClass (name) {
+		for (i = 0; i < classList.length; i++) {
+			if (name == classList[i]) return i;
+		}
+		return -1;
+	};
+
+	function go_to (baseLocation, className) {
+		var index = indexOfClass (className.toUpperCase ());
+		if (index >= 0) {
+			window.location = baseLocation + locationList[index];
+		} else {
+			alert ("Class " + className.toUpperCase () + " does not exist in system");
+		}
+	}
+// -->
