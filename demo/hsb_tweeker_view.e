@@ -38,19 +38,12 @@ feature {NONE} -- Initialization
 				%       hue: NATURAL_8 %N %
 				%       saturation: NATURAL_8 %N %
 				%       brightness: NATURAL_8 %N %
-				%  feature -- Element change %N %
-				%       set (a_hue, a_saturation, a_brightness: INTEGER) %N %
-				%       set_with_rgb (a_red, a_green, a_blue: REAL_32) %N %
-				%       set_with_ev_color (a_color: EV_COLOR) %N %
 				%  feature -- Query %N %
 				%       as_rgb: TUPLE [red, green, blue: REAL_32] %N %
 				%       as_ev_color: EV_COLOR %N %
 				%       as_grayscale: HSB_COLOR %N %
-				% %N%N %
-				% For more information see the documentation directory. %
-				% %N%N%N%N %
-				% Pick a color from other views %N %
-				% and drop in this view"
+				% %N %
+				% See index.html in the documentation directory."
 			create instruction_label.make_with_text (s)
 			instruction_label.align_text_left
 			create red_label.make_with_text ("Red")
@@ -66,8 +59,10 @@ feature {NONE} -- Initialization
 			create saturation_spin.make_with_value_range (range)
 			create brightness_spin.make_with_value_range (range)
 				--
-			create ev_color_display
-			create hsb_color_display
+			s := "%NPick a color from one of the other views and drop it here..."
+			create ev_color_display.make_with_text (s)
+			s := "%N           or here"
+			create hsb_color_display.make_with_text (s)
 			create hsb_label
 		end
 
@@ -103,11 +98,12 @@ feature {NONE} -- Initialization
 			extend (hsb_color_display)
 				-- Info about the {HSB_COLOR}
 			extend (hsb_label)
+			hsb_label.align_text_left
 				-- Position widgets for {EV_COLOR}
-			set_item_position (instruction_label, 100, 70)
+			set_item_position (instruction_label, 60, 30)
 				-- Red, green, and blue spinners and then labels
 			x := instruction_label.x_position
-			y := instruction_label.y_position + instruction_label.height + 5 * gap
+			y := instruction_label.y_position + instruction_label.height + 3 * gap
 			set_item_position (red_spin, x, y)
 			x := red_spin.x_position + red_spin.width + gap
 			set_item_position (green_spin, x, y)
@@ -125,11 +121,11 @@ feature {NONE} -- Initialization
 			x := red_spin.x_position
 			y := red_spin.y_position + red_spin.height
 			set_item_position (ev_color_display, x, y)
-			set_item_size (ev_color_display, 300, 100)
+			set_item_size (ev_color_display, 300, 80)
 				-- HSB_COLOR display
 			y := ev_color_display.y_position + ev_color_display.height + gap
 			set_item_position (hsb_color_display, x, y)
-			set_item_size (hsb_color_display, 300, 100)
+			set_item_size (hsb_color_display, 300, 80)
 				-- HSB Spinners and labels
 			y := hsb_color_display.y_position + hsb_color_display.height
 			set_item_position (hue_spin, x, y)
@@ -176,6 +172,8 @@ feature {NONE} -- Implementation
 			-- React when an {EV_COLOR} is dropped on Current or
 			-- on one of the widgets.
 		do
+			ev_color_display.remove_text
+			hsb_color_display.remove_text
 			red_spin.set_value (a_color.red_8_bit)
 			green_spin.set_value (a_color.green_8_bit)
 			blue_spin.set_value (a_color.blue_8_bit)
@@ -232,11 +230,10 @@ feature {NONE} -- Implementation
 			c := hsb_c.as_ev_color
 			hsb_color_display.set_background_color (c)
 				-- Display more info about the {HSB_COLOR} in a text
-			s := "{HSB_COLOR} %N%N %
-				%  out - " + hsb_c.out + "%N%N %
-				%  out_in_degrees - " + hsb_c.out_in_degrees + "%N%N %
-				%  out_in_rgb - " + hsb_c.out_in_rgb + "%N%N%N%N %
-				%  See %"index.html%" for information about {HSB_COLOR}."
+			s := "{HSB_COLOR} %N %
+				%    out - " + hsb_c.out + "%N %
+				%    out_in_degrees - " + hsb_c.out_in_degrees + "%N %
+				%    out_in_rgb - " + hsb_c.out_in_rgb
 			hsb_label.set_text (s)
 		end
 

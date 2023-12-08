@@ -29,7 +29,7 @@ feature {NONE} -- Initialization
 
 	default_create
 			-- Set up the object
-		do
+		once
 --			create table_imp.make (20)
 		end
 
@@ -52,19 +52,19 @@ feature -- Access (primary hues)
 
 	red: HSB_COLOR
 			-- Fully saturated color, 0 degrees = 0 base 256
-		do
+		once
 			create Result.set (0, max_value, mid_value)
 		end
 
 	green: HSB_COLOR
 			-- Fully saturated color, 120 degrees = 85 base 256
-		do
+		once
 			create Result.set (85, max_value, mid_value)
 		end
 
 	blue: HSB_COLOR
 			-- Fully saturated color, 240 degrees = 170 base 256
-		do
+		once
 			create Result.set (170, max_value, mid_value)
 		end
 
@@ -74,7 +74,7 @@ feature -- Access (secondary hues)
 			-- Fully saturated color, 60 degrees = 42.5 base 256
 		local
 			stock_col: EV_STOCK_COLORS
-		do
+		once
 			create Result.set (42, max_value, mid_value)
 		end
 
@@ -82,7 +82,7 @@ feature -- Access (secondary hues)
 			-- Fully saturated color, 180 degrees = 127.5 base 256
 		local
 			stock_col: EV_STOCK_COLORS
-		do
+		once
 			create Result.set (127, max_value, mid_value)
 		end
 
@@ -90,7 +90,7 @@ feature -- Access (secondary hues)
 			-- Fully saturated color, 300 degrees = 212.5 base 256
 		local
 			stock_col: EV_STOCK_COLORS
-		do
+		once
 			create Result.set (213, max_value, mid_value)
 		end
 
@@ -98,7 +98,7 @@ feature -- Access (tertiary hues)
 
 	orange: HSB_COLOR
 			-- Fully saturated color, 30 degrees = 21.25 base 256
-		do
+		once
 			create Result.set (21, max_value, mid_value)
 		end
 
@@ -106,31 +106,31 @@ feature -- Access (tertiary hues)
 			-- Fully saturated color, 90 degrees = 63.75 base 256
 		local
 			stock_col: EV_STOCK_COLORS
-		do
+		once
 			create Result.set (63, max_value, mid_value)
 		end
 
 	spring: HSB_COLOR
 			-- Fully saturated color, 150 degrees = 106.25 base 256
-		do
+		once
 			create Result.set (106, max_value, mid_value)
 		end
 
 	azure: HSB_COLOR
 			-- Fully saturated color, 210 degrees = 148.75 base 256
-		do
+		once
 			create Result.set (149, max_value, mid_value)
 		end
 
 	violet: HSB_COLOR
 			-- Fully saturated color, 270 degrees = 191.25 base 256
-		do
+		once
 			create Result.set (191, max_value, mid_value)
 		end
 
 	rose: HSB_COLOR
 			-- Fully saturated color, 330 degrees = 233.75 base 256
-		do
+		once
 			create Result.set (234, max_value, mid_value)
 		end
 
@@ -138,73 +138,73 @@ feature --Access (quaternary hues)
 
 	vermilion: HSB_COLOR
 			-- Fully saturated color, 15 degrees = 10.625 base 256
-		do
+		once
 			create Result.set (10, max_value, mid_value)
 		end
 
 	amber: HSB_COLOR
 			-- Fully saturated color, 45 degrees = 31.875 base 256
-		do
+		once
 			create Result.set (31, max_value, mid_value)
 		end
 
 	lime: HSB_COLOR
 			-- Fully saturated color, 75 degrees = 53.125 base 256
-		do
+		once
 			create Result.set (53, max_value, mid_value)
 		end
 
 	harlequin: HSB_COLOR
 			-- Fully saturated color, 105 degrees = 74.375 base 256
-		do
+		once
 			create Result.set (74, max_value, mid_value)
 		end
 
 	erin: HSB_COLOR
 			-- Fully saturated color, 135 degrees = 95.625 base 256
-		do
+		once
 			create Result.set (95, max_value, mid_value)
 		end
 
 	aquamarine: HSB_COLOR
 			-- Fully saturated color, 165 degrees = 116.675 base 256
-		do
+		once
 			create Result.set (117, max_value, mid_value)
 		end
 
 	capri: HSB_COLOR
 			-- Fully saturated color, 195 degrees = 138.125 base 256
-		do
+		once
 			create Result.set (138, max_value, mid_value)
 		end
 
 	cerulean: HSB_COLOR
 			-- Fully saturated color, 225 degrees = 159.375 base 256
-		do
+		once
 			create Result.set (159, max_value, mid_value)
 		end
 
 	indigo: HSB_COLOR
 			-- Fully saturated color, 255 degrees = 180.625 base 256
-		do
+		once
 			create Result.set (181, max_value, mid_value)
 		end
 
 	purple: HSB_COLOR
 			-- Fully saturated color, 285 degrees = 201.875 base 256
-		do
+		once
 			create Result.set (202, max_value, mid_value)
 		end
 
 	cerise: HSB_COLOR
 			-- Fully saturated color, 315 degrees = 223.125 base 256
-		do
+		once
 			create Result.set (223, max_value, mid_value)
 		end
 
 	crimson: HSB_COLOR
 			-- Fully saturated color, 345 degrees = 244.375 base 256
-		do
+		once
 			create Result.set (244, max_value, mid_value)
 		end
 
@@ -212,145 +212,145 @@ feature -- Access (quinary hues)
 
 	scarlet: HSB_COLOR
 			-- Fully saturated color, 7.5 degrees = 5.312 base 256
-		do
+		once
 			create Result.set (5, max_value, mid_value)
 		end
 
 	persimmon: HSB_COLOR
 			-- Fully saturated color, 22.5 degrees =15.9375 base 256
-		do
+		once
 			create Result.set (16, max_value, mid_value)
 		end
 
 	orange_peel: HSB_COLOR
 			-- Fully saturated color, 37.5 degrees = 26.5625 base 256
-		do
+		once
 			create Result.set (27, max_value, mid_value)
 		end
 
 	golden_yellow: HSB_COLOR
 			-- Fully saturated color, 52.5 degrees = 37.1875 base 256
-		do
+		once
 			create Result.set (37, max_value, mid_value)
 		end
 
 	lemon: HSB_COLOR
 			-- Fully saturated color, 67.5 degrees = 47.8125 base 256
-		do
+		once
 			create Result.set (48, max_value, mid_value)
 		end
 
 	spring_bud: HSB_COLOR
 			-- Fully saturated color, 82.5 degrees = 58.4375 base 256
-		do
+		once
 			create Result.set (58, max_value, mid_value)
 		end
 
 	bright_green: HSB_COLOR
 			-- Fully saturated color, 97.5 degrees = 69.0625 base 256
-		do
+		once
 			create Result.set (69, max_value, mid_value)
 		end
 
 	neon_green: HSB_COLOR
 			-- Fully saturated color, 112 degrees = 79.6875 base 256
-		do
+		once
 			create Result.set (80, max_value, mid_value)
 		end
 
 	jade: HSB_COLOR
 			-- Fully saturated color, 127.5 degrees = 90.3125 base 256
-		do
+		once
 			create Result.set (90, max_value, mid_value)
 		end
 
 	emerald: HSB_COLOR
 			-- Fully saturated color, 142.5 degrees = 180.9375 base 256
-		do
+		once
 			create Result.set (101, max_value, mid_value)
 		end
 
 	mint: HSB_COLOR
 			-- Fully saturated color, 157.5 degrees = 111.5625 base 256
-		do
+		once
 			create Result.set (112, max_value, mid_value)
 		end
 
 	turquiose: HSB_COLOR
 			-- Fully saturated color, 172.5 degrees = 122.1875 base 256
-		do
+		once
 			create Result.set (122, max_value, mid_value)
 		end
 
 	sky_blue: HSB_COLOR
 			-- Fully saturated color, 187.5 degrees = 132.8125 base 256
-		do
+		once
 			create Result.set (133, max_value, mid_value)
 		end
 
 	cornflower: HSB_COLOR
 			-- Fully saturated color, 202.5 degrees = 143.4375 base 256
-		do
+		once
 			create Result.set (143, max_value, mid_value)
 		end
 
 	cobalt: HSB_COLOR
 			-- Fully saturated color, 217.5 degrees = 154.0625 base 256
-		do
+		once
 			create Result.set (154, max_value, mid_value)
 		end
 
 	sapphire: HSB_COLOR
 			-- Fully saturated color, 232.5 degrees = 164.6875 base 256
-		do
+		once
 			create Result.set (165, max_value, mid_value)
 		end
 
 	iris: HSB_COLOR
 			-- Fully saturated color, 247.5 degrees = 175.3125 base 256
-		do
+		once
 			create Result.set (175, max_value, mid_value)
 		end
 
 	veronica: HSB_COLOR
 			-- Fully saturated color, 262.5 degrees = 185.9375 base 256
-		do
+		once
 			create Result.set (186, max_value, mid_value)
 		end
 
 	amethyst: HSB_COLOR
 			-- Fully saturated color, 277.5 degrees = 196.5625 base 256
-		do
+		once
 			create Result.set (197, max_value, mid_value)
 		end
 
 	phlox: HSB_COLOR
 			-- Fully saturated color, 292.5 degrees = 207.1875 base 256
-		do
+		once
 			create Result.set (207, max_value, mid_value)
 		end
 
 	fuchsia: HSB_COLOR
 			-- Fully saturated color, 307.5 degrees = 217.8125 base 256
-		do
+		once
 			create Result.set (218, max_value, mid_value)
 		end
 
 	deep_pink: HSB_COLOR
 			-- Fully saturated color, 322.5 degrees = 228.4375 base 256
-		do
+		once
 			create Result.set (228, max_value, mid_value)
 		end
 
 	raspberry: HSB_COLOR
 			-- Fully saturated color, 337.5 degrees = 239.0625 base 256
-		do
+		once
 			create Result.set (239, max_value, mid_value)
 		end
 
 	amaranth: HSB_COLOR
 			-- Fully saturated color, 352.5 degrees = 249.6875 base 256
-		do
+		once
 			create Result.set (250, max_value, mid_value)
 		end
 

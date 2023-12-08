@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-21-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-21-0 http://www.eiffel.com/developers/xml/configuration-1-21-0.xsd"
-		name="hsb_color_tester"
-		uuid="7732815D-6CCB-4710-ACA2-287727F9B234">
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-21-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-21-0 http://www.eiffel.com/developers/xml/configuration-1-21-0.xsd" name="hsb_color_tester" uuid="7732815D-6CCB-4710-ACA2-287727F9B234">
 	<target name="hsb_color_tester">
 		<root cluster="root_cluster" class="APPLICATION" feature="make_and_launch"/>
 		<file_rule>
@@ -21,8 +18,8 @@
 		</capability>
 		<precompile name="vision2_pre" location="$ISE_PRECOMP\vision2-safe.ecf"/>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="jj_colors" location="..\jj_colors.ecf" readonly="false"/>
 		<library name="vision2" location="$ISE_LIBRARY\library\vision2\vision2.ecf"/>
 		<cluster name="root_cluster" location=".\" recursive="true"/>
-		<library name="jj_colors" location="..\jj_colors.ecf"/>
 	</target>
 </system>

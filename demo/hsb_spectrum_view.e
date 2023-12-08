@@ -1,6 +1,6 @@
 note
 	description: "[
-		A {VIEW} that demonstrates the spectrum of colors available
+		A view that demonstrates the spectrum of colors available
 		with {HSB_COLOR} and the effects of changes in hue, saturation,
 		and brightness.
 		]"
@@ -169,7 +169,7 @@ feature {NONE} -- Implementation
 			i: INTEGER
 			t: EV_MODEL_TEXT
 			rec, my_rec: EV_MODEL_RECTANGLE
-			col, col2: HSB_COLOR
+			col, col2: MUTABLE_HSB_COLOR
 			gap: INTEGER
 			bar_s: INTEGER
 			x, y: INTEGER
