@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
-<meta name="description" content="A color describe using the Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.) The model uses integal values instead of reals, except when converting from and to {EV_COLOR}. The `hue', `saturation', and `brightness' are {NATURAL_8} values. For ease of use, though, the setter feature take {INTEGER_32} values."/>
+<meta name="description" content="A color described using a modified Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.)  This class differs from HSL, because the attributes, `hue', `saturation', `brightness', and `alpha' are defined as {NATURAL_8} having the range [0, 255].  In the HSL model these values have different ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is [0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0].   To picture the model here, think of a shere centered on the Origin with a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit into a NATURAL_8 number), where: T1) `hue' - the particular color given by the degrees from the red-axis, T   where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs T   (60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128 T   ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta T   is at 213 ScaDegs (300 degrees), with tertiary and other colors T   spaced accordingly. T2) `saturation' - the amount of a given color mesured as the distance T   from the origin towards the egde of the sphere. (A fully saturated T   red is on the sphere while a less saturated red would be somewhere T   inside the shere.)  As the `saturation' approaches zero, the color T   appears more and more white. T3) `brightness' - the way a color appears relative to white is the angle T   in ScaDegs measured up from the negative z-axis, with zero ScaDegs T   (0 degrees or straight down) appearing totally black/dark, 128 ScaDegs T   (90 degrees or on the shpere's equator) is a pure color, and 255 T   ScaDegs (180 degrees, or straight up) appears totally bright/white. T4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent) T   to 255 ScaDegs (totally opaque).  To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the equivalent {EV_COLOR} with feature `as_ev_color'.  An {HSB_COLOR} is immutable (i.e. it has no setters beyond the creation features). Obtain a modifiable {MUTABLE_HSB_COLOR} with feature `as_mutable'.  ToDo:   1) fix `name' to search {HTML_EXTENDED_COLORS}   2) add color tables such as `red_colors', `orange_colors', etc to      class {HTML_EXTENDED_COLORS}   3) fix `complement' to account for colors with medium brightness, becasue the      the oposite of some colors can't be seen on the original color's background.      Needs a better formula."/>
 <meta name="author" content="Jimmy J. Johnson"/>
 <meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
 <meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
@@ -24,17 +24,52 @@
 <a class="nav class" href="hsb_color_links.html">Relations</a>
 <span class="nav class selected">Text</span>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre><span class="ekeyword">note</span>
 	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;</span><span class="estring">[</span>
-		<span class="estring">A color describe using the Hue-Saturation-Brightness model.</span>
+		<span class="estring">A color described using a modified Hue-Saturation-Brightness model.</span>
 		<span class="estring">(This is same as HSL but I like the term &quot;brightness&quot; better</span>
-		<span class="estring">than &quot;lightness&quot;.)</span>
-		<span class="estring">The model uses integal values instead of reals, except when</span>
-		<span class="estring">converting from and to </span><span class="neclass">EV_COLOR</span><span class="estring">.</span>
-		<span class="estring">The </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="estring">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="estring">, and </span><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="estring"> are </span><span class="neclass">NATURAL_8</span><span class="estring"> values.</span>
-		<span class="estring">For ease of use, though, the setter feature take </span><span class="neclass">INTEGER_32</span><span class="estring"> values.</span>
+		<span class="estring">than &quot;lightness&quot;.) &nbsp;This class differs from HSL, because the attributes,</span>
+		<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="estring">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="estring">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="estring">, and </span><a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="estring"> are defined as </span><span class="neclass">NATURAL_8</span>
+		<span class="estring">having the range [0, 255]. &nbsp;In the HSL model these values have different</span>
+		<span class="estring">ranges: &nbsp;the hue range is [0.0, 360.0] in degrees, the saturation range is</span>
+		<span class="estring">[0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. </span>
+		
+		<span class="estring">To picture the model here, think of a shere centered on the Origin with</span>
+		<span class="estring">a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit</span>
+		<span class="estring">into a NATURAL_8 number), where:</span>
+		<span class="estring">	1) </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="estring"> - the particular color given by the degrees from the red-axis,</span>
+		<span class="estring">	 &nbsp;&nbsp;where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs</span>
+		<span class="estring">	 &nbsp;&nbsp;(60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128</span>
+		<span class="estring">	 &nbsp;&nbsp;ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta</span>
+		<span class="estring">	 &nbsp;&nbsp;is at 213 ScaDegs (300 degrees), with tertiary and other colors</span>
+		<span class="estring">	 &nbsp;&nbsp;spaced accordingly.</span>
+		<span class="estring">	2) </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="estring"> - the amount of a given color mesured as the distance</span>
+		<span class="estring">	 &nbsp;&nbsp;from the origin towards the egde of the sphere. (A fully saturated</span>
+		<span class="estring">	 &nbsp;&nbsp;red is on the sphere while a less saturated red would be somewhere</span>
+		<span class="estring">	 &nbsp;&nbsp;inside the shere.) &nbsp;As the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="estring"> approaches zero, the color</span>
+		<span class="estring">	 &nbsp;&nbsp;appears more and more white.</span>
+		<span class="estring">	3) </span><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="estring"> - the way a color appears relative to white is the angle</span>
+		<span class="estring">	 &nbsp;&nbsp;in ScaDegs measured up from the negative z-axis, with zero ScaDegs</span>
+		<span class="estring">	 &nbsp;&nbsp;(0 degrees or straight down) appearing totally black/dark, 128 ScaDegs</span>
+		<span class="estring">	 &nbsp;&nbsp;(90 degrees or on the shpere's equator) is a &quot;pure&quot; color, and 255</span>
+		<span class="estring">	 &nbsp;&nbsp;ScaDegs (180 degrees, or straight up) appears totally bright/white.</span>
+		<span class="estring">	4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent)</span>
+		<span class="estring">	 &nbsp;&nbsp;to 255 ScaDegs (totally opaque).</span>
+		
+		<span class="estring">To display an </span><a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="estring"> using the EV_xxx classes of EiffelVision, obtain the</span>
+		<span class="estring">equivalent </span><span class="neclass">EV_COLOR</span><span class="estring"> with feature </span><a class="efeature" href="../jj_colors/hsb_color.html#f_as_ev_color">as_ev_color</a><span class="estring">.</span>
+		
+		<span class="estring">An </span><a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="estring"> is immutable (i.e. it has no setters beyond the creation features).</span>
+		<span class="estring">Obtain a modifiable </span><a class="eclass" href="../jj_colors/mutable_hsb_color.html">MUTABLE_HSB_COLOR</a><span class="estring"> with feature </span><a class="efeature" href="../jj_colors/hsb_color.html#f_as_mutable">as_mutable</a><span class="estring">.</span>
+		
+		<span class="estring">ToDo:</span>
+		<span class="estring"> &nbsp;1) fix </span><a class="efeature" href="../jj_colors/hsb_color.html#f_name">name</a><span class="estring"> to search </span><a class="eclass" href="../jj_colors/html_extended_colors.html">HTML_EXTENDED_COLORS</a>
+		<span class="estring"> &nbsp;2) add color tables such as </span><span class="estring">red_colors</span><span class="estring">, </span><span class="estring">orange_colors</span><span class="estring">, etc to</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;class </span><a class="eclass" href="../jj_colors/html_extended_colors.html">HTML_EXTENDED_COLORS</a>
+		<span class="estring"> &nbsp;3) fix </span><a class="efeature" href="../jj_colors/hsb_color.html#f_complement">complement</a><span class="estring"> to account for colors with medium brightness, becasue the</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;the oposite of some colors can't be seen on the original color's background.</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;Needs a better formula.</span>
 	<span class="estring">]</span><span class="estring">&quot;</span>
 	<span class="eitag">author</span><span class="esymbol">:</span> <span class="estring">&quot;Jimmy J. Johnson&quot;</span>
 	<span class="eitag">date</span><span class="esymbol">:</span> <span class="estring">&quot;11/11/23&quot;</span>
@@ -47,69 +82,68 @@
 <span class="ekeyword">inherit</span>
 	<span class="neclass">ANY</span>
 		<span class="ekeyword">redefine</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_default_create">default_create</a><span class="esymbol">,</span>
 			<a class="efeature" href="../jj_colors/hsb_color.html#f_out">out</a>
 		<span class="ekeyword">end</span>
 
 <span class="ekeyword">create</span> 
-	<span class="nefeature">default_create</span><span class="esymbol">,</span>
+	<a class="efeature" href="../jj_colors/hsb_color.html#f_default_create">default_create</a><span class="esymbol">,</span>
 	<a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol">,</span>
+	<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_alpha">set_with_alpha</a><span class="esymbol">,</span>
 	<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a><span class="esymbol">,</span>
-	<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a>
+	<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol">,</span>
+	<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb_and_alpha">set_with_rgb_and_alpha</a>
 
-<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access</span>
+<span class="ekeyword">feature</span> <span class="esymbol">{</span>NONE<span class="esymbol">}</span> <span class="ecomment">--</span><span class="ecomment"> Implementation</span>
 
-	<a name="f_hue"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
-			<span class="ecomment">--</span><span class="ecomment"> Describes the dominant color family of a spcific color.</span>
-
-	<a name="f_saturation"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
-			<span class="ecomment">--</span><span class="ecomment"> The colorfullness relative to te brightness of a similarly</span>
-			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
-			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards a pure hue.</span>
-
-	<a name="f_brightness"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
-			<span class="ecomment">--</span><span class="ecomment"> The brightness relative to the brightness of a similarly</span>
-			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
-			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards white</span>
-
-	<a name="f_min_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">0</span>
-			<span class="ecomment">--</span><span class="ecomment"> The minimum value for the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
-
-	<a name="f_max_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">255</span>
-			<span class="ecomment">--</span><span class="ecomment"> The maximum value for the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
-
-	<a name="f_name"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_name">name</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
-			<span class="ecomment">--</span><span class="ecomment"> The name, if known, of Current; &quot;Unknown&quot; if not</span>
-		<span class="ekeyword">local</span>
-			<span class="elocal">f</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_factory.html">HSB_COLOR_FACTORY</a>
+	<a name="f_default_create"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_default_create">default_create</a>
+			<span class="ecomment">--</span><span class="ecomment"> Create an instance with all attributes set to zero.</span>
+			<span class="ecomment">--</span><span class="ecomment"> This will appear completely black</span>
 		<span class="ekeyword">do</span>
-			<span class="ekeyword">create</span> <span class="elocal">f</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color_factory.html#f_name">name</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">ensure then</span>
+			<span class="etag">is_red</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<span class="etag">fully_saturated</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<span class="etag">mid_brightness</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a>
+			<span class="etag">fully_opaque</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
 		<span class="ekeyword">end</span>
 
-	<a name="f_complement"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_complement">complement</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
-			<span class="ecomment">--</span><span class="ecomment"> A color that is opposite hue</span>
-			<span class="ecomment">--</span><span class="ecomment"> Keep </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment"> the same.</span>
-		<span class="ekeyword">local</span>
-			<span class="elocal">h</span><span class="esymbol">,</span> <span class="elocal">s</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
-		<span class="ekeyword">do</span>
-			<span class="elocal">h</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a> <span class="esymbol">//</span> <span class="enumber">2</span>
-			<span class="elocal">s</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a>
-			<span class="elocal">b</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a> <span class="esymbol">-</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a>
-			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">h</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <span class="elocal">s</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">)</span>
-		<span class="ekeyword">end</span>
-	
-<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Element change</span>
-
-	<a name="f_set"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_lightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+	<a name="f_set"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_brightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
 			<span class="ecomment">--</span><span class="ecomment"> Change the corresponding attributes</span>
 		<span class="ekeyword">require</span>
 			<span class="etag">valid_hue</span><span class="esymbol">:</span> <span class="elocal">a_hue</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_hue</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
 			<span class="etag">valid_saturation</span><span class="esymbol">:</span> <span class="elocal">a_saturation</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_saturation</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-			<span class="etag">valid_lightness</span><span class="esymbol">:</span> <span class="elocal">a_lightness</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_lightness</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_lightness</span><span class="esymbol">:</span> <span class="elocal">a_brightness</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_brightness</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
 		<span class="ekeyword">do</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_hue">set_hue</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">)</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_saturation">set_saturation</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_saturation</span><span class="esymbol">)</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_brightness">set_brightness</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_lightness</span><span class="esymbol">)</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">:=</span> <span class="elocal">a_hue</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">:=</span> <span class="elocal">a_saturation</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">:=</span> <span class="elocal">a_brightness</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">hue_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_hue</span>
+			<span class="etag">saturation_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_saturation</span>
+			<span class="etag">brightness_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_brightness</span>
+			<span class="etag">fully_opaque</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">end</span>
+
+	<a name="f_set_with_alpha"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_alpha">set_with_alpha</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_brightness</span><span class="esymbol">,</span> <span class="elocal">a_alpha</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Change the corresponding attributes</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">valid_hue</span><span class="esymbol">:</span> <span class="elocal">a_hue</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_hue</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_saturation</span><span class="esymbol">:</span> <span class="elocal">a_saturation</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_saturation</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_lightness</span><span class="esymbol">:</span> <span class="elocal">a_brightness</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_brightness</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+			<span class="etag">valid_alpha</span><span class="esymbol">:</span> <span class="elocal">a_alpha</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="ekeyword">and</span> <span class="elocal">a_alpha</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+		<span class="ekeyword">do</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_brightness</span><span class="esymbol">)</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <span class="elocal">a_alpha</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">hue_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_hue</span>
+			<span class="etag">saturation_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_saturation</span>
+			<span class="etag">brightness_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_brightness</span>
+			<span class="etag">alpha_set</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="edot">.</span><span class="nefeature">to_integer_32</span> <span class="esymbol">=</span> <span class="elocal">a_alpha</span>
 		<span class="ekeyword">end</span>
 
 	<a name="f_set_with_rgb"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span>
@@ -127,6 +161,27 @@
 		<span class="ekeyword">do</span>
 			<span class="ekeyword">create</span> <span class="elocal">c</span><span class="edot">.</span><span class="nefeature">make_with_rgb</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">)</span>
 			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">c</span><span class="esymbol">)</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">ensure</span>
+			<span class="etag">fully_opaque</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">end</span>
+
+	<a name="f_set_with_rgb_and_alpha"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb_and_alpha">set_with_rgb_and_alpha</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">,</span> <span class="elocal">a_alpha</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Create and instance using RGB colors</span>
+			<span class="ecomment">--</span><span class="ecomment"> Color might be slightly off, because this creates an</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><span class="neclass">EV_COLOR</span><span class="ecomment"> then calls </span><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a><span class="ecomment">. &nbsp;If Current</span>
+			<span class="ecomment">--</span><span class="ecomment"> is then converted to an EV_COLOR the result may be</span>
+			<span class="ecomment">--</span><span class="ecomment"> slightly different than expected due to rounding.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">red_in_range</span><span class="esymbol">:</span> <span class="elocal">a_red</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span> <span class="ekeyword">and then</span> <span class="elocal">a_red</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+			<span class="etag">green_in_range</span><span class="esymbol">:</span> <span class="elocal">a_green</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span> <span class="ekeyword">and then</span> <span class="elocal">a_green</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+			<span class="etag">blue_in_range</span><span class="esymbol">:</span> <span class="elocal">a_blue</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span> <span class="ekeyword">and then</span> <span class="elocal">a_blue</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+			<span class="etag">alpha_in_range</span><span class="esymbol">:</span> <span class="elocal">a_alpha</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span> <span class="ekeyword">and then</span> <span class="elocal">a_alpha</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+		<span class="ekeyword">local</span>
+			<span class="elocal">c</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span>
+		<span class="ekeyword">do</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">)</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <span class="esymbol">(</span><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_real_32</span> <span class="esymbol">*</span> <span class="elocal">a_alpha</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">truncated_to_integer</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
 		<span class="ekeyword">end</span>
 
 	<a name="f_set_with_ev_color"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span><span class="esymbol">)</span>
@@ -138,62 +193,112 @@
 			<a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">:=</span> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="edot">.</span><span class="nefeature">lightness</span> <span class="esymbol">*</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_real_32</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">rounded</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
 			<span class="elocal">h</span> <span class="esymbol">:=</span> <span class="elocal">a_color</span><span class="edot">.</span><span class="nefeature">hue_as_degrees</span><span class="edot">.</span><span class="nefeature">to_real</span>
 			<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">:=</span> <span class="esymbol">(</span><span class="elocal">h</span> <span class="esymbol">/</span> <span class="enumber">360.0</span> <span class="esymbol">*</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_real_32</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">rounded</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+			<a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access</span>
+
+	<a name="f_hue"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> Describes the dominant color family of a spcific color.</span>
+
+	<a name="f_saturation"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The colorfullness relative to te brightness of a similarly</span>
+			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards a pure hue.</span>
+
+	<a name="f_brightness"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The brightness relative to the brightness of a similarly</span>
+			<span class="ecomment">--</span><span class="ecomment"> illuminated white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Increasing values move the color towards white</span>
+
+	<a name="f_alpha"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> Measure of transparncy, when </span><a class="efeature" href="../jj_colors/hsb_color.html#f_blended">blended</a><span class="ecomment"> with another color,</span>
+			<span class="ecomment">--</span><span class="ecomment"> where </span><a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="ecomment"> is totally transparent and </span><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="ecomment"> is opaque.</span>
+
+	<a name="f_min_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">0</span>
+			<span class="ecomment">--</span><span class="ecomment"> The minimum value for the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
+
+	<a name="f_max_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span> <span class="esymbol">=</span> <span class="enumber">255</span>
+			<span class="ecomment">--</span><span class="ecomment"> The maximum value for the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment">, and </span><span class="equoted">lightness</span>
+
+	<a name="f_mid_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_mid_value">Mid_value</a><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span> <span class="esymbol">=</span> <span class="enumber">128</span>
+			<span class="ecomment">--</span><span class="ecomment"> The middle value of the interval:</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;[</span><span class="esymbol">{</span><a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">}</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">min_value</a><span class="ecomment">, </span><span class="esymbol">{</span><a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">}</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">max_value</a><span class="ecomment">]</span>
+
+	<a name="f_name"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_name">name</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> The name, if known, of Current; &quot;Unknown&quot; if not</span>
+		<span class="ekeyword">local</span>
+			<span class="elocal">f</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_factory.html">HSB_COLOR_FACTORY</a>
+		<span class="ekeyword">do</span>
+			<span class="ekeyword">create</span> <span class="elocal">f</span>
+			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color_factory.html#f_name">name</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="ekeyword">Current</span><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 
-	<a name="f_set_hue"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_hue">set_hue</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
-			<span class="ecomment">--</span><span class="ecomment"> Change the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a>
-		<span class="ekeyword">require</span>
-			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
+	<a name="f_complement"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_complement">complement</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A color that is opposite </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a>
+			<span class="ecomment">--</span><span class="ecomment"> Keep </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment"> the same.</span>
+		<span class="ekeyword">local</span>
+			<span class="elocal">h</span><span class="esymbol">,</span> <span class="elocal">s</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
 		<span class="ekeyword">do</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">:=</span> <span class="elocal">a_value</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
-		<span class="ekeyword">end</span>
-
-	<a name="f_set_saturation"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_saturation">set_saturation</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
-			<span class="ecomment">--</span><span class="ecomment"> Change the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a>
-		<span class="ekeyword">require</span>
-			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-		<span class="ekeyword">do</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">:=</span> <span class="elocal">a_value</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
-		<span class="ekeyword">end</span>
-
-	<a name="f_set_brightness"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_set_brightness">set_brightness</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span>
-			<span class="ecomment">--</span><span class="ecomment"> Change the </span><span class="equoted">lightness</span>
-		<span class="ekeyword">require</span>
-			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span>
-		<span class="ekeyword">do</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">:=</span> <span class="elocal">a_value</span><span class="edot">.</span><span class="nefeature">as_natural_8</span>
+			<span class="elocal">h</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a> <span class="esymbol">//</span> <span class="enumber">2</span>
+			<span class="elocal">s</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a>
+			<span class="elocal">b</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a> <span class="esymbol">-</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">h</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <span class="elocal">s</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 	
 <span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Basic operations</span>
 
-	<a name="f_add"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_add">add</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">)</span>
-			<span class="ecomment">--</span><span class="ecomment"> Modify Current by adding </span><span class="equoted">a_other</span><span class="ecomment"> to it</span>
+	<a name="f_over"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_over">over</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A new color resulting by alpha-blending the</span>
+			<span class="ecomment">--</span><span class="ecomment"> placement of Current over </span><span class="equoted">a_other</span><span class="ecomment">, using the</span>
+			<span class="ecomment">--</span><span class="ecomment"> NON-premultiplied alpha equations from:</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><a class="ecomment" href="https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending">https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending</a>
 		<span class="ekeyword">local</span>
-			<span class="elocal">mid</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+			<span class="elocal">rgb</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
+			<span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span>
 		<span class="ekeyword">do</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_mid_value">mid_value</a><span class="esymbol"> </span><span class="esymbol">(</span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">,</span> <span class="elocal">a_other</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">)</span>
+			<span class="elocal">rgb</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
+			<span class="elocal">other_rgb</span> <span class="esymbol">:=</span> <span class="elocal">a_other</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
+			<span class="elocal">r</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_blended">blended</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">red</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">red</span><span class="esymbol">,</span> <span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">)</span>
+			<span class="elocal">g</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_blended">blended</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">green</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">green</span><span class="esymbol">,</span> <span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">)</span>
+			<span class="elocal">b</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_blended">blended</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">blue</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">blue</span><span class="esymbol">,</span> <span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">,</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">)</span>
+			<span class="elocal">a</span> <span class="esymbol">:=</span> <span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">alpha</span> <span class="esymbol">+</span> <span class="elocal">other_rgb</span><span class="edot">.</span><span class="elocal">alpha</span> <span class="esymbol">*</span> <span class="esymbol">(</span><span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="esymbol">-</span> <span class="elocal">rgb</span><span class="edot">.</span><span class="elocal">alpha</span><span class="esymbol">)</span>
+			<span class="ekeyword">if</span> <span class="elocal">a</span> <span class="esymbol">&gt;</span> <span class="enumber">0.0</span> <span class="ekeyword">then</span>
+				<span class="elocal">r</span> <span class="esymbol">:=</span> <span class="elocal">r</span> <span class="esymbol">/</span> <span class="elocal">a</span>
+				<span class="elocal">g</span> <span class="esymbol">:=</span> <span class="elocal">g</span> <span class="esymbol">/</span> <span class="elocal">a</span>
+				<span class="elocal">b</span> <span class="esymbol">:=</span> <span class="elocal">b</span> <span class="esymbol">/</span> <span class="elocal">a</span>
+			<span class="ekeyword">end</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb_and_alpha">set_with_rgb_and_alpha</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 
-	<a name="f_sum"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
-			<span class="ecomment">--</span><span class="ecomment"> A new object that is the sum of Current and </span><span class="equoted">a_other</span>
+	<a name="f_hsb_over"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_hsb_over">hsb_over</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+		<span class="ekeyword">obsolete</span> &quot;Not emplemented, use `over' instead.&quot;
+			<span class="ecomment">--</span><span class="ecomment"> Attempt to find formula using </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="ecomment">, </span><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="ecomment">,</span>
+			<span class="ecomment">--</span><span class="ecomment"> and </span><a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="ecomment"> directly instead of converting to RGB values.</span>
 		<span class="ekeyword">do</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="nefeature">twin</span><span class="esymbol">;</span>
-			<span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_add">add</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">)</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_sum"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <span class="ekeyword">Current</span>
+			<span class="ecomment">--</span><span class="ecomment"> A new &quot;pure&quot; (i.e. fully saturated and medium brightness) color</span>
+			<span class="ecomment">--</span><span class="ecomment"> whose </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment"> is halfway between the </span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="ecomment"> of Current and </span><span class="equoted">a_other</span><span class="ecomment">.</span>
+		<span class="ekeyword">local</span>
+			<span class="elocal">h</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+		<span class="ekeyword">do</span>
+			<span class="elocal">h</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_between_value">between_value</a><span class="esymbol"> </span><span class="esymbol">(</span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">,</span> <span class="elocal">a_other</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">)</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">h</span><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_mid_value">Mid_value</a><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 	
 <span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Query</span>
 
-	<a name="f_as_rgb"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="elocal">red</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">green</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span>
-			<span class="ecomment">--</span><span class="ecomment"> The equivalent color in RGB format</span>
+	<a name="f_as_rgba"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="elocal">red</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">green</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">;</span> <span class="elocal">alpha</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span>
+			<span class="ecomment">--</span><span class="ecomment"> The red, green, blue, and alpha values as reals</span>
 			<span class="ecomment">--</span><span class="ecomment"> </span><a class="ecomment" href="https://www.baeldung.com/cs/convert-color-hsl-rgb">https://www.baeldung.com/cs/convert-color-hsl-rgb</a>
 		<span class="ekeyword">local</span>
 			<span class="elocal">h</span><span class="esymbol">,</span> <span class="elocal">sat</span><span class="esymbol">,</span> <span class="elocal">lit</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
 			<span class="elocal">h_prime</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
 			<span class="elocal">c</span><span class="esymbol">,</span> <span class="elocal">x</span><span class="esymbol">,</span> <span class="elocal">m</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
-			<span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
+			<span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
 			<span class="elocal">mod2</span><span class="esymbol">:</span> <span class="neclass">REAL_64</span>
 			<span class="elocal">i_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span>
 		<span class="ekeyword">do</span>
@@ -242,35 +347,34 @@
 			<span class="elocal">r</span> <span class="esymbol">:=</span> <span class="elocal">r</span> <span class="esymbol">+</span> <span class="elocal">m</span>
 			<span class="elocal">g</span> <span class="esymbol">:=</span> <span class="elocal">g</span> <span class="esymbol">+</span> <span class="elocal">m</span>
 			<span class="elocal">b</span> <span class="esymbol">:=</span> <span class="elocal">b</span> <span class="esymbol">+</span> <span class="elocal">m</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="esymbol">[</span><span class="elocal">r</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">]</span>
+			<span class="elocal">a</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">/</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="esymbol">[</span><span class="elocal">r</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="edot">.</span><span class="nefeature">truncated_to_real</span><span class="edot">.</span><span class="nefeature">max</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="esymbol">]</span>
 		<span class="ekeyword">end</span>
 
 	<a name="f_as_ev_color"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_as_ev_color">as_ev_color</a><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span>
 			<span class="ecomment">--</span><span class="ecomment"> Current converted to an </span><span class="neclass">EV_COLOR</span>
 		<span class="ekeyword">local</span>
-			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
+			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
 		<span class="ekeyword">do</span>
-			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
+			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
 			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><span class="nefeature">make_with_rgb</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">tup</span><span class="edot">.</span><span class="elocal">red</span><span class="esymbol">,</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">green</span><span class="esymbol">,</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">blue</span><span class="esymbol">)</span>
-		<span class="ekeyword">end</span>
-
-	<a name="f_to_grayscale"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_to_grayscale">to_grayscale</a>
-			<span class="ecomment">--</span><span class="ecomment"> Convert Current to its grayscale</span>
-			<span class="ecomment">--</span><span class="ecomment"> Uses the BT.709 formula.</span>
-		<span class="ekeyword">local</span>
-			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
-			<span class="elocal">y_prime</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span>
-		<span class="ekeyword">do</span>
-			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
-			<span class="elocal">y_prime</span> <span class="esymbol">:=</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">red</span> <span class="esymbol">*</span> <span class="enumber">0.2126</span> <span class="esymbol">+</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">green</span> <span class="esymbol">*</span> <span class="enumber">0.587</span> <span class="esymbol">+</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">blue</span> <span class="esymbol">*</span> <span class="enumber">0.087</span>
-			<a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">y_prime</span><span class="esymbol">,</span> <span class="elocal">y_prime</span><span class="esymbol">,</span> <span class="elocal">y_prime</span><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 
 	<a name="f_as_grayscale"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_as_grayscale">as_grayscale</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
 			<span class="ecomment">--</span><span class="ecomment"> A new color that is the grayscale version of Current</span>
+		<span class="ekeyword">local</span>
+			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
+			<span class="elocal">y_prime</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span>
 		<span class="ekeyword">do</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="nefeature">twin</span><span class="esymbol">;</span>
-			<span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_to_grayscale">to_grayscale</a>
+			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
+			<span class="elocal">y_prime</span> <span class="esymbol">:=</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">red</span> <span class="esymbol">*</span> <span class="enumber">0.2126</span> <span class="esymbol">+</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">green</span> <span class="esymbol">*</span> <span class="enumber">0.587</span> <span class="esymbol">+</span> <span class="elocal">tup</span><span class="edot">.</span><span class="elocal">blue</span> <span class="esymbol">*</span> <span class="enumber">0.087</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="elocal">y_prime</span><span class="esymbol">,</span> <span class="elocal">y_prime</span><span class="esymbol">,</span> <span class="elocal">y_prime</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_as_mutable"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_as_mutable">as_mutable</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/mutable_hsb_color.html">MUTABLE_HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> A copy of Current that can be changed</span>
+		<span class="ekeyword">do</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="edot">.</span><span class="nefeature">to_integer_32</span><span class="esymbol">)</span>
 		<span class="ekeyword">end</span>
 	
 <span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Output</span>
@@ -278,7 +382,7 @@
 	<a name="f_out"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_out">out</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
 			<span class="ecomment">--</span><span class="ecomment"> String representation of Current</span>
 		<span class="ekeyword">do</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> &quot;HSB: (&quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;)&quot;
+			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> &quot;HSB: (&quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="edot">.</span><span class="nefeature">out</span> <span class="esymbol">+</span> &quot;)&quot;
 		<span class="ekeyword">end</span>
 
 	<a name="f_out_in_degrees"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_out_in_degrees">out_in_degrees</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
@@ -295,29 +399,45 @@
 		<span class="ekeyword">end</span>
 
 	<a name="f_out_in_rgb"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_out_in_rgb">out_in_rgb</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
-			<span class="ecomment">--</span><span class="ecomment"> String representation in 8-bit RGB values</span>
+			<span class="ecomment">--</span><span class="ecomment"> String representation in 8-bit RGB values (pre-multiplied)</span>
 		<span class="ekeyword">local</span>
 			<span class="elocal">f</span><span class="esymbol">:</span> <span class="neclass">FORMAT_INTEGER</span>
-			<span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
-			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
+			<span class="elocal">r</span><span class="esymbol">,</span> <span class="elocal">g</span><span class="esymbol">,</span> <span class="elocal">b</span><span class="esymbol">,</span> <span class="elocal">a</span><span class="esymbol">:</span> <span class="neclass">STRING_8</span>
+			<span class="elocal">tup</span><span class="esymbol">:</span> <span class="ekeyword">like</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
 		<span class="ekeyword">do</span>
 			<span class="ekeyword">create</span> <span class="elocal">f</span><span class="edot">.</span><span class="nefeature">make</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">3</span><span class="esymbol">)</span><span class="esymbol">;</span>
 			<span class="elocal">f</span><span class="edot">.</span><span class="nefeature">no_justify</span>
-			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgb">as_rgb</a>
+			<span class="elocal">tup</span> <span class="esymbol">:=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a>
 			<span class="elocal">r</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><span class="nefeature">formatted</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">tup</span><span class="edot">.</span><span class="elocal">red</span> <span class="esymbol">*</span> <span class="enumber">255</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">floor</span><span class="esymbol">)</span>
 			<span class="elocal">g</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><span class="nefeature">formatted</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">tup</span><span class="edot">.</span><span class="elocal">green</span> <span class="esymbol">*</span> <span class="enumber">255</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">floor</span><span class="esymbol">)</span>
 			<span class="elocal">b</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><span class="nefeature">formatted</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">tup</span><span class="edot">.</span><span class="elocal">blue</span> <span class="esymbol">*</span> <span class="enumber">255</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">floor</span><span class="esymbol">)</span>
-			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> &quot;RGB: (&quot; <span class="esymbol">+</span> <span class="elocal">r</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <span class="elocal">g</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <span class="elocal">b</span> <span class="esymbol">+</span> &quot;)&quot;
+			<span class="elocal">a</span> <span class="esymbol">:=</span> <span class="elocal">f</span><span class="edot">.</span><span class="nefeature">formatted</span><span class="esymbol"> </span><span class="esymbol">(</span><span class="esymbol">(</span><span class="elocal">tup</span><span class="edot">.</span><span class="elocal">alpha</span> <span class="esymbol">*</span> <span class="enumber">255</span><span class="edot">.</span><span class="nefeature">to_real</span><span class="esymbol">)</span><span class="edot">.</span><span class="nefeature">floor</span><span class="esymbol">)</span>
+			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> &quot;RGB: (&quot; <span class="esymbol">+</span> <span class="elocal">r</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <span class="elocal">g</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <span class="elocal">b</span> <span class="esymbol">+</span> &quot;, &quot; <span class="esymbol">+</span> <span class="elocal">a</span> <span class="esymbol">+</span> &quot;)&quot;
 		<span class="ekeyword">end</span>
 	
 <span class="ekeyword">feature</span> <span class="esymbol">{</span>NONE<span class="esymbol">}</span> <span class="ecomment">--</span><span class="ecomment"> Implementation</span>
 
-	<a name="f_mid_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_mid_value">mid_value</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">,</span> <span class="elocal">a_other</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
+	<a name="f_blended"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_blended">blended</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">,</span> <span class="elocal">a_other_value</span><span class="esymbol">,</span> <span class="elocal">a_alpha</span><span class="esymbol">,</span> <span class="elocal">a_other_alpha</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span>
+			<span class="ecomment">--</span><span class="ecomment"> Alpha blending of one channel (a_value over a_other_value)</span>
+			<span class="ecomment">--</span><span class="ecomment"> Implements the straight-alpha fomula.</span>
+			<span class="ecomment">--</span><span class="ecomment"> Feature called by </span><a class="efeature" href="../jj_colors/hsb_color.html#f_over">over</a><span class="ecomment">, which uses RGB values.</span>
+		<span class="ekeyword">require</span>
+			<span class="etag">value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span>
+			<span class="etag">value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_value</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+			<span class="etag">other_value_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_other_value</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span>
+			<span class="etag">other_value_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_other_value</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+			<span class="etag">alpha_big_enough</span><span class="esymbol">:</span> <span class="elocal">a_alpha</span> <span class="esymbol">&gt;=</span> <span class="enumber">0.0</span>
+			<span class="etag">alpha_small_enough</span><span class="esymbol">:</span> <span class="elocal">a_alpha</span> <span class="esymbol">&lt;=</span> <span class="enumber">1.0</span>
+		<span class="ekeyword">do</span>
+			<span class="ekeyword">Result</span> <span class="esymbol">:=</span> <span class="esymbol">(</span><span class="elocal">a_value</span> <span class="esymbol">*</span> <span class="elocal">a_alpha</span> <span class="esymbol">+</span> <span class="elocal">a_other_value</span> <span class="esymbol">*</span> <span class="elocal">a_other_alpha</span> <span class="esymbol">*</span> <span class="esymbol">(</span><span class="enumber">1</span><span class="edot">.</span><span class="nefeature">to_real</span> <span class="esymbol">-</span> <span class="elocal">a_alpha</span><span class="esymbol">)</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_between_value"></a><a class="efeature" href="../jj_colors/hsb_color.html#f_between_value">between_value</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">,</span> <span class="elocal">a_other</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span><span class="esymbol">)</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
 			<span class="ecomment">--</span><span class="ecomment"> The number half way between a_value and </span><span class="equoted">a_other_value</span><span class="ecomment">.</span>
 			<span class="ecomment">--</span><span class="ecomment"> To accout for the colors arrange in a circle, translate the</span>
 			<span class="ecomment">--</span><span class="ecomment"> values so the larger is at </span><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="ecomment">, add half the difference</span>
 			<span class="ecomment">--</span><span class="ecomment"> the shift the result back.</span>
-			<span class="ecomment">--</span><span class="ecomment"> This featue is used by </span><a class="efeature" href="../jj_colors/hsb_color.html#f_add">add</a>
+			<span class="ecomment">--</span><span class="ecomment"> This featue is used by </span><span class="equoted">add</span>
 		<span class="ekeyword">local</span>
 			<span class="elocal">min</span><span class="esymbol">,</span> <span class="elocal">max</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
 			<span class="elocal">dist</span><span class="esymbol">,</span> <span class="elocal">min_dist</span><span class="esymbol">,</span> <span class="elocal">max_dist</span><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span>
@@ -340,6 +460,7 @@
 	<span class="etag">valid_hue</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
 	<span class="etag">valid_saturation</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
 	<span class="etag">valid_lightness</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
+	<span class="etag">valid_alpha</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">&gt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a> <span class="ekeyword">and</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a> <span class="esymbol">&lt;=</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a>
 
 <span class="ekeyword">end</span> <span class="ecomment">--</span> <span class="ecomment">class </span><a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
 <div class="nav">
@@ -350,7 +471,6 @@
 <a class="nav class" href="hsb_color_links.html">Relations</a>
 <span class="nav class selected">Text</span>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre></pre>
 <p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>

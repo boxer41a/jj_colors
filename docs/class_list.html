@@ -18,13 +18,49 @@
 <span class="nav class goto">Go to: <input name="c" value=""></span>
 </div></form><pre><span class="ekeyword">Classes</span>
 	<a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a>
-			<span class="ecomment">--</span><span class="ecomment"> A color describe using the Hue-Saturation-Brightness model.</span>
+			<span class="ecomment">--</span><span class="ecomment"> A color described using a modified Hue-Saturation-Brightness model.</span>
 			<span class="ecomment">--</span><span class="ecomment"> (This is same as HSL but I like the term &quot;brightness&quot; better</span>
-			<span class="ecomment">--</span><span class="ecomment"> than &quot;lightness&quot;.)</span>
-			<span class="ecomment">--</span><span class="ecomment"> The model uses integal values instead of reals, except when</span>
-			<span class="ecomment">--</span><span class="ecomment"> converting from and to </span><span class="neclass">EV_COLOR</span><span class="ecomment">.</span>
-			<span class="ecomment">--</span><span class="ecomment"> The </span><span class="equoted">hue</span><span class="ecomment">, </span><span class="equoted">saturation</span><span class="ecomment">, and </span><span class="equoted">brightness</span><span class="ecomment"> are </span><span class="neclass">NATURAL_8</span><span class="ecomment"> values.</span>
-			<span class="ecomment">--</span><span class="ecomment"> For ease of use, though, the setter feature take </span><span class="neclass">INTEGER_32</span><span class="ecomment"> values.</span>
+			<span class="ecomment">--</span><span class="ecomment"> than &quot;lightness&quot;.) &nbsp;This class differs from HSL, because the attributes,</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span><span class="equoted">hue</span><span class="ecomment">, </span><span class="equoted">saturation</span><span class="ecomment">, </span><span class="equoted">brightness</span><span class="ecomment">, and </span><span class="equoted">alpha</span><span class="ecomment"> are defined as </span><span class="neclass">NATURAL_8</span>
+			<span class="ecomment">--</span><span class="ecomment"> having the range [0, 255]. &nbsp;In the HSL model these values have different</span>
+			<span class="ecomment">--</span><span class="ecomment"> ranges: &nbsp;the hue range is [0.0, 360.0] in degrees, the saturation range is</span>
+			<span class="ecomment">--</span><span class="ecomment"> [0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. </span>
+			<span class="ecomment">--</span><span class="ecomment"> </span>
+			<span class="ecomment">--</span><span class="ecomment"> To picture the model here, think of a shere centered on the Origin with</span>
+			<span class="ecomment">--</span><span class="ecomment"> a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit</span>
+			<span class="ecomment">--</span><span class="ecomment"> into a NATURAL_8 number), where:</span>
+			<span class="ecomment">--</span><span class="ecomment"> 1) </span><span class="equoted">hue</span><span class="ecomment"> - the particular color given by the degrees from the red-axis,</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;(60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;is at 213 ScaDegs (300 degrees), with tertiary and other colors</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;spaced accordingly.</span>
+			<span class="ecomment">--</span><span class="ecomment"> 2) </span><span class="equoted">saturation</span><span class="ecomment"> - the amount of a given color mesured as the distance</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;from the origin towards the egde of the sphere. (A fully saturated</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;red is on the sphere while a less saturated red would be somewhere</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;inside the shere.) &nbsp;As the </span><span class="equoted">saturation</span><span class="ecomment"> approaches zero, the color</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;appears more and more white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> 3) </span><span class="equoted">brightness</span><span class="ecomment"> - the way a color appears relative to white is the angle</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;in ScaDegs measured up from the negative z-axis, with zero ScaDegs</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;(0 degrees or straight down) appearing totally black/dark, 128 ScaDegs</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;(90 degrees or on the shpere's equator) is a &quot;pure&quot; color, and 255</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;ScaDegs (180 degrees, or straight up) appears totally bright/white.</span>
+			<span class="ecomment">--</span><span class="ecomment"> 4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent)</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;to 255 ScaDegs (totally opaque).</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span>
+			<span class="ecomment">--</span><span class="ecomment"> To display an </span><a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="ecomment"> using the EV_xxx classes of EiffelVision, obtain the</span>
+			<span class="ecomment">--</span><span class="ecomment"> equivalent </span><span class="neclass">EV_COLOR</span><span class="ecomment"> with feature </span><span class="equoted">as_ev_color</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span>
+			<span class="ecomment">--</span><span class="ecomment"> An </span><a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="ecomment"> is immutable (i.e. it has no setters beyond the creation features).</span>
+			<span class="ecomment">--</span><span class="ecomment"> Obtain a modifiable </span><a class="eclass" href="jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a><span class="ecomment"> with feature </span><span class="equoted">as_mutable</span><span class="ecomment">.</span>
+			<span class="ecomment">--</span><span class="ecomment"> </span>
+			<span class="ecomment">--</span><span class="ecomment"> ToDo:</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;1) fix </span><span class="equoted">name</span><span class="ecomment"> to search </span><a class="eclass" href="jj_colors/html_extended_colors_chart.html">HTML_EXTENDED_COLORS</a>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;2) add color tables such as </span><span class="equoted">red_colors</span><span class="ecomment">, </span><span class="equoted">orange_colors</span><span class="ecomment">, etc to</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class </span><a class="eclass" href="jj_colors/html_extended_colors_chart.html">HTML_EXTENDED_COLORS</a>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;3) fix </span><span class="equoted">complement</span><span class="ecomment"> to account for colors with medium brightness, becasue the</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the oposite of some colors can't be seen on the original color's background.</span>
+			<span class="ecomment">--</span><span class="ecomment"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Needs a better formula.</span>
 
 	<a class="eclass" href="jj_colors/hsb_color_factory_chart.html">HSB_COLOR_FACTORY</a>
 			<span class="ecomment">--</span><span class="ecomment"> Can be used as a factory for some </span><a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="ecomment"> objects.</span>
@@ -38,6 +74,13 @@
 			<span class="ecomment">--</span><span class="ecomment"> Table holding </span><a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="ecomment"> paired with a name, allowing</span>
 			<span class="ecomment">--</span><span class="ecomment"> seach by string to find a color or search by color to</span>
 			<span class="ecomment">--</span><span class="ecomment"> find a name.</span>
+
+	<a class="eclass" href="jj_colors/html_extended_colors_chart.html">HTML_EXTENDED_COLORS</a>
+			<span class="ecomment">--</span><span class="ecomment"> A factory for HTML &quot;basic&quot; and &quot;extended colors&quot; as described </span>
+			<span class="ecomment">--</span><span class="ecomment"> in </span><a class="ecomment" href="https://en.wikipedia.org/wiki/Web_colors.">https://en.wikipedia.org/wiki/Web_colors.</a>
+
+	<a class="eclass" href="jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> An </span><a class="eclass" href="jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="ecomment"> that can be modified.</span>
 
 </pre><form class="nav" onsubmit="go_to('',this.c.value);return false;">
 <div class="nav">

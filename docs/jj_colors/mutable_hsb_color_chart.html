@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
+<meta name="description" content="An {HSB_COLOR} that can be modified."/>
+<meta name="author" content="Jimmy J. Johnson"/>
+<meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
+<meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<title>mutable_hsb_color Chart</title>
+<link rel="stylesheet" href="../default.css" type="text/css">
+<script type="text/javascript" src="../goto.html"></script>
+</head>
+<body>
+<pre></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<span class="nav class selected">Chart</span>
+<a class="nav class" href="mutable_hsb_color_links.html">Relations</a>
+<a class="nav class" href="mutable_hsb_color.html">Text</a>
+<a class="nav class" href="mutable_hsb_color_short.html">Contracts</a>
+<span class="nav class goto">Go to: <input name="c" value="mutable_hsb_color"></span>
+</div></form><pre><span class="ekeyword">class</span>
+	<a class="eclass" href="../jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a>
+
+<span class="ekeyword">General</span>
+	<span class="eitag">cluster</span><span class="esymbol">:</span> <a class="ecluster" href="../jj_colors/index.html">jj_colors</a>
+	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;An </span><a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="estring"> that can be modified.&quot;</span>
+	<span class="eitag">create</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_default_create">default_create</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_alpha">set_with_alpha</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb_and_alpha">set_with_rgb_and_alpha</a>
+
+<span class="ekeyword">Ancestors</span>
+	<a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a>
+
+<span class="ekeyword">Queries</span>
+	<span title="`alpha' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_alpha">alpha</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`as_ev_color' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_as_ev_color">as_ev_color</a><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span></span>
+	<span title="`as_grayscale' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_as_grayscale">as_grayscale</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
+	<span title="`as_mutable' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_as_mutable">as_mutable</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a></span>
+	<span title="`as_rgba' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_as_rgba">as_rgba</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span></span>
+	<span title="`brightness' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_brightness">brightness</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`complement' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_complement">complement</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
+	<span title="`hue' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_hue">hue</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`max_value' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_max_value">Max_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`mid_value' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_mid_value">Mid_value</a><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span></span>
+	<span title="`min_value' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_min_value">Min_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`name' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_name">name</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
+	<span title="`out' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_out">out</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
+	<span title="`out_in_degrees' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_out_in_degrees">out_in_degrees</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
+	<span title="`out_in_rgb' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_out_in_rgb">out_in_rgb</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
+	<span title="`over' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_over">over</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
+	<span title="`saturation' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_saturation">saturation</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`sum' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="esymbol">[</span><span class="ekeyword">like</span> <span class="ekeyword">Current</span><span class="esymbol">]</span> <a class="eclass" href="../jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a></span>
+
+<span class="ekeyword">Commands</span>
+	<span title="`add' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_add">add</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span></span>
+	<span title="`set' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_brightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_alpha' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_set_alpha">set_alpha</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_brightness' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_set_brightness">set_brightness</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_hue' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_set_hue">set_hue</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_saturation' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_set_saturation">set_saturation</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_with_alpha' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_alpha">set_with_alpha</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_brightness</span><span class="esymbol">,</span> <span class="elocal">a_alpha</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
+	<span title="`set_with_ev_color' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_ev_color">set_with_ev_color</a> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span><span class="esymbol">)</span></span>
+	<span title="`set_with_rgb' was declared in HSB_COLOR"><a class="efeature" href="../jj_colors/hsb_color.html#f_set_with_rgb">set_with_rgb</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span></span>
+	<span title="`to_grayscale' is declared in `Current'"><a class="efeature" href="../jj_colors/mutable_hsb_color.html#f_to_grayscale">to_grayscale</a></span>
+
+</pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<span class="nav class selected">Chart</span>
+<a class="nav class" href="mutable_hsb_color_links.html">Relations</a>
+<a class="nav class" href="mutable_hsb_color.html">Text</a>
+<a class="nav class" href="mutable_hsb_color_short.html">Contracts</a>
+<span class="nav class goto">Go to: <input name="c" value="mutable_hsb_color"></span>
+</div></form><pre></pre>
+<p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>
+</body>
+</html>

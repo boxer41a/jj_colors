@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
-<meta name="description" content="A color describe using the Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.) The model uses integal values instead of reals, except when converting from and to {EV_COLOR}. The `hue', `saturation', and `brightness' are {NATURAL_8} values. For ease of use, though, the setter feature take {INTEGER_32} values."/>
+<meta name="description" content="A color described using a modified Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.)  This class differs from HSL, because the attributes, `hue', `saturation', `brightness', and `alpha' are defined as {NATURAL_8} having the range [0, 255].  In the HSL model these values have different ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is [0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0].   To picture the model here, think of a shere centered on the Origin with a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit into a NATURAL_8 number), where: T1) `hue' - the particular color given by the degrees from the red-axis, T   where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs T   (60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128 T   ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta T   is at 213 ScaDegs (300 degrees), with tertiary and other colors T   spaced accordingly. T2) `saturation' - the amount of a given color mesured as the distance T   from the origin towards the egde of the sphere. (A fully saturated T   red is on the sphere while a less saturated red would be somewhere T   inside the shere.)  As the `saturation' approaches zero, the color T   appears more and more white. T3) `brightness' - the way a color appears relative to white is the angle T   in ScaDegs measured up from the negative z-axis, with zero ScaDegs T   (0 degrees or straight down) appearing totally black/dark, 128 ScaDegs T   (90 degrees or on the shpere's equator) is a pure color, and 255 T   ScaDegs (180 degrees, or straight up) appears totally bright/white. T4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent) T   to 255 ScaDegs (totally opaque).  To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the equivalent {EV_COLOR} with feature `as_ev_color'.  An {HSB_COLOR} is immutable (i.e. it has no setters beyond the creation features). Obtain a modifiable {MUTABLE_HSB_COLOR} with feature `as_mutable'.  ToDo:   1) fix `name' to search {HTML_EXTENDED_COLORS}   2) add color tables such as `red_colors', `orange_colors', etc to      class {HTML_EXTENDED_COLORS}   3) fix `complement' to account for colors with medium brightness, becasue the      the oposite of some colors can't be seen on the original color's background.      Needs a better formula."/>
 <meta name="author" content="Jimmy J. Johnson"/>
 <meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
 <meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
@@ -24,7 +24,6 @@
 <a class="nav class" href="hsb_color_links.html">Relations</a>
 <a class="nav class" href="hsb_color.html">Text</a>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre><span class="ekeyword">class</span>
 	<a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a>
@@ -32,48 +31,79 @@
 <span class="ekeyword">General</span>
 	<span class="eitag">cluster</span><span class="esymbol">:</span> <a class="ecluster" href="../jj_colors/index.html">jj_colors</a>
 	<span class="eitag">description</span><span class="esymbol">:</span> 
-		<span class="estring">&quot;A color describe using the Hue-Saturation-Brightness model.</span>
+		<span class="estring">&quot;A color described using a modified Hue-Saturation-Brightness model.</span>
 		<span class="estring">(This is same as HSL but I like the term %&quot;brightness%&quot; better</span>
-		<span class="estring">than %&quot;lightness%&quot;.)</span>
-		<span class="estring">The model uses integal values instead of reals, except when</span>
-		<span class="estring">converting from and to </span><span class="neclass">EV_COLOR</span><span class="estring">.</span>
-		<span class="estring">The </span><span class="estring">hue</span><span class="estring">, </span><span class="estring">saturation</span><span class="estring">, and </span><span class="estring">brightness</span><span class="estring"> are </span><span class="neclass">NATURAL_8</span><span class="estring"> values.</span>
-		<span class="estring">For ease of use, though, the setter feature take </span><span class="neclass">INTEGER_32</span><span class="estring"> values.&quot;</span>
-	<span class="eitag">create</span><span class="esymbol">:</span> <span class="nefeature">default_create</span><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set">set</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_ev_color">set_with_ev_color</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_rgb">set_with_rgb</a>
+		<span class="estring">than %&quot;lightness%&quot;.) &nbsp;This class differs from HSL, because the attributes,</span>
+		<span class="estring">hue</span><span class="estring">, </span><span class="estring">saturation</span><span class="estring">, </span><span class="estring">brightness</span><span class="estring">, and </span><span class="estring">alpha</span><span class="estring"> are defined as </span><span class="neclass">NATURAL_8</span>
+		<span class="estring">having the range [0, 255]. &nbsp;In the HSL model these values have different</span>
+		<span class="estring">ranges: &nbsp;the hue range is [0.0, 360.0] in degrees, the saturation range is</span>
+		<span class="estring">[0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. </span>
+		
+		<span class="estring">To picture the model here, think of a shere centered on the Origin with</span>
+		<span class="estring">a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit</span>
+		<span class="estring">into a NATURAL_8 number), where:</span>
+		<span class="estring">1) </span><span class="estring">hue</span><span class="estring"> - the particular color given by the degrees from the red-axis,</span>
+		<span class="estring"> &nbsp;&nbsp;where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs</span>
+		<span class="estring"> &nbsp;&nbsp;(60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128</span>
+		<span class="estring"> &nbsp;&nbsp;ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta</span>
+		<span class="estring"> &nbsp;&nbsp;is at 213 ScaDegs (300 degrees), with tertiary and other colors</span>
+		<span class="estring"> &nbsp;&nbsp;spaced accordingly.</span>
+		<span class="estring">2) </span><span class="estring">saturation</span><span class="estring"> - the amount of a given color mesured as the distance</span>
+		<span class="estring"> &nbsp;&nbsp;from the origin towards the egde of the sphere. (A fully saturated</span>
+		<span class="estring"> &nbsp;&nbsp;red is on the sphere while a less saturated red would be somewhere</span>
+		<span class="estring"> &nbsp;&nbsp;inside the shere.) &nbsp;As the </span><span class="estring">saturation</span><span class="estring"> approaches zero, the color</span>
+		<span class="estring"> &nbsp;&nbsp;appears more and more white.</span>
+		<span class="estring">3) </span><span class="estring">brightness</span><span class="estring"> - the way a color appears relative to white is the angle</span>
+		<span class="estring"> &nbsp;&nbsp;in ScaDegs measured up from the negative z-axis, with zero ScaDegs</span>
+		<span class="estring"> &nbsp;&nbsp;(0 degrees or straight down) appearing totally black/dark, 128 ScaDegs</span>
+		<span class="estring"> &nbsp;&nbsp;(90 degrees or on the shpere's equator) is a %&quot;pure%&quot; color, and 255</span>
+		<span class="estring"> &nbsp;&nbsp;ScaDegs (180 degrees, or straight up) appears totally bright/white.</span>
+		<span class="estring">4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent)</span>
+		<span class="estring"> &nbsp;&nbsp;to 255 ScaDegs (totally opaque).</span>
+		
+		<span class="estring">To display an </span><a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="estring"> using the EV_xxx classes of EiffelVision, obtain the</span>
+		<span class="estring">equivalent </span><span class="neclass">EV_COLOR</span><span class="estring"> with feature </span><span class="estring">as_ev_color</span><span class="estring">.</span>
+		
+		<span class="estring">An </span><a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="estring"> is immutable (i.e. it has no setters beyond the creation features).</span>
+		<span class="estring">Obtain a modifiable </span><a class="eclass" href="../jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a><span class="estring"> with feature </span><span class="estring">as_mutable</span><span class="estring">.</span>
+		
+		<span class="estring">ToDo:</span>
+		<span class="estring"> &nbsp;1) fix </span><span class="estring">name</span><span class="estring"> to search </span><a class="eclass" href="../jj_colors/html_extended_colors_chart.html">HTML_EXTENDED_COLORS</a>
+		<span class="estring"> &nbsp;2) add color tables such as </span><span class="estring">red_colors</span><span class="estring">, </span><span class="estring">orange_colors</span><span class="estring">, etc to</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;class </span><a class="eclass" href="../jj_colors/html_extended_colors_chart.html">HTML_EXTENDED_COLORS</a>
+		<span class="estring"> &nbsp;3) fix </span><span class="estring">complement</span><span class="estring"> to account for colors with medium brightness, becasue the</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;the oposite of some colors can't be seen on the original color's background.</span>
+		<span class="estring"> &nbsp;&nbsp;&nbsp;&nbsp;Needs a better formula.&quot;</span>
+	<span class="eitag">create</span><span class="esymbol">:</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_default_create">default_create</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set">set</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_alpha">set_with_alpha</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_ev_color">set_with_ev_color</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_rgb">set_with_rgb</a><span class="esymbol">,</span> <a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_rgb_and_alpha">set_with_rgb_and_alpha</a>
 
 <span class="ekeyword">Ancestors</span>
 	<span class="neclass">ANY</span>
 
 <span class="ekeyword">Queries</span>
+	<span title="`alpha' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_alpha">alpha</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
 	<span title="`as_ev_color' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_as_ev_color">as_ev_color</a><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span></span>
 	<span title="`as_grayscale' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_as_grayscale">as_grayscale</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
-	<span title="`as_rgb' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_as_rgb">as_rgb</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span></span>
+	<span title="`as_mutable' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_as_mutable">as_mutable</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/mutable_hsb_color_chart.html">MUTABLE_HSB_COLOR</a></span>
+	<span title="`as_rgba' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_as_rgba">as_rgba</a><span class="esymbol">:</span> <span class="neclass">TUPLE</span> <span class="esymbol">[</span><span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">,</span> <span class="neclass">REAL_32</span><span class="esymbol">]</span></span>
 	<span title="`brightness' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_brightness">brightness</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
 	<span title="`complement' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_complement">complement</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
 	<span title="`hue' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_hue">hue</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
 	<span title="`max_value' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_max_value">Max_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
+	<span title="`mid_value' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_mid_value">Mid_value</a><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span></span>
 	<span title="`min_value' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_min_value">Min_value</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
 	<span title="`name' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_name">name</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
 	<span title="`out' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_out">out</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
 	<span title="`out_in_degrees' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_out_in_degrees">out_in_degrees</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
 	<span title="`out_in_rgb' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_out_in_rgb">out_in_rgb</a><span class="esymbol">:</span> <span class="neclass">STRING_8</span></span>
+	<span title="`over' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_over">over</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
 	<span title="`saturation' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_saturation">saturation</a><span class="esymbol">:</span> <span class="neclass">NATURAL_8</span></span>
-	<span title="`sum' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color_chart.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
-
-<span class="ekeyword">Commands</span>
-	<span title="`add' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_add">add</a> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span></span>
-	<span title="`set' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set">set</a> <span class="esymbol">(</span><span class="elocal">a_hue</span><span class="esymbol">,</span> <span class="elocal">a_saturation</span><span class="esymbol">,</span> <span class="elocal">a_lightness</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
-	<span title="`set_brightness' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_brightness">set_brightness</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
-	<span title="`set_hue' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_hue">set_hue</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
-	<span title="`set_saturation' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_saturation">set_saturation</a> <span class="esymbol">(</span><span class="elocal">a_value</span><span class="esymbol">:</span> <span class="neclass">INTEGER_32</span><span class="esymbol">)</span></span>
-	<span title="`set_with_ev_color' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_ev_color">set_with_ev_color</a> <span class="esymbol">(</span><span class="elocal">a_color</span><span class="esymbol">:</span> <span class="neclass">EV_COLOR</span><span class="esymbol">)</span></span>
-	<span title="`set_with_rgb' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_set_with_rgb">set_with_rgb</a> <span class="esymbol">(</span><span class="elocal">a_red</span><span class="esymbol">,</span> <span class="elocal">a_green</span><span class="esymbol">,</span> <span class="elocal">a_blue</span><span class="esymbol">:</span> <span class="neclass">REAL_32</span><span class="esymbol">)</span></span>
-	<span title="`to_grayscale' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_to_grayscale">to_grayscale</a></span>
+	<span title="`sum' is declared in `Current'"><a class="efeature" href="../jj_colors/hsb_color_chart.html#f_sum">sum</a> <span class="ekeyword">alias</span> <span class="esymbol">&quot;</span><a class="esymbol" href="../jj_colors/hsb_color_chart.html#f_sum">+</a><span class="esymbol">&quot;</span> <span class="esymbol">(</span><span class="elocal">a_other</span><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a><span class="esymbol">)</span><span class="esymbol">:</span> <span class="esymbol">[</span><span class="ekeyword">like</span> <span class="ekeyword">Current</span><span class="esymbol">]</span> <a class="eclass" href="../jj_colors/hsb_color_chart.html">HSB_COLOR</a></span>
 
 <span class="ekeyword">Constraints</span>
 	<span class="etag">valid hue</span>
 	<span class="etag">valid saturation</span>
 	<span class="etag">valid lightness</span>
+	<span class="etag">valid alpha</span>
 
 </pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
 <div class="nav">
@@ -84,7 +114,6 @@
 <a class="nav class" href="hsb_color_links.html">Relations</a>
 <a class="nav class" href="hsb_color.html">Text</a>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre></pre>
 <p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>

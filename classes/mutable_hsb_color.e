@@ -66,6 +66,8 @@ feature -- Element change
 			alpha := a_value.as_natural_8
 		end
 
+feature -- Basic operations
+
 	to_grayscale
 			-- Convert Current to its grayscale
 			-- Uses the BT.709 formula.
@@ -77,5 +79,14 @@ feature -- Element change
 			y_prime := tup.red * 0.2126 + tup.green * 0.587 + tup.blue * 0.087
 			set_with_rgb (y_prime, y_prime, y_prime)
 		end
+
+	add (a_other: HSB_COLOR)
+			-- A new object that is the sum of Current and `a_other'
+		local
+			c: HSB_COLOR
+		do
+			copy (Current.sum (a_other))
+		end
+
 
 end

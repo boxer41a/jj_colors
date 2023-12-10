@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
-<meta name="description" content="A color describe using the Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.) The model uses integal values instead of reals, except when converting from and to {EV_COLOR}. The `hue', `saturation', and `brightness' are {NATURAL_8} values. For ease of use, though, the setter feature take {INTEGER_32} values."/>
+<meta name="description" content="A color described using a modified Hue-Saturation-Brightness model. (This is same as HSL but I like the term brightness better than lightness.)  This class differs from HSL, because the attributes, `hue', `saturation', `brightness', and `alpha' are defined as {NATURAL_8} having the range [0, 255].  In the HSL model these values have different ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is [0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0].   To picture the model here, think of a shere centered on the Origin with a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit into a NATURAL_8 number), where: T1) `hue' - the particular color given by the degrees from the red-axis, T   where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs T   (60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128 T   ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta T   is at 213 ScaDegs (300 degrees), with tertiary and other colors T   spaced accordingly. T2) `saturation' - the amount of a given color mesured as the distance T   from the origin towards the egde of the sphere. (A fully saturated T   red is on the sphere while a less saturated red would be somewhere T   inside the shere.)  As the `saturation' approaches zero, the color T   appears more and more white. T3) `brightness' - the way a color appears relative to white is the angle T   in ScaDegs measured up from the negative z-axis, with zero ScaDegs T   (0 degrees or straight down) appearing totally black/dark, 128 ScaDegs T   (90 degrees or on the shpere's equator) is a pure color, and 255 T   ScaDegs (180 degrees, or straight up) appears totally bright/white. T4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent) T   to 255 ScaDegs (totally opaque).  To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the equivalent {EV_COLOR} with feature `as_ev_color'.  An {HSB_COLOR} is immutable (i.e. it has no setters beyond the creation features). Obtain a modifiable {MUTABLE_HSB_COLOR} with feature `as_mutable'.  ToDo:   1) fix `name' to search {HTML_EXTENDED_COLORS}   2) add color tables such as `red_colors', `orange_colors', etc to      class {HTML_EXTENDED_COLORS}   3) fix `complement' to account for colors with medium brightness, becasue the      the oposite of some colors can't be seen on the original color's background.      Needs a better formula."/>
 <meta name="author" content="Jimmy J. Johnson"/>
 <meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
 <meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
@@ -24,7 +24,6 @@
 <span class="nav class selected">Relations</span>
 <a class="nav class" href="hsb_color.html">Text</a>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre><span class="ekeyword">class</span>
 	<a class="eclass" href="../jj_colors/hsb_color_links.html">HSB_COLOR</a>
@@ -32,9 +31,13 @@
 <span class="ekeyword">Ancestors</span>
 	<span class="neclass">ANY</span>
 
+<span class="ekeyword">Descendants</span>
+	<a class="eclass" href="../jj_colors/mutable_hsb_color_links.html">MUTABLE_HSB_COLOR</a>
+
 <span class="ekeyword">Clients</span>
 	<a class="eclass" href="../jj_colors/hsb_color_links.html">HSB_COLOR</a>
 	<a class="eclass" href="../jj_colors/hsb_color_factory_links.html">HSB_COLOR_FACTORY</a>
+	<a class="eclass" href="../jj_colors/html_extended_colors_links.html">HTML_EXTENDED_COLORS</a>
 
 <span class="ekeyword">Suppliers</span>
 	<span class="neclass">BOOLEAN</span>
@@ -44,6 +47,7 @@
 	<a class="eclass" href="../jj_colors/hsb_color_links.html">HSB_COLOR</a>
 	<a class="eclass" href="../jj_colors/hsb_color_factory_links.html">HSB_COLOR_FACTORY</a>
 	<span class="neclass">INTEGER_32</span>
+	<a class="eclass" href="../jj_colors/mutable_hsb_color_links.html">MUTABLE_HSB_COLOR</a>
 	<span class="neclass">NATURAL_8</span>
 	<span class="neclass">REAL_32</span>
 	<span class="neclass">REAL_64</span>
@@ -58,7 +62,6 @@
 <span class="nav class selected">Relations</span>
 <a class="nav class" href="hsb_color.html">Text</a>
 <a class="nav class" href="hsb_color_short.html">Contracts</a>
-<a class="nav class" href="hsb_color_flatshort.html">Flat contracts</a>
 <span class="nav class goto">Go to: <input name="c" value="hsb_color"></span>
 </div></form><pre></pre>
 <p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>

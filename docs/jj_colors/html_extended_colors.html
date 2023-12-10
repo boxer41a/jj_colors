@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content="ISE EiffelStudio version 20.05.10.4470 - macosx-x86-64">
+<meta name="description" content="A factory for HTML basic and extended colors as described  in https://en.wikipedia.org/wiki/Web_colors."/>
+<meta name="author" content="Jimmy J. Johnson"/>
+<meta name="copyright" content="Copyright (c) 2023, Jimmy J. Johnson"/>
+<meta name="license" content="Eiffel Forum v2 (http://www.eiffel.com/licensing/forum.txt)"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="keywords" content="Eiffel class"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<title>html_extended_colors Text</title>
+<link rel="stylesheet" href="../default.css" type="text/css">
+<script type="text/javascript" src="../goto.html"></script>
+</head>
+<body>
+<pre></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="html_extended_colors_chart.html">Chart</a>
+<a class="nav class" href="html_extended_colors_links.html">Relations</a>
+<span class="nav class selected">Text</span>
+<a class="nav class" href="html_extended_colors_short.html">Contracts</a>
+<span class="nav class goto">Go to: <input name="c" value="html_extended_colors"></span>
+</div></form><pre><span class="ekeyword">note</span>
+	<span class="eitag">description</span><span class="esymbol">:</span> <span class="estring">&quot;</span><span class="estring">[</span>
+		<span class="estring">A factory for HTML &quot;basic&quot; and &quot;extended colors&quot; as described </span>
+		<span class="estring">in </span><a class="estring" href="https://en.wikipedia.org/wiki/Web_colors.">https://en.wikipedia.org/wiki/Web_colors.</a>
+	<span class="estring">]</span><span class="estring">&quot;</span>
+	<span class="eitag">author</span><span class="esymbol">:</span> <span class="estring">&quot;Jimmy J. Johnson&quot;</span>
+	<span class="eitag">date</span><span class="esymbol">:</span> <span class="estring">&quot;11/11/23&quot;</span>
+	<span class="eitag">copyright</span><span class="esymbol">:</span> <span class="estring">&quot;Copyright (c) 2023, Jimmy J. Johnson&quot;</span>
+	<span class="eitag">license</span><span class="esymbol">:</span> <span class="estring">&quot;Eiffel Forum v2 (</span><a class="estring" href="http://www.eiffel.com/licensing/forum.txt">http://www.eiffel.com/licensing/forum.txt</a><span class="estring">)&quot;</span>
+
+<span class="ekeyword">class</span> 
+	<a class="eclass" href="../jj_colors/html_extended_colors.html">HTML_EXTENDED_COLORS</a>
+
+<span class="ekeyword">create</span> 
+	<span class="nefeature">default_create</span>
+
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (pink colors)</span>
+
+	<a name="f_medium_violet_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_violet_red">Medium_violet_red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">228</span><span class="esymbol">,</span> <span class="enumber">206</span><span class="esymbol">,</span> <span class="enumber">110</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_deep_pink"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_deep_pink">Deep_pink</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">232</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">138</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_pale_violet_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_pale_violet_red">Pale_violet_red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">241</span><span class="esymbol">,</span> <span class="enumber">152</span><span class="esymbol">,</span> <span class="enumber">166</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_hot_pink"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_hot_pink">Hot_pink</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">234</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">180</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_pink"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_pink">Light_pink</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">249</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">219</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_pink"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_pink">Pink</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumVioletRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">248</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">224</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (red colors)</span>
+
+	<a name="f_dark_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_red">Dark_red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">70</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_red">Red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Red</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_firebrick"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_firebrick">Firebrick</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Firebrick</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">173</span><span class="esymbol">,</span> <span class="enumber">106</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_crimson"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_crimson">Crimson</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Crimson</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">247</span><span class="esymbol">,</span> <span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">120</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_indian_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_indian_red">Indian_red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color IndianRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">135</span><span class="esymbol">,</span> <span class="enumber">149</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_coral"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_coral">Light_coral</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightCoral</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">201</span><span class="esymbol">,</span> <span class="enumber">184</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_salmon"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_salmon">Salmon</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Salmon</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">4</span><span class="esymbol">,</span> <span class="enumber">238</span><span class="esymbol">,</span> <span class="enumber">183</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_salmon"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_salmon">Dark_salmon</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkSalmon</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">11</span><span class="esymbol">,</span> <span class="enumber">183</span><span class="esymbol">,</span> <span class="enumber">178</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_salmon"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_salmon">Light_salmon</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightSalmon</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">12</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">189</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (orange colors)</span>
+
+	<a name="f_orange_red"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_orange_red">Orange_red</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color OrangeRed</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">11</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_tomato"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_tomato">Tomato</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Tomato</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">6</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">163</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_orange"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_orange">Dark_orange</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkOrange</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">23</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_coral"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_coral">Coral</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Coral</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">11</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">168</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_orange"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_orange">Orange</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Orange</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">28</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (yellow colors)</span>
+
+	<a name="f_dark_khaki"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_khaki">Dark_khaki</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkKhaki</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">40</span><span class="esymbol">,</span> <span class="enumber">98</span><span class="esymbol">,</span> <span class="enumber">148</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_gold"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_gold">Gold</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Gold</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">36</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_khaki"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_khaki">Khaki</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Khiki</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">38</span><span class="esymbol">,</span> <span class="enumber">196</span><span class="esymbol">,</span> <span class="enumber">190</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_peach_puff"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_peach_puff">Peach_puff</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PeachPuff</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">20</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">220</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_yellow"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_yellow">Yellow</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Yellow</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">25</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_pale_goldenrod"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_pale_goldenrod">Pale_goldenrod</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PaleGoldenrod</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">39</span><span class="esymbol">,</span> <span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">204</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_moccasin"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_moccasin">Moccasin</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Moccasin</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">27</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">218</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_papaya_whip"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_papaya_whip">Papaya_whip</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PapayaWhip</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">26</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">234</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_godenrod_yellow"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_godenrod_yellow">Light_godenrod_yellow</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightGodenrodYellow</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">204</span><span class="esymbol">,</span> <span class="enumber">230</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lemon_chiffon"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lemon_chiffon">Lemon_chiffon</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LemonChiffon</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">38</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">230</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_yellow"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_yellow">Light_yellow</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightYellow</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">240</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (brown colors)</span>
+
+	<a name="f_maroon"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_maroon">Maroon</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Maroon</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_brown"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_brown">Brown</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Brown</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">152</span><span class="esymbol">,</span> <span class="enumber">104</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_saddle_brown"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_saddle_brown">Saddle_brown</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SaddleBrown</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">18</span><span class="esymbol">,</span> <span class="enumber">194</span><span class="esymbol">,</span> <span class="enumber">79</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_sienna"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_sienna">Sienna</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Sienna</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">13</span><span class="esymbol">,</span> <span class="enumber">143</span><span class="esymbol">,</span> <span class="enumber">103</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_chocolate"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_chocolate">Chocolate</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Chocolate</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">18</span><span class="esymbol">,</span> <span class="enumber">191</span><span class="esymbol">,</span> <span class="enumber">120</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_deep_goldenrod"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_deep_goldenrod">Deep_goldenrod</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DeepGoldenrod</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">30</span><span class="esymbol">,</span> <span class="enumber">226</span><span class="esymbol">,</span> <span class="enumber">98</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_peru"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_peru">Peru</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Peru</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">21</span><span class="esymbol">,</span> <span class="enumber">150</span><span class="esymbol">,</span> <span class="enumber">134</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_rosy_brown"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_rosy_brown">Rosy_brown</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color RoseyBrown</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">,</span> <span class="enumber">166</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_goldenrod"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_goldenrod">Goldenrod</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Goldenrod</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">30</span><span class="esymbol">,</span> <span class="enumber">190</span><span class="esymbol">,</span> <span class="enumber">125</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_sandy_brown"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_sandy_brown">Sandy_brown</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SandyBrown</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">20</span><span class="esymbol">,</span> <span class="enumber">222</span><span class="esymbol">,</span> <span class="enumber">170</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_tan"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_tan">Tan</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Tan</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">24</span><span class="esymbol">,</span> <span class="enumber">112</span><span class="esymbol">,</span> <span class="enumber">175</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_burlywood"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_burlywood">Burlywood</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Burlywood</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">24</span><span class="esymbol">,</span> <span class="enumber">145</span><span class="esymbol">,</span> <span class="enumber">179</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_wheat"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_wheat">Wheat</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Wheat</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">29</span><span class="esymbol">,</span> <span class="enumber">200</span><span class="esymbol">,</span> <span class="enumber">209</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_navajo_white"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_navajo_white">Navajo_white</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color NavajoWhite</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">26</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">214</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_bisque"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_bisque">Bisque</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Bisque</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">23</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">226</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_blanched_almond"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_blanched_almond">Blanched_almond</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color BlanchedAlmond</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">26</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">230</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_cornsilk"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_cornsilk">Cornsilk</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Cornsilk</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">34</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">238</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (purple, violet, and magenta colors)</span>
+
+	<a name="f_indigo"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_indigo">Indigo</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Indigo</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">195</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">65</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_purple"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_purple">Purple</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Purple</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_magenta"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_magenta">Dark_magenta</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkMagenta</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">70</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_violet"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_violet">Dark_violet</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkViolet</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">200</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">106</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_slate_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_slate_blue">Dark_slate_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkSlateBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">176</span><span class="esymbol">,</span> <span class="enumber">99</span><span class="esymbol">,</span> <span class="enumber">100</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_blue_violet"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_blue_violet">Blue_violet</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color BlueViolet</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">192</span><span class="esymbol">,</span> <span class="enumber">194</span><span class="esymbol">,</span> <span class="enumber">135</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_orchid"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_orchid">Dark_orchid</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkOrchid</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">198</span><span class="esymbol">,</span> <span class="enumber">155</span><span class="esymbol">,</span> <span class="enumber">127</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_fuchsia"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_fuchsia">Fuchsia</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Fuchsia</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_magenta"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_magenta">Magenta</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Magenta</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_slate_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_slate_blue">Slate_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SlateBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">176</span><span class="esymbol">,</span> <span class="enumber">136</span><span class="esymbol">,</span> <span class="enumber">148</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_slate_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_slate_blue">Medium_slate_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumSlateBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">176</span><span class="esymbol">,</span> <span class="enumber">203</span><span class="esymbol">,</span> <span class="enumber">171</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_orchid"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_orchid">Medium_orchid</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumOrchid</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">204</span><span class="esymbol">,</span> <span class="enumber">150</span><span class="esymbol">,</span> <span class="enumber">148</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_purple"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_purple">Medium_purple</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumPurple</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">184</span><span class="esymbol">,</span> <span class="enumber">152</span><span class="esymbol">,</span> <span class="enumber">166</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_orchid"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_orchid">Orchid</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Orchid</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">214</span><span class="esymbol">,</span> <span class="enumber">150</span><span class="esymbol">,</span> <span class="enumber">165</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_violet"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_violet">Violet</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Violet</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">194</span><span class="esymbol">,</span> <span class="enumber">184</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_plum"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_plum">Plum</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Plum</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">121</span><span class="esymbol">,</span> <span class="enumber">191</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_thistle"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_thistle">Thistle</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Thistle</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">213</span><span class="esymbol">,</span> <span class="enumber">62</span><span class="esymbol">,</span> <span class="enumber">204</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lavender"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lavender">Lavender</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Lavender</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">240</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (blue colors)</span>
+
+	<a name="f_midnight_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_midnight_blue">Midnight_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MidnightBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">162</span><span class="esymbol">,</span> <span class="enumber">69</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_navy"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_navy">Navy</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Navy</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_blue">Dark_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">70</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_blue">Medium_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">103</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_blue">Blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Blue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_royal_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_royal_blue">Royal_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color RoyalBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">159</span><span class="esymbol">,</span> <span class="enumber">185</span><span class="esymbol">,</span> <span class="enumber">145</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_steel_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_steel_blue">Steel_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SteelBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">147</span><span class="esymbol">,</span> <span class="enumber">112</span><span class="esymbol">,</span> <span class="enumber">125</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dodger_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dodger_blue">Dodger_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DodgerBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">149</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">143</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_deep_sky_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_deep_sky_blue">Deep_sky_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DeepSkyBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">138</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_cornflower_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_cornflower_blue">Cornflower_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color CornflowerBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">155</span><span class="esymbol">,</span> <span class="enumber">202</span><span class="esymbol">,</span> <span class="enumber">169</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_sky_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_sky_blue">Sky_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SkyBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">140</span><span class="esymbol">,</span> <span class="enumber">182</span><span class="esymbol">,</span> <span class="enumber">185</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_sky_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_sky_blue">Light_sky_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightSkyBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">144</span><span class="esymbol">,</span> <span class="enumber">235</span><span class="esymbol">,</span> <span class="enumber">193</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_steel_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_steel_blue">Light_steel_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightSteelBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">152</span><span class="esymbol">,</span> <span class="enumber">105</span><span class="esymbol">,</span> <span class="enumber">199</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_blue">Light_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">138</span><span class="esymbol">,</span> <span class="enumber">136</span><span class="esymbol">,</span> <span class="enumber">202</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_powder_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_powder_blue">Powder_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PowderBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">132</span><span class="esymbol">,</span> <span class="enumber">132</span><span class="esymbol">,</span> <span class="enumber">203</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (cyan colors)</span>
+
+	<a name="f_teal"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_teal">Teal</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Teal</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_cyan"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_cyan">Dark_cyan</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkCyan</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">70</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_ligh_sea_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_ligh_sea_green">Ligh_sea_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightSeaGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">125</span><span class="esymbol">,</span> <span class="enumber">177</span><span class="esymbol">,</span> <span class="enumber">105</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_cadet_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_cadet_blue">Cadet_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color CadetBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">129</span><span class="esymbol">,</span> <span class="enumber">65</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_turquoise"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_turquoise">Dark_turquoise</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkTurquoise</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">105</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_turquoise"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_turquoise">Medium_turquoise</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumTurquoise</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">126</span><span class="esymbol">,</span> <span class="enumber">153</span><span class="esymbol">,</span> <span class="enumber">141</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_turquoise"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_turquoise">Turquoise</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Turquiose</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">123</span><span class="esymbol">,</span> <span class="enumber">184</span><span class="esymbol">,</span> <span class="enumber">144</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_aqua"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_aqua">Aqua</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Aqua</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_cyan"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_cyan">Cyan</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Cyan</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_aquamarine"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_aquamarine">Aquamarine</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Aquamarine</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">191</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_pale_turquoise"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_pale_turquoise">Pale_turquoise</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PaleTrquoise</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">166</span><span class="esymbol">,</span> <span class="enumber">207</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_cyan"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_cyan">Light_cyan</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightCyan</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">240</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (green colors)</span>
+
+	<a name="f_dark_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_green">Dark_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">50</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_green">Green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Green</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_olive_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_olive_green">Dark_olive_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkOliveGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">58</span><span class="esymbol">,</span> <span class="enumber">99</span><span class="esymbol">,</span> <span class="enumber">77</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_forest_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_forest_green">Forest_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color ForestGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">155</span><span class="esymbol">,</span> <span class="enumber">87</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_see_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_see_green">See_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SeaGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">103</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">93</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_olive"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_olive">Olive</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Olive</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_olive_drab"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_olive_drab">Olive_drab</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color OliveDrab</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">57</span><span class="esymbol">,</span> <span class="enumber">154</span><span class="esymbol">,</span> <span class="enumber">89</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_sea_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_sea_green">Medium_sea_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumSeaGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">104</span><span class="esymbol">,</span> <span class="enumber">127</span><span class="esymbol">,</span> <span class="enumber">120</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lime_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lime_green">Lime_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LimeGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">155</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lime"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lime">Lime</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Lime</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_spring_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_spring_green">Spring_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SpringGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">106</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_spring_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_spring_green">Medium_spring_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumSpringGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">111</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">125</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_sea_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_sea_green">Dark_sea_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkSeaGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">64</span><span class="esymbol">,</span> <span class="enumber">166</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_medium_aqua_marine"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_medium_aqua_marine">Medium_aqua_marine</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MediumAquaMarine</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">113</span><span class="esymbol">,</span> <span class="enumber">129</span><span class="esymbol">,</span> <span class="enumber">154</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_yellow_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_yellow_green">Yellow_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color YellowGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">57</span><span class="esymbol">,</span> <span class="enumber">155</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lawn_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lawn_green">Lawn_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LawnGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">64</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">126</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_chartreuse"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_chartreuse">Chartreuse</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Chartreuse</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">64</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_green">Light_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">187</span><span class="esymbol">,</span> <span class="enumber">191</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_green_yellow"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_green_yellow">Green_yellow</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color GreenYellow</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">60</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">151</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_pale_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_pale_green">Pale_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color PaleGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">236</span><span class="esymbol">,</span> <span class="enumber">202</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (white colors)</span>
+
+	<a name="f_misty_rose"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_misty_rose">Misty_rose</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MistyRose</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">4</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">240</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_antique_white"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_antique_white">Antique_white</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color AntiqueWhite</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">24</span><span class="esymbol">,</span> <span class="enumber">198</span><span class="esymbol">,</span> <span class="enumber">233</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_linen"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_linen">Linen</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Linen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">21</span><span class="esymbol">,</span> <span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">240</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_beige"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_beige">Beige</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Beige</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">142</span><span class="esymbol">,</span> <span class="enumber">233</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_white_smoke"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_white_smoke">White_smoke</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color WhiteSmoke</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">245</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_lavender_blush"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_lavender_blush">Lavender_blush</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LavenderBlush</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">241</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_old_lace"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_old_lace">Old_lace</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color OldLace</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">28</span><span class="esymbol">,</span> <span class="enumber">217</span><span class="esymbol">,</span> <span class="enumber">242</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_alice_blue"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_alice_blue">Alice_blue</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color AliceBlue</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">147</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_seashell"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_seashell">Seashell</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Seashell</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">18</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">247</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_ghost_white"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_ghost_white">Ghost_white</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color GhostWhite</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">170</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">252</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_honey_dew"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_honey_dew">Honey_dew</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color HoneyDew</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">85</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_floral_white"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_floral_white">Floral_white</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color FloralWhite</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">28</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_azure"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_azure">Azure</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Azure</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_mint_green"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_mint_green">Mint_green</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color MingGreen</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">106</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">250</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_snow"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_snow">Snow</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Snow</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">253</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_ivory"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_ivory">Ivory</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Ivory</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">43</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">,</span> <span class="enumber">248</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_white"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_white">White</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color White</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">255</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">feature</span> <span class="ecomment">--</span><span class="ecomment"> Access (gray and black colors</span>
+
+	<a name="f_black"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_black">Black</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Black</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_slate_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_slate_gray">Dark_slate_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkSlateGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">128</span><span class="esymbol">,</span> <span class="enumber">65</span><span class="esymbol">,</span> <span class="enumber">63</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dim_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dim_gray">Dim_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DimGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">105</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_slate_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_slate_gray">Slate_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color SlateGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">49</span><span class="esymbol">,</span> <span class="enumber">32</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_gray">Gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Gray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">128</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_slate_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_slate_gray">Light_slate_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightSlateGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">149</span><span class="esymbol">,</span> <span class="enumber">36</span><span class="esymbol">,</span> <span class="enumber">136</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_dark_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_dark_gray">Dark_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color DarkGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">169</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_silver"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_silver">Silver</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Silver</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">192</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_light_gray"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_light_gray">Light_gray</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color LightGray</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">211</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+
+	<a name="f_gainsboro"></a><a class="efeature" href="../jj_colors/html_extended_colors.html#f_gainsboro">Gainsboro</a><span class="esymbol">:</span> <a class="eclass" href="../jj_colors/hsb_color.html">HSB_COLOR</a>
+			<span class="ecomment">--</span><span class="ecomment"> HTML color Gainsboro</span>
+		<span class="ekeyword">once</span>
+			<span class="ekeyword">create</span> <span class="ekeyword">Result</span><span class="edot">.</span><a class="efeature" href="../jj_colors/hsb_color.html#f_set">set</a><span class="esymbol"> </span><span class="esymbol">(</span><span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">0</span><span class="esymbol">,</span> <span class="enumber">220</span><span class="esymbol">)</span>
+		<span class="ekeyword">end</span>
+	
+<span class="ekeyword">end</span> <span class="ecomment">--</span> <span class="ecomment">class </span><a class="eclass" href="../jj_colors/html_extended_colors.html">HTML_EXTENDED_COLORS</a></pre><form class="nav" onsubmit="go_to('../',this.c.value);return false;">
+<div class="nav">
+<a class="nav hierarchy" href="../class_list.html">Classes</a>
+<a class="nav hierarchy" href="../cluster_list.html">Clusters</a>
+<a class="nav hierarchy" href="../cluster_hierarchy.html">Cluster hierarchy</a>
+<a class="nav class" href="html_extended_colors_chart.html">Chart</a>
+<a class="nav class" href="html_extended_colors_links.html">Relations</a>
+<span class="nav class selected">Text</span>
+<a class="nav class" href="html_extended_colors_short.html">Contracts</a>
+<span class="nav class goto">Go to: <input name="c" value="html_extended_colors"></span>
+</div></form><pre></pre>
+<p style="text-align:center;">Generated by <a href="http://www.eiffel.com">ISE EiffelStudio</a></p>
+</body>
+</html>
+

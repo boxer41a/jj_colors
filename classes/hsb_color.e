@@ -1,12 +1,48 @@
 note
 	description: "[
-		A color describe using the Hue-Saturation-Brightness model.
+		A color described using a modified Hue-Saturation-Brightness model.
 		(This is same as HSL but I like the term "brightness" better
-		than "lightness".)
-		The model uses integer values instead of reals, except when
-		converting to or from an {EV_COLOR}.
-		The `hue', `saturation', and `brightness' are {NATURAL_8} values.
-		For ease of use, though, the setter feature take {INTEGER_32} values.
+		than "lightness".)  This class differs from HSL, because the attributes,
+		`hue', `saturation', `brightness', and `alpha' are defined as {NATURAL_8}
+		having the range [0, 255].  In the HSL model these values have different
+		ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is
+		[0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. 
+		
+		To picture the model here, think of a shere centered on the Origin with
+		a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit
+		into a NATURAL_8 number), where:
+			1) `hue' - the particular color given by the degrees from the red-axis,
+			   where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs
+			   (60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128
+			   ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta
+			   is at 213 ScaDegs (300 degrees), with tertiary and other colors
+			   spaced accordingly.
+			2) `saturation' - the amount of a given color mesured as the distance
+			   from the origin towards the egde of the sphere. (A fully saturated
+			   red is on the sphere while a less saturated red would be somewhere
+			   inside the shere.)  As the `saturation' approaches zero, the color
+			   appears more and more white.
+			3) `brightness' - the way a color appears relative to white is the angle
+			   in ScaDegs measured up from the negative z-axis, with zero ScaDegs
+			   (0 degrees or straight down) appearing totally black/dark, 128 ScaDegs
+			   (90 degrees or on the shpere's equator) is a "pure" color, and 255
+			   ScaDegs (180 degrees, or straight up) appears totally bright/white.
+			4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent)
+			   to 255 ScaDegs (totally opaque).
+		
+		To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the
+		equivalent {EV_COLOR} with feature `as_ev_color'.
+		
+		An {HSB_COLOR} is immutable (i.e. it has no setters beyond the creation features).
+		Obtain a modifiable {MUTABLE_HSB_COLOR} with feature `as_mutable'.
+		
+		ToDo:
+		  1) fix `name' to search {HTML_EXTENDED_COLORS}
+		  2) add color tables such as `red_colors', `orange_colors', etc to
+		     class {HTML_EXTENDED_COLORS}
+		  3) fix `complement' to account for colors with medium brightness, becasue the
+		     the oposite of some colors can't be seen on the original color's background.
+		     Needs a better formula.
 		]"
 	author:    "Jimmy J. Johnson"
 	date:      "11/11/23"
@@ -233,54 +269,39 @@ feature -- Basic operations
 		end
 
 	hsb_over (a_other: HSB_COLOR): HSB_COLOR
-			-- Attempt to find formula using `hue', `saturation', and
-			-- `alpha' directly instead of converting to RGB values.
-		local
-			new_h, new_s, new_b, new_a: NATURAL_8
-			rat: REAL_64
+			-- Attempt to find formula using `hue', `saturation', `brightness',
+			-- and `alpha' directly instead of converting to RGB values.
+		obsolete
+			"Not emplemented, use `over' instead."
 		do
-				-- The resulting color can never be more transparent;
-				-- it can only get more opaque.
-			if alpha >= a_other.alpha then
-				new_a := alpha
-			else
-					-- New alpha is average, but watch overflow
-				new_a := alpha // 2 + a_other.alpha // 2
-			end
-				-- Find ratio but watch for divide by zero
-			if alpha.max (a_other.alpha) = 0 then
-				rat := 1.0
-			else
-				rat := alpha.min (a_other.alpha) / alpha.max (a_other.alpha)
-			end
-			new_h := proportioned_value (hue, a_other.hue, rat, true)
-			new_s := proportioned_value (saturation, a_other.saturation, rat, false)
-			new_b := proportioned_value (brightness, a_other.brightness, rat, false)
-			create Result.set_with_alpha (new_h, new_s, new_b, new_a)
+				-- Appease Void-safety
+			create Result
+				-- Make it not usable
+--			check
+--				do_not_call: false
+--					-- because I don't think this is worth implementing.
+--					-- See "Implementing Over in HSB" in the documentation folder.
+--			end
 		end
 
-	add (a_other: HSB_COLOR)
-			-- Modify Current by adding `a_other' to it
+	sum alias "+"(a_other: HSB_COLOR): like Current
+			-- A new "pure" (i.e. fully saturated and medium brightness) color
+			-- whose `hue' is halfway between the `hue' of Current and `a_other'.
 		local
-			mid: NATURAL_8
+			h: NATURAL_8
 		do
---			hue := mid_value (hue, a_other.hue)
-			--
-			-- Example 1:  red + cyan would give white because cyan is
-			--   a combiation of green and blue.  Red + Green + Blue is
-			--   white.
-			-- So, adding a complementary color (e.g. red + cyan) pulls
-			-- the value towards the cyan along the EDGE of the color circle,
-			-- -- not through the white middle.
-			-- Problem:  which way to go?  do we get Violet or Chartreuse?
-			--
-		end
-
-	sum alias "+" (a_other: HSB_COLOR): HSB_COLOR
-			-- A new object that is the sum of Current and `a_other'
-		do
-			Result := twin
-			Result.add (a_other)
+			h := between_value (hue, a_other.hue)
+				-- Example 1:  red + yellow = orange, but
+				-- Example 2:  red + cyan would give white if we were combining
+				-- light because cyan is a combiation of green and blue.
+				-- Red + Green + Blue = White.
+				-- But, this class will restrict the result to go around the edge
+				-- of the color circle not throught the middle where `unsaturated'
+				-- (i.e. white) colors lie.  Adding a complementary color such as
+				-- adding cyan to red pulls the `hue' around the circle towards
+				-- the cyan which is 180-degree out.
+				-- Problem:  which way to go?  do we get Violet or Chartreuse?
+			create Result.set (h, Max_value, Mid_value)
 		end
 
 feature -- Query
@@ -293,7 +314,6 @@ feature -- Query
 			h_prime: REAL_64
 			c, x, m: REAL_64
 			r, g, b, a: REAL_64
---			r_int, g_int, b_int: INTEGER_32
 			mod2: REAL_64
 			i_value: INTEGER
 		do
@@ -430,20 +450,6 @@ feature -- Output
 
 feature {NONE} -- Implementation
 
---	blended_64 (a_value, a_other_value, a_alpha, a_other_alpha: REAL_64): REAL_64
---			-- Alpha blending of one channel (a_value over a_other_value)
---			-- Impements the non-premultiplied fromula
---		require
---			value_big_enough: a_value >= 0.0
---			value_small_enough: a_value <= 1.0
---			other_value_big_enough: a_other_value >= 0.0
---			other_value_small_enough: a_other_value <= 1.0
---			alpha_big_enough: a_alpha >= 0.0
---			alpha_small_enough: a_alpha <= 1.0
---		do
---			Result := (a_value * a_alpha + a_other_value * a_other_alpha * (1 - a_alpha))
---		end
-
 	blended (a_value, a_other_value, a_alpha, a_other_alpha: REAL): REAL
 			-- Alpha blending of one channel (a_value over a_other_value)
 			-- Implements the straight-alpha fomula.
@@ -461,62 +467,29 @@ feature {NONE} -- Implementation
 			Result := (a_value * a_alpha + a_other_value * a_other_alpha * (1 - a_alpha))
 		end
 
-	proportioned_value (a_value, a_other: NATURAL_8; a_ratio: REAL_64; is_wrapped: BOOLEAN): NATURAL_8
-			-- A value that is between `a_value' and `a_other' value by
-			-- `a_ratio' distance.  Normally this distance is added to
-			-- the minimum of the two values, but if `is_wrapped' it is
-			-- added to the maximum of the two values, allowing NATURAL_8
-			-- wrapping to come into play (i.e. for `hue' values which
-			-- are positioned around a circle.
-			-- The `a_ratio' argument is expected to the ratio between
-			-- Current's `alpha' and another colors `alpha'.
-			-- This feature is used by `hsb_over'.
-		require
-			ratio_big_enough: a_ratio >= 0.0
-			ratio_small_enough: a_ratio <= 1.0
+	between_value (a_value, a_other: NATURAL_8): NATURAL_8
+			-- The number half way between a_value and `a_other_value'.
+			-- To accout for the colors arrange in a circle, translate the
+			-- values so the larger is at `Max_value', add half the difference
+			-- the shift the result back.
+			-- This featue is used by `add'
 		local
 			min, max: NATURAL_8
 			dist, min_dist, max_dist: NATURAL_8
-			v: REAL_64
+			mid: NATURAL_8
 		do
 			min := a_value.min (a_other)
 			max := a_value.max (a_other)
 			dist := max - min
 			min_dist := (max - min).min (min - max)
 			max_dist := (max - min).max (min - max)
-			v := (min_dist * a_ratio).rounded
-			if is_wrapped and then dist > Max_value // 2 then
-				Result := max + v.truncated_to_integer.as_natural_8
+			mid := min_dist // 2
+			if dist > Max_value // 2 then
+				Result := max + mid
 			else
-				Result := min + v.truncated_to_integer.as_natural_8
+				Result := min + mid
 			end
 		end
-
---	mid_value (a_value, a_other: NATURAL_8): NATURAL_8
---			-- The number half way between a_value and `a_other_value'.
---			-- To accout for the colors arrange in a circle, translate the
---			-- values so the larger is at `Max_value', add half the difference
---			-- the shift the result back.
---			-- This featue is used by `add'
---		local
---			min, max: NATURAL_8
---			dist, min_dist, max_dist: NATURAL_8
---			mid: NATURAL_8
---		do
---			min := a_value.min (a_other)
---			max := a_value.max (a_other)
---			dist := max - min
---			min_dist := (max - min).min (min - max)
---			max_dist := (max - min).max (min - max)
---			mid := min_dist // 2
-
-
---			if dist > Max_value // 2 then
---				Result := max + mid
---			else
---				Result := min + mid
---			end
---		end
 
 invariant
 
@@ -524,4 +497,5 @@ invariant
 	valid_saturation: saturation >= Min_value and saturation <= Max_value
 	valid_lightness: brightness >= Min_value and brightness <= Max_value
 	valid_alpha: alpha >= Min_value and alpha <= Max_value
+
 end
