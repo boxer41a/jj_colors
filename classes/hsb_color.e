@@ -1,34 +1,34 @@
 note
 	description: "[
 		A color described using a modified Hue-Saturation-Brightness model.
-		(This is same as HSL but I like the term "brightness" better
-		than "lightness".)  This class differs from HSL, because the attributes,
-		`hue', `saturation', `brightness', and `alpha' are defined as {NATURAL_8}
-		having the range [0, 255].  In the HSL model these values have different
+		(This model is the same as HSL but I like the term "brightness" over
+		"lightness".)  This class differs from HSL, because it defines attributes,
+		`hue', `saturation', `brightness', and `alpha' as {NATURAL_8} numbers
+		in the range [0, 255], while the HSL model gives these values in other
 		ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is
 		[0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. 
 		
-		To picture the model here, think of a shere centered on the Origin with
-		a radius measured in ScaDegs (SCAled-DEGreeS, 360 degrees scaled to fit
-		into a NATURAL_8 number), where:
+		To picture this HSL model, think of a sphere centered on the origin with
+		a radius measured in units scaled to fit 360 degrees into a NATURAL_8 number),
+		where:
 			1) `hue' - the particular color given by the degrees from the red-axis,
-			   where red is at 0 ScaDegs, progressing through yellow at 43 ScaDegs
-			   (60-degrees), green is at 85 ScaDegs (120 degees), cyan is at 128
-			   ScaDegs (180 degrees), blue is at 170 ScaDegs (240 degrees), Magenta
-			   is at 213 ScaDegs (300 degrees), with tertiary and other colors
+			   where red is at 0 units, progressing through yellow at 43 units
+			   (60-degrees), green is at 85 units (120 degrees), cyan is at 128
+			   units (180 degrees), blue is at 170 units (240 degrees), Magenta
+			   is at 213 units (300 degrees), with tertiary and other colors
 			   spaced accordingly.
-			2) `saturation' - the amount of a given color mesured as the distance
-			   from the origin towards the egde of the sphere. (A fully saturated
+			2) `saturation' - the amount of a given color measured as the distance
+			   from the origin towards the edge of the sphere. (A fully saturated
 			   red is on the sphere while a less saturated red would be somewhere
-			   inside the shere.)  As the `saturation' approaches zero, the color
+			   inside the sphere.)  As the `saturation' approaches zero, the color
 			   appears more and more white.
 			3) `brightness' - the way a color appears relative to white is the angle
-			   in ScaDegs measured up from the negative z-axis, with zero ScaDegs
-			   (0 degrees or straight down) appearing totally black/dark, 128 ScaDegs
-			   (90 degrees or on the shpere's equator) is a "pure" color, and 255
-			   ScaDegs (180 degrees, or straight up) appears totally bright/white.
-			4) Alpha - the transparency, ranges from zero ScaDegs (totally transparent)
-			   to 255 ScaDegs (totally opaque).
+			   in units measured up from the negative z-axis, with zero units
+			   (0 degrees or straight down) appearing totally black/dark, 128 units
+			   (90 degrees or on the sphere's equator) is a "pure" color, and 255
+			   units (180 degrees, or straight up) appears totally bright/white.
+			4) Alpha - the transparency, ranges from zero units (totally transparent)
+			   to 255 units (totally opaque).
 		
 		To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the
 		equivalent {EV_COLOR} with feature `as_ev_color'.
@@ -40,8 +40,8 @@ note
 		  1) fix `name' to search {HTML_EXTENDED_COLORS}
 		  2) add color tables such as `red_colors', `orange_colors', etc to
 		     class {HTML_EXTENDED_COLORS}
-		  3) fix `complement' to account for colors with medium brightness, becasue the
-		     the oposite of some colors can't be seen on the original color's background.
+		  3) fix `complement' to account for colors with medium brightness, because the
+		     the opposite of some colors can't be seen on the original color's background.
 		     Needs a better formula.
 		]"
 	author:    "Jimmy J. Johnson"
@@ -191,7 +191,7 @@ feature -- Access
 			-- Describes the dominant color family of a spcific color.
 
 	saturation: NATURAL_8
-			-- The colorfullness relative to te brightness of a similarly
+			-- The colorfulness relative to the brightness of a similarly
 			-- illuminated white.
 			-- Increasing values move the color towards a pure hue.
 
@@ -201,7 +201,7 @@ feature -- Access
 			-- Increasing values move the color towards white
 
 	alpha: NATURAL_8
-			-- Measure of transparncy, when `blended' with another color,
+			-- Measure of transparancy, when `blended' with another color,
 			-- where `Min_value' is totally transparent and `Max_value' is opaque.
 
 	Min_value: NATURAL_8 = 0
@@ -272,7 +272,7 @@ feature -- Basic operations
 			-- Attempt to find formula using `hue', `saturation', `brightness',
 			-- and `alpha' directly instead of converting to RGB values.
 		obsolete
-			"Not emplemented, use `over' instead."
+			"Not implemented, use `over' instead."
 		do
 				-- Appease Void-safety
 			create Result
@@ -293,10 +293,10 @@ feature -- Basic operations
 			h := between_value (hue, a_other.hue)
 				-- Example 1:  red + yellow = orange, but
 				-- Example 2:  red + cyan would give white if we were combining
-				-- light because cyan is a combiation of green and blue.
+				-- light because cyan is a combination of green and blue.
 				-- Red + Green + Blue = White.
 				-- But, this class will restrict the result to go around the edge
-				-- of the color circle not throught the middle where `unsaturated'
+				-- of the color circle not through the middle where `unsaturated'
 				-- (i.e. white) colors lie.  Adding a complementary color such as
 				-- adding cyan to red pulls the `hue' around the circle towards
 				-- the cyan which is 180-degree out.
@@ -321,7 +321,6 @@ feature -- Query
 			sat := saturation / Max_value
 			lit := brightness / Max_value
 				-- Get `h' into interval [0, 360]
-				-- Units for `h' is doobers so doobers X 360 degrees/255 doobers
 			h := (hue * 360.0 / 255.0)
 			h_prime := h / 60.0
 				-- Compute the chroma, h-prime, and x
@@ -452,7 +451,7 @@ feature {NONE} -- Implementation
 
 	blended (a_value, a_other_value, a_alpha, a_other_alpha: REAL): REAL
 			-- Alpha blending of one channel (a_value over a_other_value)
-			-- Implements the straight-alpha fomula.
+			-- Implements the straight-alpha formula.
 			-- Feature called by `over', which uses RGB values.
 		require
 			value_big_enough: a_value >= 0.0
@@ -462,17 +461,17 @@ feature {NONE} -- Implementation
 			alpha_big_enough: a_alpha >= 0.0
 			alpha_small_enough: a_alpha <= 1.0
 		do
-					-- commented line is the premultied-alpha formula
+					-- commented line is the premultiplied-alpha formula
 --			Result := a_value * a_other_value * (1 - a_alpha)
 			Result := (a_value * a_alpha + a_other_value * a_other_alpha * (1 - a_alpha))
 		end
 
 	between_value (a_value, a_other: NATURAL_8): NATURAL_8
 			-- The number half way between a_value and `a_other_value'.
-			-- To accout for the colors arrange in a circle, translate the
-			-- values so the larger is at `Max_value', add half the difference
+			-- To account for the colors arranged in a circle, translate the
+			-- values so the larger is at `Max_value', add half the difference,
 			-- the shift the result back.
-			-- This featue is used by `add'
+			-- This feature is used by `add'
 		local
 			min, max: NATURAL_8
 			dist, min_dist, max_dist: NATURAL_8
