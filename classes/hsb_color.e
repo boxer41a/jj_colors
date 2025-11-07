@@ -29,13 +29,13 @@ note
 			   units (180 degrees, or straight up) appears totally bright/white.
 			4) Alpha - the transparency, ranges from zero units (totally transparent)
 			   to 255 units (totally opaque).
-		
+
 		To display an {HSB_COLOR} using the EV_xxx classes of EiffelVision, obtain the
 		equivalent {EV_COLOR} with feature `as_ev_color'.
-		
+
 		An {HSB_COLOR} is immutable (i.e. it has no setters beyond the creation features).
 		Obtain a modifiable {MUTABLE_HSB_COLOR} with feature `as_mutable'.
-		
+
 		ToDo:
 		  1) fix `name' to search {HTML_EXTENDED_COLORS}
 		  2) add color tables such as `red_colors', `orange_colors', etc to
@@ -60,7 +60,13 @@ inherit
 			out
 		end
 
---	SAFE_DOUBLE_MATH
+inherit {NONE}
+
+	SAFE_DOUBLE_MATH
+		undefine
+			default_create,
+			out
+		end
 
 create
 	default_create,
@@ -153,8 +159,6 @@ feature {NONE} -- Implementation
 			green_in_range: a_green >= 0.0 and then a_green <= 1.0
 			blue_in_range: a_blue >= 0.0 and then a_blue <= 1.0
 			alpha_in_range: a_alpha >= 0.0 and then a_alpha <= 1.0
-		local
-			c: EV_COLOR
 		do
 			set_with_rgb (a_red, a_green, a_blue)
 			alpha := (Max_value * a_alpha).truncated_to_integer.as_natural_8
@@ -201,8 +205,9 @@ feature -- Access
 			-- Increasing values move the color towards white
 
 	alpha: NATURAL_8
-			-- Measure of transparancy, when `blended' with another color,
-			-- where `Min_value' is totally transparent and `Max_value' is opaque.
+			-- Measure of opacity, when `blended' with another color,
+			-- where `Min_value' is totally transparent and `Max_value'
+			-- is totally opaque.
 
 	Min_value: NATURAL_8 = 0
 			-- The minimum value for the `hue', `saturation', and `lightness'
@@ -210,7 +215,7 @@ feature -- Access
 	Max_value: NATURAL_8 = 255
 			-- The maximum value for the `hue', `saturation', and `lightness'
 
-	Mid_value: INTEGER = 128
+	Mid_value: NATURAL_8 = 128
 			-- The middle value of the interval:
 			--   [{HSB_COLOR}.Min_value, {HSB_COLOR}.Max_value]
 
@@ -269,19 +274,21 @@ feature -- Basic operations
 		end
 
 	hsb_over (a_other: HSB_COLOR): HSB_COLOR
+			-- A new color resulting by alpha-blending the
+			-- placement of Current over `a_other'.
 			-- Attempt to find formula using `hue', `saturation', `brightness',
 			-- and `alpha' directly instead of converting to RGB values.
 		obsolete
-			"Not implemented, use `over' instead."
+			"Not quite right.  Problem in called feature/s.  Use `over' instead."
+		local
+			a: REAL_64
+			p1, p2, p3: TUPLE [x, y, z: REAL_64]
 		do
-				-- Appease Void-safety
-			create Result
-				-- Make it not usable
---			check
---				do_not_call: false
---					-- because I don't think this is worth implementing.
---					-- See "Implementing Over in HSB" in the documentation folder.
---			end
+			p1 := to_cartesian (a_other)
+			p2 := to_cartesian (Current)
+			a := alpha / Max_value
+			p3 := point_on_line (p1, p2, a)
+			Result := from_cartesian (p3)
 		end
 
 	sum alias "+"(a_other: HSB_COLOR): like Current
@@ -290,7 +297,7 @@ feature -- Basic operations
 		local
 			h: NATURAL_8
 		do
-			h := between_value (hue, a_other.hue)
+			h := half_value (hue, a_other.hue)
 				-- Example 1:  red + yellow = orange, but
 				-- Example 2:  red + cyan would give white if we were combining
 				-- light because cyan is a combination of green and blue.
@@ -299,7 +306,7 @@ feature -- Basic operations
 				-- of the color circle not through the middle where `unsaturated'
 				-- (i.e. white) colors lie.  Adding a complementary color such as
 				-- adding cyan to red pulls the `hue' around the circle towards
-				-- the cyan which is 180-degree out.
+				-- the cyan which is 180-degrees out.
 				-- Problem:  which way to go?  do we get Violet or Chartreuse?
 			create Result.set (h, Max_value, Mid_value)
 		end
@@ -466,7 +473,7 @@ feature {NONE} -- Implementation
 			Result := (a_value * a_alpha + a_other_value * a_other_alpha * (1 - a_alpha))
 		end
 
-	between_value (a_value, a_other: NATURAL_8): NATURAL_8
+	half_value (a_value, a_other: NATURAL_8): NATURAL_8
 			-- The number half way between a_value and `a_other_value'.
 			-- To account for the colors arranged in a circle, translate the
 			-- values so the larger is at `Max_value', add half the difference,
@@ -487,6 +494,194 @@ feature {NONE} -- Implementation
 				Result := max + mid
 			else
 				Result := min + mid
+			end
+		end
+
+	ranged_value (a_value, a_other: NATURAL_8; a_percent: REAL_64): NATURAL_8
+			-- Like feature `half' value except the Result is the
+			-- number that is `a_percent' distance from `a_value'
+			-- toward `a_other'.
+		require
+			percent_big_enough: a_percent >= 0.0
+			percent_small_enough: a_percent <= 1.0
+		local
+			min, max: NATURAL_8
+			dist: NATURAL_8
+			i: INTEGER_32
+			v: NATURAL_8
+		do
+print ("USB_COLOR.ranged_value (" + a_value.out + ", " + a_other.out + ", " + a_percent.out + "%N")
+			if a_value <= a_other then
+				min := a_value
+				max := a_other
+			else
+				min := a_other
+				max := a_value
+			end
+			dist := max - min
+			i := (dist * a_percent).rounded
+			check
+					-- not needed, because `to_natural_8' checks range
+				temp_big_enough: i >= 0
+				temp_small_enough: i <= 255
+					-- because NATURAL_8 range and preconditions
+			end
+			v := i.to_natural_8
+			if a_value = min then
+					-- Result is `a_percent' above `a_value'
+				Result := a_value + v
+			else
+					-- Result is `a_percent' toward `value'
+				Result := a_value - v
+			end
+print ("USB_COLOR.ranged_value:  min = " + min.out + "%N")
+print ("USB_COLOR.ranged_value:  max = " + max.out + "%N")
+print ("USB_COLOR.ranged_value:  dist = " + dist.out + "%N")
+print ("USB_COLOR.ranged_value:  i = " + i.out + "%N")
+print ("USB_COLOR.ranged_value:  Resul = " + Result.out + "%N")
+		end
+
+	normalized (a_color: HSB_COLOR): TUPLE [rho, theta, phi: REAL_64]
+			-- The `hue', `saturation' and `brightness' of `a_color' normalized to real
+			-- values where, `hue' (the angle around vertical axis corresponding
+			-- to `therta')  is in range [0, 2Pi)], `saturation' (the distance from the origin
+			-- corresponding to `rho') is in range [0, `Max_value']], and `brightness' (the
+			-- down from the z-axis, corresponding to `phi') is in range [0, Pi].
+		local
+			h, s, b: REAL_64
+		do
+				-- Normalize to correct range
+			s := a_color.saturation	-- / Max_value
+			b := (a_color.brightness / Max_value) * {MATH_CONST}.Pi
+			h := (a_color.hue / Max_value) * (2.0 * {MATH_CONST}.Pi)
+			Result := [s, h, b]
+		ensure
+			theta_in_range: Result.theta >= 0.0 and Result.theta <= 2 * {MATH_CONST}.Pi
+			rho_in_range: Result.rho >= 0.0 and Result.rho <= Max_value
+			phi_in_range: Result.phi >= 0.0 and Result.phi <= {MATH_CONST}.Pi
+		end
+
+	denormalized (a_tuple: like normalized): TUPLE [h, s, b: NATURAL_8]
+			-- From `normalized' coodinates, create a TUPLE containing
+			-- a hue, saturation, and brightness.
+		require
+		local
+			h, s, b: NATURAL_8
+		do
+			h := (a_tuple.theta / (2 * {MATH_CONST}.Pi) * Max_value).rounded.to_natural_8
+			s := (a_tuple.rho * Max_value).rounded.to_natural_8
+			b := (a_tuple.phi / {MATH_CONST}.Pi * Max_value).rounded.to_natural_8
+				-- Create the Result
+			Result := [h, s, b]
+		end
+
+	to_cartesian (a_color: HSB_COLOR): TUPLE [x, y, z: REAL_64]
+			-- The Cartesian coordinates of the endpoint of the vector
+			-- describing Current.
+		local
+			rho: REAL_64		-- distance from origin
+			theta: REAL_64	-- angle from the x_axis
+			phi: REAL_64		-- angle down from z axis
+			x, y, z: REAL_64
+		do
+				-- Convert to spherical coordinates
+			rho := a_color.saturation
+			theta := (a_color.hue / Max_value) * (2.0 * {MATH_CONST}.Pi)
+			phi := (a_color.brightness / Max_value) * {MATH_CONST}.Pi
+				-- Convert to Cartesian coordinates
+			x := rho * sine (phi) * cosine (theta)
+			y := rho * sine (phi) * sine (theta)
+			z := rho * cosine (phi)
+				-- Place values into Result {TUPLE}
+			Result := [x, y, z]
+		end
+
+	from_cartesian (a_tuple: TUPLE [x, y, z: REAL_64]): HSB_COLOR
+			-- From catesian coordinates create equivalent
+			-- spherical_coordinates
+		require
+		local
+			x, y, z: REAL_64
+			rho: REAL_64	-- saturation in range (0, 1)
+			theta: REAL_64	-- brightness in range (0, Pi)
+			phi: REAL_64	-- hue in range (0, 2Pi)
+			h, s, b: NATURAL_8
+		do
+			x := a_tuple.x
+			y := a_tuple.y
+			z := a_tuple.z
+				-- Use `min' to prevent a number slightly larger than `Max_value'
+				-- which would violate the "rho_small_enough" check statment.
+			rho := sqrt (x^2 + y^2 + z^2).min (Max_value)
+			check
+				rho_big_enough: rho >= 0.0
+				rho_small_enough: rho <= Max_value.to_real_64
+					-- ... because ?
+			end
+				-- Calculate theta
+			if very_close (x, 0.0) then
+				theta := {MATH_CONST}.pi
+			else
+				theta := y.sign * my_atan (y, x)
+--				theta := y.sign * arc_cosine (x / sqrt (x^2 + y^2))
+			end
+			check
+				theta_big_enough: theta >= 0.0
+				theta_small_enough: theta <=2 * {MATH_CONST}.Pi
+--				theta_small_enough: theta < 2 * {MATH_CONST}.Pi or else very_close (theta - Max_value, 0.0)
+					-- because ... ?
+			end
+				-- Calculate phi
+			if very_close (rho, 0.0) then
+				phi := 0.0
+			else
+				phi := arc_cosine (z / rho)
+			end
+			check
+				phi_big_enough: phi >= 0.0
+				phi_small_enough: phi <= {MATH_CONST}.Pi
+					-- because by definition
+			end
+--			Result := [rho, theta, phi]
+				-- Convert back to {NATURAL_8} range
+			h := (theta / (2 * {MATH_CONST}.Pi) * Max_value).rounded.to_natural_8
+			s := rho.rounded.to_natural_8
+			b := (phi / {MATH_CONST}.Pi * Max_value).rounded.to_natural_8
+			create Result.set (h, s, b)
+		end
+
+	point_on_line (a_point: TUPLE [x, y, z: REAL_64];
+					a_other: TUPLE [x, y, z: REAL_64];
+					a_alpha: REAL_64): TUPLE [x, y, z: REAL_64]
+			-- The position of a point at `a_alpha' along the line
+			-- between the points `a_point' and `a_other'.
+			-- https://byjus.com/maths/equation-line/
+		local
+			x, y, z: REAL_64
+		do
+			x := a_point.x + a_alpha * (a_other.x - a_point.x)
+			y := a_point.y + a_alpha * (a_other.y - a_point.y)
+			z := a_point.z + a_alpha * (a_other.z - a_point.z)
+			Result := [x, y, z]
+		end
+
+	my_atan (y, x: REAL_64): REAL_64
+			-- Arctangent function to get result in range [-Pi, Pi], because the `arc_tangent'
+			-- function from {DOUBLE_MATH} is in range [-Pi/2, Pi/2]
+		do
+			if x > 0.0 then
+				Result := {DOUBLE_MATH}.arc_tangent (y / x)
+			elseif (y > 0.0 or very_close (y, 0.0)) and x < 0.0 then
+				Result := Pi + {DOUBLE_MATH}.arc_tangent (y / x)
+			elseif y < 0.0 and x < 0.0 then
+				Result := -Pi + {DOUBLE_MATH}.arc_tangent (y / x)
+			elseif y > 0.0 and very_close (x, 0.0) then
+				Result := Pi / 2
+			else
+				check
+					should_not_happen: False
+						-- because, all possibilities should be covered above.
+				end
 			end
 		end
 

@@ -439,6 +439,8 @@ feature {NONE} -- Basic operations
 
 	update_background_color (a_value: INTEGER)
 			-- Change the `background_color'
+			-- Argument `a_value' is not used, but needed to match
+			-- signature of `change_actions' for the spin button.
 		local
 			h, s, b: INTEGER
 			ev_col: EV_COLOR
@@ -468,6 +470,8 @@ feature {NONE} -- Basic operations
 
 	update_rectangle_color (a_value: INTEGER)
 			-- Change the background for `color'
+			-- Argument `a_value' is not used, but needed to match
+			-- signature of `change_actions' for the spin button.
 		local
 			h, s, b, a: INTEGER
 			ev_col: EV_COLOR
@@ -497,6 +501,8 @@ feature {NONE} -- Basic operations
 
 	update_other_color (a_value: INTEGER)
 			-- Change the background for `other_color'
+			-- Argument `a_value' is not used, but needed to match
+			-- signature of `change_actions' for the spin button.
 		local
 			h, s, b, a: INTEGER
 			ev_col: EV_COLOR
@@ -743,6 +749,7 @@ feature {NONE} -- Implentation
 	overlapped_rectangle_color: HSB_COLOR
 			-- The color obtained from blending the colors of
 			-- the `rectangle' and the `other_rectangle'
+
 feature {NONE} -- Implentation
 
 	other_overlapped_rectangle: EV_TEXT

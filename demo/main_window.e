@@ -53,6 +53,8 @@ feature {NONE} -- Initialization
 			mod_wc: EV_MODEL_WORLD_CELL
 			sat_wc: EV_MODEL_WORLD_CELL
 			add_wc: EV_MODEL_WORLD_CELL
+
+			c: HSB_COLOR
 		do
 			Precursor {EV_TITLED_WINDOW}
 			add_actions
@@ -69,6 +71,41 @@ feature {NONE} -- Initialization
 			hsb_spectrum_view.resize_if_necessary
 			hsb_color_summations_view.resize_if_necessary
 --			hsb_blender_view.resize_if_necessary
+
+			test_naturals
+
+		end
+
+
+	test_naturals
+			-- Tries some math to see what we get
+		local
+			a, b, c: NATURAL_8
+			min, max, dist, min_dist, max_dist: NATURAL_8
+		do
+			print ("%N%N")
+			a := 250
+			b := 10
+			c := a + b
+			print (a.out + " + " + b.out + " = " + c.out + "%N")
+			a := 250
+			b := 10
+			c := b - a
+			print (b.out + " - " + a.out + " = " + c.out + "%N")
+
+
+			min := a.min (b)
+			max := a.max (b)
+			dist := max - min
+			min_dist := (max - min).min (min - max)
+			max_dist := (max - min).max (min - max)
+
+			print ("min = " + min.out + "%N")
+			print ("max = " + max.out + "%N")
+			print ("dist = " + dist.out + "%N")
+			print ("min_dist = " + min_dist.out + "%N")
+			print ("max_dist = " + max_dist.out + "%N")
+
 		end
 
 feature {NONE} -- Implementation, Close event
