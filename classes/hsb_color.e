@@ -622,8 +622,7 @@ print ("USB_COLOR.ranged_value:  Resul = " + Result.out + "%N")
 			if very_close (x, 0.0) then
 				theta := {MATH_CONST}.pi
 			else
-				theta := y.sign * my_atan (y, x)
---				theta := y.sign * arc_cosine (x / sqrt (x^2 + y^2))
+				theta := my_atan (y, x)
 			end
 			check
 				theta_big_enough: theta >= 0.0
@@ -642,7 +641,6 @@ print ("USB_COLOR.ranged_value:  Resul = " + Result.out + "%N")
 				phi_small_enough: phi <= {MATH_CONST}.Pi
 					-- because by definition
 			end
---			Result := [rho, theta, phi]
 				-- Convert back to {NATURAL_8} range
 			h := (theta / (2 * {MATH_CONST}.Pi) * Max_value).rounded.to_natural_8
 			s := rho.rounded.to_natural_8
@@ -667,22 +665,32 @@ print ("USB_COLOR.ranged_value:  Resul = " + Result.out + "%N")
 
 	my_atan (y, x: REAL_64): REAL_64
 			-- Arctangent function to get result in range [-Pi, Pi], because the `arc_tangent'
-			-- function from {DOUBLE_MATH} is in range [-Pi/2, Pi/2]
+			-- function from {DOUBLE_MATH} is in range [0, 2Pi]
+			-- See "https://www.mathworks.com/matlabcentral/answers/9330-
+			-- changing-the-atan-function-so-that-it-ranges-from-0-to-2-pi"
 		do
 			if x > 0.0 then
 				Result := {DOUBLE_MATH}.arc_tangent (y / x)
-			elseif (y > 0.0 or very_close (y, 0.0)) and x < 0.0 then
+			elseif (y >= 0.0) and x < 0.0 then
 				Result := Pi + {DOUBLE_MATH}.arc_tangent (y / x)
 			elseif y < 0.0 and x < 0.0 then
 				Result := -Pi + {DOUBLE_MATH}.arc_tangent (y / x)
 			elseif y > 0.0 and very_close (x, 0.0) then
 				Result := Pi / 2
+			elseif y < 0.0 and very_close (x, 0.0) then
+				Result := -Pi / 2
 			else
 				check
 					should_not_happen: False
 						-- because, all possibilities should be covered above.
 				end
 			end
+			if Result < 0.0 then
+				Result := Result + 2 * Pi
+			end
+		ensure
+			big_enough: Result >= 0.0
+			small_enough: Result <= 2 * Pi
 		end
 
 invariant
