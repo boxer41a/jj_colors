@@ -215,7 +215,7 @@ feature -- Access
 	Max_value: NATURAL_8 = 255
 			-- The maximum value for the `hue', `saturation', and `lightness'
 
-	Mid_value: NATURAL_8 = 128
+	Mid_value: NATURAL_8 = 127
 			-- The middle value of the interval:
 			--   [{HSB_COLOR}.Min_value, {HSB_COLOR}.Max_value]
 
@@ -281,14 +281,47 @@ feature -- Basic operations
 		obsolete
 			"Not quite right.  Problem in called feature/s.  Use `over' instead."
 		local
+			h, s, b: NATURAL_8
+
 			a: REAL_64
 			p1, p2, p3: TUPLE [x, y, z: REAL_64]
+				-- variables for second method
+			r: REAL_64
+			big, lit: NATURAL_8
 		do
+--				-- These lines perform a weighted average between the values.
+--			a := alpha / Max_value
+--			print ("hsb_over:  hue ----------- %N")
+--			h := ranged_value (a_other.hue, hue, a, True)
+--			print ("hsb_over:  saturation ----------- %N")
+--			s := ranged_value (a_other.saturation, saturation, a, False)
+--			print ("hsb_over:  brightness ----------- %N")
+--			b := ranged_value (a_other.brightness, brightness, a, False)
+--			create Result.set (h, s,  b)
+
+				-- Geometric method.  Finds cartesian coordiates for the HSL vectors,
+				-- finds a point along a line between the two endpoints, then converts
+				-- the point back to HSL (i.e. spherical) representation.
+				-- This seems to work better than the above, but its not right.
 			p1 := to_cartesian (a_other)
 			p2 := to_cartesian (Current)
 			a := alpha / Max_value
 			p3 := point_on_line (p1, p2, a)
 			Result := from_cartesian (p3)
+
+				-- These equations were obtained from Duck-Duck-Go search assistent.
+				-- The source was ambiguous.
+----			r := alpha / Max_value
+----				--hue
+----			if (h1-h2).abs > 180 then
+----				h := (h1 + (h2 - 360) * t) % 360
+----			else
+----				h := h1 + (h2 - h1) * t
+----			end
+----				-- saturation
+----			s := s1 + (s2 - s1) * t
+----				-- Lightness
+----			L := L1 + (L2 - L1) * t
 		end
 
 	sum alias "+"(a_other: HSB_COLOR): like Current
@@ -497,48 +530,47 @@ feature {NONE} -- Implementation
 			end
 		end
 
-	ranged_value (a_value, a_other: NATURAL_8; a_percent: REAL_64): NATURAL_8
-			-- Like feature `half' value except the Result is the
-			-- number that is `a_percent' distance from `a_value'
-			-- toward `a_other'.
+	ranged_value (a_value, a_other: NATURAL_8; a_percent: REAL_64; is_wrapped: BOOLEAN): NATURAL_8
+			-- The number that is `a_percent' distance from `a_value' toward `a_other'.
+			-- If `is_wrapped' we use the shorter distance around a circle.
 		require
 			percent_big_enough: a_percent >= 0.0
 			percent_small_enough: a_percent <= 1.0
 		local
 			min, max: NATURAL_8
 			dist: NATURAL_8
+			min_dist, max_dist: NATURAL_8
 			i: INTEGER_32
 			v: NATURAL_8
 		do
-print ("USB_COLOR.ranged_value (" + a_value.out + ", " + a_other.out + ", " + a_percent.out + "%N")
-			if a_value <= a_other then
-				min := a_value
-				max := a_other
-			else
-				min := a_other
-				max := a_value
-			end
+print ("HSB_COLOR.ranged_value (" + a_value.out + ", " + a_other.out + ", " + a_percent.out +  ", " + is_wrapped.out + ") %N")
+			min := a_value.min (a_other)
+			max := a_value.max (a_other)
 			dist := max - min
-			i := (dist * a_percent).rounded
-			check
-					-- not needed, because `to_natural_8' checks range
-				temp_big_enough: i >= 0
-				temp_small_enough: i <= 255
-					-- because NATURAL_8 range and preconditions
-			end
-			v := i.to_natural_8
-			if a_value = min then
-					-- Result is `a_percent' above `a_value'
-				Result := a_value + v
+			if is_wrapped then
+				min_dist := (max - min).min (min - max)
+				v := (min_dist * a_percent).rounded.to_natural_8
+				if dist > Mid_value then
+					Result := max + v
+				else
+					Result := min + v
+				end
 			else
-					-- Result is `a_percent' toward `value'
-				Result := a_value - v
+--				max_dist := (max - min).max (min - max)
+				v := (dist * a_percent).rounded.to_natural_8
+				if min = a_value then
+					Result := a_value + v
+				else
+					Result := a_value - v
+				end
 			end
-print ("USB_COLOR.ranged_value:  min = " + min.out + "%N")
-print ("USB_COLOR.ranged_value:  max = " + max.out + "%N")
-print ("USB_COLOR.ranged_value:  dist = " + dist.out + "%N")
-print ("USB_COLOR.ranged_value:  i = " + i.out + "%N")
-print ("USB_COLOR.ranged_value:  Resul = " + Result.out + "%N")
+print ("%T min = " + min.out + "%N")
+print ("%T max = " + max.out + "%N")
+print ("%T dist = " + dist.out + "%N")
+print ("%T min_dist = " + min_dist.out + "%N")
+print ("%T max_dist = " + max_dist.out + "%N")
+print ("%T i = " + i.out + "%N")
+print ("%T Result = " + Result.out + "%N")
 		end
 
 	normalized (a_color: HSB_COLOR): TUPLE [rho, theta, phi: REAL_64]
