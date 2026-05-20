@@ -8,7 +8,7 @@ note
 		ranges:  the hue range is [0.0, 360.0] in degrees, the saturation range is
 		[0.0, 1.0], and the brightness/lightness range is normally [0.0, 1.0]. 
 		
-		To picture this HSL model, think of a sphere centered on the origin with
+		To picture this HSB model, think of a sphere centered on the origin with
 		a radius measured in units scaled to fit 360 degrees into a NATURAL_8 number),
 		where:
 			1) `hue' - the particular color given by the degrees from the red-axis,
