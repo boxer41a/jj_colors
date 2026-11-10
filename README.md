@@ -10,7 +10,5 @@ To picture this HSB model, think of a sphere centered on the origin with a radiu
 3. `*brightness*' - the way a color appears relative to white is the angle in units measured up from the negative z-axis, with zero units (0 degrees or straight down) appearing totally black/dark, 128 units (90 degrees or on the sphere's equator) is a "pure" color, and 255 units (180 degrees, or straight up) appears totally bright/white.
 4. '*Alpha*' - the transparency, ranges from zero units (totally transparent) to 255 units (totally opaque).
 
-To display an [HSB_COLOR](./classes/hsb_color.e) using the EV\_xxx classes of EiffelVision, obtain the equivalent EV\_COLOR with feature `*as\_ev\_color*'.
-
 An [HSB_COLOR](./classes/hsb_color.e) is immutable (i.e. it has no setters beyond the creation features).  Obtain a modifiable [.MUTABLE\_HSB\_COLOR](./classes/mutable_\hsb_\color.e) with feature `as_mutable'.
 
