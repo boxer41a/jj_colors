@@ -32,6 +32,12 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
+	count: INTEGER
+			-- The number of items in Current
+		do
+			Result := table_imp.count
+		end
+
 	item_for_iteration: HSB_COLOR
 			-- Element at current iteration position
 		require

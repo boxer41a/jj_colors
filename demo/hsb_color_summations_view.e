@@ -19,6 +19,14 @@ inherit
 			initialize
 		end
 
+inherit {NONE}
+
+	SHARED_UTILS
+		undefine
+			default_create,
+			copy
+		end
+
 feature {NONE} -- Initialization
 
 	create_interface_objects
@@ -46,67 +54,68 @@ feature {NONE} -- Implementation
 	add_widgets
 			-- Check adding two colors
 		local
-			f: HSB_COLOR_FACTORY
+			f: RGB_COLORS
 		do
-			create f
-				-- Primary colors
-			print ("----  Primary colors ----%N")
-			add_test (f.red, f.red, f.red)
-			add_test (f.green, f.green, f.green)
-			add_test (f.blue, f.blue, f.blue)
-				-- Secondary colors	(combination of primaries)
-			print ("----  Secondary colors ----%N")
-			add_test (f.red, f.green, f.yellow)
-			add_test (f.green, f.blue, f.cyan)
-			add_test (f.blue, f.red, f.magenta)
-				-- Tertiary
-			print ("----  Tertiary colors ----%N")
-			add_test (f.red, f.yellow, f.orange)
-			add_test (f.yellow, f.green, f.chartreuse)
-			add_test (f.green, f.cyan, f.spring)
-			add_test (f.cyan, f.blue, f.azure)
-			add_test (f.blue, f.magenta, f.violet)
-			add_test (f.magenta, f.red, f.rose)
-				-- Quaternary
-			print ("----  Quaternary colors ----%N")
-			add_test (f.red, f.orange, f.vermilion)
-			add_test (f.orange, f.yellow, f.amber)
-			add_test (f.yellow, f.chartreuse, f.lime)
-			add_test (f.chartreuse, f.green, f.harlequin)
-			add_test (f.green, f.spring, f.erin)
-			add_test (f.spring, f.cyan, f.aquamarine)
-			add_test (f.cyan, f.azure, f.capri)
-			add_test (f.azure, f.blue, f.cerulean)
-			add_test (f.blue, f.violet, f.indigo)
-			add_test (f.violet, f.magenta, f.purple)
-			add_test (f.magenta, f.rose, f.cerise)
-			add_test (f.rose, f.red, f.crimson)
-				-- Quiary
-			print ("----  Quiary colors ----%N")
-			add_test (f.red, f.vermilion, f.scarlet)
-			add_test (f.vermilion, f.orange, f.persimmon)
-			add_test (f.orange, f.amber, f.orange_peel)
-			add_test (f.amber, f.yellow, f.golden_yellow)
-			add_test (f.yellow, f.lime, f.lemon)
-			add_test (f.lime, f.chartreuse, f.spring_bud)
-			add_test (f.chartreuse, f.harlequin, f.bright_green)
-			add_test (f.harlequin, f.green, f.neon_green)
-			add_test (f.green, f.erin, f.jade)
-			add_test (f.erin, f.spring, f.emerald)
-			add_test (f.spring, f.aquamarine, f.mint)
-			add_test (f.aquamarine, f.cyan, f.turquiose)
-			add_test (f.cyan, f.capri, f.sky_blue)
-			add_test (f.capri, f.azure, f.cornflower)
-			add_test (f.azure, f.cerulean, f.cobalt)
-			add_test (f.cerulean, f.blue, f.sapphire)
-			add_test (f.blue, f.indigo, f.iris)
-			add_test (f.indigo, f.violet, f.veronica)
-			add_test (f.violet, f.purple, f.amethyst)
-			add_test (f.purple, f.magenta, f.phlox)
-			add_test (f.magenta, f.cerise, f.fuchsia)
-			add_test (f.cerise, f.rose, f.deep_pink)
-			add_test (f.rose, f.crimson, f.raspberry)
-			add_test (f.crimson, f.red, f.amaranth)
+			print (" HSB_COLORP_SUMMATIONS.add_widgets:   Fix me? %N")
+--			create f
+--				-- Primary colors
+--			print ("----  Primary colors ----%N")
+--			add_test (f.red, f.red, f.red)
+--			add_test (f.green, f.green, f.green)
+--			add_test (f.blue, f.blue, f.blue)
+--				-- Secondary colors	(combination of primaries)
+--			print ("----  Secondary colors ----%N")
+--			add_test (f.red, f.green, f.yellow)
+--			add_test (f.green, f.blue, f.cyan)
+--			add_test (f.blue, f.red, f.magenta)
+--				-- Tertiary
+--			print ("----  Tertiary colors ----%N")
+--			add_test (f.red, f.yellow, f.orange)
+--			add_test (f.yellow, f.green, f.chartreuse)
+--			add_test (f.green, f.cyan, f.spring)
+--			add_test (f.cyan, f.blue, f.azure)
+--			add_test (f.blue, f.magenta, f.violet)
+--			add_test (f.magenta, f.red, f.rose)
+--				-- Quaternary
+--			print ("----  Quaternary colors ----%N")
+--			add_test (f.red, f.orange, f.vermilion)
+--			add_test (f.orange, f.yellow, f.amber)
+--			add_test (f.yellow, f.chartreuse, f.lime)
+--			add_test (f.chartreuse, f.green, f.harlequin)
+--			add_test (f.green, f.spring, f.erin)
+--			add_test (f.spring, f.cyan, f.aquamarine)
+--			add_test (f.cyan, f.azure, f.capri)
+--			add_test (f.azure, f.blue, f.cerulean)
+--			add_test (f.blue, f.violet, f.indigo)
+--			add_test (f.violet, f.magenta, f.purple)
+--			add_test (f.magenta, f.rose, f.cerise)
+--			add_test (f.rose, f.red, f.crimson)
+--				-- Quiary
+--			print ("----  Quiary colors ----%N")
+--			add_test (f.red, f.vermilion, f.scarlet)
+--			add_test (f.vermilion, f.orange, f.persimmon)
+--			add_test (f.orange, f.amber, f.orange_peel)
+--			add_test (f.amber, f.yellow, f.golden_yellow)
+--			add_test (f.yellow, f.lime, f.lemon)
+--			add_test (f.lime, f.chartreuse, f.spring_bud)
+--			add_test (f.chartreuse, f.harlequin, f.bright_green)
+--			add_test (f.harlequin, f.green, f.neon_green)
+--			add_test (f.green, f.erin, f.jade)
+--			add_test (f.erin, f.spring, f.emerald)
+--			add_test (f.spring, f.aquamarine, f.mint)
+--			add_test (f.aquamarine, f.cyan, f.turquiose)
+--			add_test (f.cyan, f.capri, f.sky_blue)
+--			add_test (f.capri, f.azure, f.cornflower)
+--			add_test (f.azure, f.cerulean, f.cobalt)
+--			add_test (f.cerulean, f.blue, f.sapphire)
+--			add_test (f.blue, f.indigo, f.iris)
+--			add_test (f.indigo, f.violet, f.veronica)
+--			add_test (f.violet, f.purple, f.amethyst)
+--			add_test (f.purple, f.magenta, f.phlox)
+--			add_test (f.magenta, f.cerise, f.fuchsia)
+--			add_test (f.cerise, f.rose, f.deep_pink)
+--			add_test (f.rose, f.crimson, f.raspberry)
+--			add_test (f.crimson, f.red, f.amaranth)
 		end
 
 	add_test (a_color, a_other, a_expected: HSB_COLOR)
@@ -115,7 +124,8 @@ feature {NONE} -- Implementation
 		local
 			c: HSB_COLOR
 		do
-			c := a_color + a_other
+--			c := a_color + a_other
+create c
 			if c ~ a_expected then
 --				print (a_color.name + " + " + a_other.name + " = " + c.name + "%N")
 			else
@@ -128,7 +138,7 @@ feature {NONE} -- Implementation
 	build_add_world
 			-- Fill the area that shows adding of colors
 		local
-			fac: HSB_COLOR_FACTORY
+			fac: RGB_COLORS
 			row, prev_row: EV_MODEL_WORLD
 			t: EV_MODEL_TEXT
 			jump: INTEGER
@@ -285,9 +295,9 @@ feature {NONE} -- Implementation
 			b2.set_x_y (b1.x + w + gap, b1.y)
 			Result.extend (b2)
 				-- Create box for third color
-			b3 := color_box (a_color + a_other_color, w, h)
-			b3.set_x_y (b2.x + w + gap, b2.y)
-			Result.extend (b3)
+--			b3 := color_box (a_color + a_other_color, w, h)
+--			b3.set_x_y (b2.x + w + gap, b2.y)
+--			Result.extend (b3)
 		end
 
 	color_box (a_color: HSB_COLOR; a_width, a_height: INTEGER): EV_MODEL_WORLD
@@ -298,11 +308,11 @@ feature {NONE} -- Implementation
 			rec: EV_MODEL_RECTANGLE
 			t: EV_MODEL_TEXT
 			c: EV_COLOR
-			fac: HSB_COLOR_FACTORY
+			fac: RGB_COLORS
 		do
 			create Result
 			create fac
-			c := a_color.as_ev_color
+			c := as_ev_color (a_color)
 			create rec.make_rectangle (100, 100, a_width, a_height)
 			rec.set_background_color (c)
 --			rec.set_foreground_color (c)

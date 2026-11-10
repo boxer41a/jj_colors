@@ -30,6 +30,12 @@ inherit {NONE}
 			copy
 		end
 
+	SHARED_UTILS
+		undefine
+			default_create,
+			copy
+		end
+
 feature {NONE} -- Initialization
 
 	create_interface_objects
@@ -52,12 +58,15 @@ feature {NONE} -- Initialization
 
 feature {NONE} -- Implementation
 
+	size: INTEGER = 50
+			-- Size of the color squares and length of rectangles
+
 	add_widgets
 			-- Show the color palette to demonstrate change in HSL values
 		local
 			row: EV_MODEL_WORLD
 			prev_row: EV_MODEL_WORLD
-			s, gap: INTEGER
+			gap: INTEGER
 			t: EV_MODEL_TEXT
 			str: STRING
 		do
@@ -70,52 +79,50 @@ feature {NONE} -- Implementation
 				--    build_row (a_color, a_name)
 				--  maybe have a table of colors with their names?
 			gap := 5
-			s := 60
 
 			create t.make_with_text ("Name   EV_COLOR   HSL_COLOR")
 			world.extend (t)
-			t.set_x_y (150, 2)
+			t.set_x_y (100, 50)
 			str := " Top Row - Saturation goes from 0 to 255 %N %
 					% Middel Row - grayscale of the colors in the top row %N %
 					% Bottom Row - Lightness goes from 0 to 255"
 			create t.make_with_text (str)
-			t.set_x_y (500, 2)
+			t.set_x_y (450, 30)
 			world.extend (t)
 				-- Red
-			row := new_color_row (Red, "Red", s)
-			row.set_y (t.y + t.height + 10 * gap)
+			row := new_color_row (Red, "Red", Size)
+			row.set_y (t.y + t.height + 5 * gap)
 			world.extend (row)
 				-- Green
 			prev_row := row
-			row := new_color_row (Green, "Green", s)
-			row.set_x_y (prev_row.x, prev_row.y + s + 2 * gap)
+			row := new_color_row (Green, "Green", Size)
+			row.set_x_y (prev_row.x, prev_row.y + Size + 2 * gap)
 			world.extend (row)
 				-- Blue
 			prev_row := row
-			row := new_color_row (Blue, "Blue", s)
-			row.set_x_y (prev_row.x, prev_row.y + s + 2 * gap)
+			row := new_color_row (Blue, "Blue", Size)
+			row.set_x_y (prev_row.x, prev_row.y + Size + 2 * gap)
 			world.extend (row)
 				-- Yellow
 			prev_row := row
-			row := new_color_row (Yellow, "Yellow", s)
-			row.set_x_y (prev_row.x, prev_row.y + s + 2 * gap)
+			row := new_color_row (Yellow, "Yellow", Size)
+			row.set_x_y (prev_row.x, prev_row.y + Size + 2 * gap)
 			world.extend (row)
 				-- Cyan
 			prev_row := row
-			row := new_color_row (Cyan, "Cyan", s)
-			row.set_x_y (prev_row.x, prev_row.y + s + 2 * gap)
+			row := new_color_row (Cyan, "Cyan", Size)
+			row.set_x_y (prev_row.x, prev_row.y + Size + 2 * gap)
 			world.extend (row)
 				-- Magenta
 			prev_row := row
-			row := new_color_row (Magenta, "Magenta", s)
-			row.set_x_y (prev_row.x, prev_row.y + s + 2 * gap)
+			row := new_color_row (Magenta, "Magenta", Size)
+			row.set_x_y (prev_row.x, prev_row.y + Size + 2 * gap)
 			world.extend (row)
-
 				-- Show changes in `hue'
 			prev_row := row
 			row := new_hue_row
 			world.extend (row)
-			row.set_x_y (prev_row.x, prev_row.y + 3 * s)
+			row.set_point_position (prev_row.point_x  + Size, prev_row.point_y + 2 * Size)
 		end
 
 	new_hue_row: EV_MODEL_WORLD
@@ -129,28 +136,30 @@ feature {NONE} -- Implementation
 			i: INTEGER
 			c: HSB_COLOR
 			s: STRING
-			fac: HSB_COLOR_FACTORY
+			rgb_fac: RGB_COLORS
+			html_fac: HTML_EXTENDED_COLORS
 		do
 			create Result
-			create fac
-			w := 6
+			create rgb_fac
+			create html_fac
+			w := 4
 			h := 50
 --			create prev_rec
 			from i := 0
 			until i > {HSB_COLOR}.max_value
 			loop
-				create c.set (i, {HSB_COLOR}.max_value, {HSB_COLOR}.max_value // 2)
+				create c.make (i, {HSB_COLOR}.Max_value, {HSB_COLOR}.Mid_value)
 				create rec.make_rectangle (i * w, 0, w, h)
-				rec.set_pebble (c.as_ev_color)
-				rec.set_background_color (c.as_ev_color)
-				rec.set_foreground_color (c.as_ev_color)
-				s := fac.name (c)
-				if i \\ 10 = 0 then
-					create t.make_with_text (i.out)
-					t.set_x_y (rec.x - w, rec.y)
-					Result.extend (t)
+				rec.set_pebble (c)
+				rec.set_background_color (as_ev_color (c))
+				rec.set_foreground_color (as_ev_color (c))
+				s := rgb_fac.name (c)
+				if s ~ "Unknown" then
+					s := html_fac.name (c)
 				end
-				if not s.has_substring ("Unknown") then
+					-- Put color names under the spectrum
+				if i \\ 2 = 0 and then not s.has_substring ("Unknown") then
+--				if not s.has_substring ("Unknown") then
 					create t.make_with_text (s)
 					t.set_x_y (rec.x, rec.y + h)
 					Result.extend (t)
@@ -159,6 +168,18 @@ feature {NONE} -- Implementation
 					Result.extend (lin)
 				end
 				Result.extend (rec)
+				i := i + 1
+			end
+				-- Now put the hue value over the colored rectangle in the spectrum
+			from i := 1
+			until i > {HSB_COLOR}.max_value
+			loop
+				if i \\ 10 = 0 then
+					create rec.make_rectangle (i * w, 0, w, h)
+					create t.make_with_text (i.out)
+					t.set_x_y (rec.x - w, rec.y)
+					Result.extend (t)
+				end
 				i := i + 1
 			end
 		end
@@ -181,23 +202,25 @@ feature {NONE} -- Implementation
 			create Result
 				-- Show `a_name'
 			create t.make_with_text (a_name)
+				-- Make the EV_COLOR square
 			create rec.make_rectangle (100, 10, a_size, a_size)
 			rec.set_background_color (a_color)
 			rec.set_foreground_color (a_color)
 			rec.set_pebble (a_color)
-			t.set_x_y (rec.point_a_x - gap - t.width, rec.y)
+			t.set_x_y (rec.x - rec.width - t.width, rec.y)
+--			t.set_foreground_color (a_color)
 			Result.extend (t)
 			Result.extend (rec)
 				-- Now make my color
-			create col.set_with_ev_color (a_color)
+			create col.make_with_rgb (a_color.red, a_color.green, a_color.blue)
 			create my_rec.make_rectangle (0, 0 , a_size, a_size)
 			my_rec.set_x_y (rec.x + a_size + gap, rec.y)
-			my_rec.set_background_color (col.as_ev_color)
-			my_rec.set_foreground_color (col.as_ev_color)
-			my_rec.set_pebble (col.as_ev_color)
+			my_rec.set_background_color (as_ev_color (col))
+			my_rec.set_foreground_color (as_ev_color (col))
+			my_rec.set_pebble (as_ev_color (col))
 			Result.extend (my_rec)
 				-- Make the change in saturation columns
-			create col2.set_with_ev_color (a_color)
+			create col2.make_with_rgb (a_color.red, a_color.green, a_color.blue)
 			col2.set_brightness ({HSB_COLOR}.max_value)
 			prev_rec := my_rec
 			y := my_rec.y
@@ -221,8 +244,8 @@ feature {NONE} -- Implementation
 					-- Create the rectangle
 				create rec.make_rectangle (0, 0, a_size, bar_s)
 				rec.set_x_y (x, y)
-				rec.set_background_color (col.as_ev_color)
-				rec.set_pebble (col.as_ev_color)
+				rec.set_background_color (as_ev_color (col))
+				rec.set_pebble (as_ev_color (col))
 				Result.extend (rec)
 				create t.make_with_text (col.saturation.out)
 				t.set_x_y (rec.x, rec.y)
@@ -230,19 +253,19 @@ feature {NONE} -- Implementation
 				if i > n then
 					rec.set_foreground_color (Black)
 				else
-					rec.set_foreground_color (col.as_ev_color)
+					rec.set_foreground_color (as_ev_color (col))
 				end
 					-- Show grey scale in middle, using `col' of saturation row
 					-- Create the rectangle
 				y := prev_rec.y
 				create rec.make_rectangle (0, 0, a_size, bar_s)
 				rec.set_x_y (x, y)
-				rec.set_background_color (col.as_grayscale.as_ev_color)
-				rec.set_pebble (col.as_grayscale.as_ev_color)
+				rec.set_background_color (as_ev_color (col.as_grayscale))
+				rec.set_pebble (as_ev_color (col.as_grayscale))
 				if i > n then
 					rec.set_foreground_color (Black)
 				else
-					rec.set_foreground_color (col.as_ev_color)
+					rec.set_foreground_color (as_ev_color (col))
 				end
 				Result.extend (rec)
 					-- Increment the `lightness' level
@@ -251,12 +274,12 @@ feature {NONE} -- Implementation
 				y := prev_rec.y + bar_s + bar_s // 2
 				create rec.make_rectangle (0, 0, a_size, bar_s)
 				rec.set_x_y (x, y)
-				rec.set_background_color (col2.as_ev_color)
-				rec.set_pebble (col2.as_ev_color)
+				rec.set_background_color (as_ev_color (col2))
+				rec.set_pebble (as_ev_color (col2))
 				if i > n then
 					rec.set_foreground_color (Black)
 				else
-					rec.set_foreground_color (col2.as_ev_color)
+					rec.set_foreground_color (as_ev_color (col2))
 				end
 				Result.extend (rec)
 				i := i + 1

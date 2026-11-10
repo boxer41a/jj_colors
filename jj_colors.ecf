@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <system xmlns="http://www.eiffel.com/developers/xml/configuration-1-22-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-22-0 http://www.eiffel.com/developers/xml/configuration-1-22-0.xsd" name="jj_colors" uuid="7614815D-6B9C-5821-BCB2-288816D9B422" library_target="jj_colors">
+
 	<target name="jj_colors">
 		<root all_classes="true"/>
+
 		<file_rule>
 			<exclude>/CVS$</exclude>
 			<exclude>/EIFGENs$</exclude>
@@ -10,29 +12,33 @@
 			<exclude>/demo$</exclude>
 			<exclude>/docs$</exclude>
 		</file_rule>
-		<option warning="warning" is_obsolete_iteration="true" manifest_array_type="mismatch_warning">
-			<assertions precondition="true"/>
+
+		<option
+			warning="warning"
+			is_obsolete_iteration="false"
+			manifest_array_type="mismatch_warning">
+			<assertions
+				precondition="true"
+				postcondition="true"
+				check="true"
+				invariant="true"
+				loop="true"/>
 		</option>
+
 		<setting name="total_order_on_reals" value="true"/>
 		<setting name="dead_code_removal" value="feature"/>
+
 		<capability>
-			<concurrency use="none"/>
+			<concurrency support="scoop" use="scoop"/>
+			<void_safety support="all" use="all"/>
 		</capability>
-		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf">
-			<option>
-			</option>
-		</library>
-		<library name="jj_math" location="$JJ_GITHUB\jj_math\jj_math.ecf">
-			<option>
-			</option>
-		</library>
-		<library name="vision2" location="$ISE_LIBRARY\library\vision2\vision2.ecf">
-			<option>
-			</option>
-		</library>
-		<cluster name="jj_colors" location=".\" recursive="true">
-			<option is_obsolete_iteration="true">
-			</option>
-		</cluster>
+
+			<!-- Eiffel Software Libraries -->
+		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+
+			<!-- My Classes -->
+		<library name="jj_math" location="$JJ_GITHUB\jj_math\jj_math.ecf"/>
+		<cluster name="jj_colors" location=".\" recursive="true"/>
+
 	</target>
 </system>

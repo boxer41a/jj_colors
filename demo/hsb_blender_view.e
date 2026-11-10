@@ -62,11 +62,10 @@ inherit
 
 inherit {NONE}
 
-	HTML_EXTENDED_COLORS
+	SHARED_UTILS
 		undefine
 			default_create,
-			copy,
-			is_equal
+			copy
 		end
 
 feature {NONE} -- Initialization
@@ -78,14 +77,16 @@ feature {NONE} -- Initialization
 			-- bridge pattern.
 		local
 			s: STRING
+			fac: HTML_EXTENDED_COLORS
 		do
 			Precursor {EV_FRAME}
 			create fixed
-			background_color := white.as_mutable
-			rectangle_color := red.as_mutable
-			other_rectangle_color := green.as_mutable
-			overlapped_rectangle_color := dark_gray
-			other_overlapped_rectangle_color := silver
+			create fac
+			background_color := fac.white.as_mutable
+			rectangle_color := fac.red.as_mutable
+			other_rectangle_color := fac.green.as_mutable
+			overlapped_rectangle_color := fac.dark_gray
+--			other_overlapped_rectangle_color := fac.silver
 				-- explain label
 			s := "tell me something"
 			create explain_label.make_with_text (s)
@@ -136,14 +137,16 @@ feature {NONE} -- Initialization
 			create overlapped_rectangle
 			create overlapped_rectangle_text.make_with_text (s)
 			overlapped_rectangle_text.align_text_left
-				-- `other_overlapped_rectangle' and text
-			create other_overlapped_rectangle
-			create other_overlapped_rectangle_text.make_with_text (s)
-			other_overlapped_rectangle_text.align_text_left
+--				-- `other_overlapped_rectangle' and text
+--			create other_overlapped_rectangle
+--			create other_overlapped_rectangle_text.make_with_text (s)
+--			other_overlapped_rectangle_text.align_text_left
 		end
 
 	initialize
 			-- Set up the view
+		local
+			fac: HTML_EXTENDED_COLORS
 		do
 			Precursor {EV_FRAME}
 			set_border_width (4)
@@ -188,19 +191,17 @@ feature {NONE} -- Initialization
 				-- Add `overlapped_rectangle'
 			fixed.extend (overlapped_rectangle)
 			fixed.extend (overlapped_rectangle_text)
-				-- Add `other_overlapped_rectangle'
-			fixed.extend (other_overlapped_rectangle)
-			fixed.extend (other_overlapped_rectangle_text)
 				-- Position the rectangles and text
 			position_explain_label
 			position_background
 			position_rectangle
 			position_other_rectangle
-			position_overlapped_rectangles
+			position_overlapped_rectangle
 				-- Initialize the colors of the rectangles
-			on_drop_color (background, white.as_ev_color)
-			on_drop_color (rectangle, red.as_ev_color)
-			on_drop_color (other_rectangle, green.as_ev_color)
+			create fac
+			on_drop_color (background, as_ev_color (fac.black))
+			on_drop_color (rectangle, as_ev_color (fac.red))
+			on_drop_color (other_rectangle, as_ev_color (fac.green))
 				-- Add actions to rectangles and controls
 			add_actions
 		end
@@ -214,18 +215,9 @@ feature {NONE} -- Implementation
 			s: STRING
 		do
 			s := " Demonstrates color blending %N%N %
-				% Two colored rectangles are placed over a background rectangle.%N %
-				% The two foreground rectangles are blended with the background %N %
-				% based on their alpha values and are also blended togeter pro- %N %
-				% ducing the two smaller blended areas in the middle.  The left %N %
-				% side is produced by first calculating the RGB values of the   %N %
-				% two colors, calculating the blended values usng 64-bit reals, %N %
-				% then converted back 8-bit natural `hue', `saturation', and    %N %
-				%`brightness' values.                                           %N %
-				% The right side shows an attempt to calculated the new blended %N %
-				% color using only the attributes of {HSB_COLOR} (e.g. `hue',   %N %
-				% `saturation', `brightness', and `alpha' without going through %N %
-				% the convertion to RGB values."
+				% Two colored rectangles are placed over a background rectangle.  The%N %
+				% two foreground rectangles are alpha blended with the background %N %
+				% and are also blended together, giving middle area. "
 			explain_label.set_text (s)
 			explain_label.align_text_left
 			fixed.set_item_position (explain_label, margin, margin)
@@ -238,14 +230,14 @@ feature {NONE} -- Implementation
 		do
 			gap := 4
 				-- The background rectangle first, leaving room for controls
-			x := margin
-			y := explain_label.y_position + explain_label.height + 3 * margin
-			fixed.set_item_position (background, x, y)
-			fixed.set_item_size (background, background_width, background_height)
 
-				-- Spinners on top of `background' (adjusted right toward center)
-			x := background.x_position + 5 * margin
-			y := background.y_position - background_hue_spin.height
+				-- Starting point is under the explain_label
+			x := margin
+			y := explain_label.y_position + explain_label.height + margin
+				-- Position  first (i.e. `hue') label
+			fixed.set_item_position (background_hue_label, x, y)
+			y := background_hue_label.y_position + background_hue_label.height
+				-- Position first (i.e. `hue' spinner) & reference off it for other spinners
 			fixed.set_item_position (background_hue_spin, x, y)
 			x := background_hue_spin.x_position + background_hue_spin.width + gap
 			fixed.set_item_position (background_saturation_spin, x, y)
@@ -253,18 +245,22 @@ feature {NONE} -- Implementation
 			fixed.set_item_position (background_brightness_spin, x, y)
 			x := background_brightness_spin.x_position + background_brightness_spin.width + gap
 			fixed.set_item_position (background_alpha_spin, x, y)
-				-- Labels over the spinners
-			x := background_hue_spin.x_position
-			y := background_hue_spin.y_position - background_hue_label.height
-			fixed.set_item_position (background_hue_label, x, y)
+			y := background_hue_label.y_position
+				-- Put other labels above the appropriate spinner
+			y := background_hue_label.y_position
 			x := background_saturation_spin.x_position
 			fixed.set_item_position (background_saturation_label, x, y)
 			x := background_brightness_spin.x_position
 			fixed.set_item_position (background_brightness_label, x, y)
 			x := background_alpha_spin.x_position
 			fixed.set_item_position (background_alpha_label, x, y)
-				-- Position the text
-			x := background.x_position + background.width - background_text.width - margin
+				-- Position the `background' rectangle
+			x := background_hue_spin.x_position
+			y := background_hue_spin.y_position + background_hue_spin.height + gap
+			fixed.set_item_position (background, x, y)
+			fixed.set_item_size (background, background_width, background_height)
+				-- Position the `background_text'
+			x := background.x_position + background.width - background_text.width - gap
 			y := background.y_position + gap
 			fixed.set_item_position (background_text, x, y)
 		end
@@ -306,7 +302,7 @@ feature {NONE} -- Implementation
 			fixed.set_item_size (rectangle, rec_width, rec_height)
 				-- Position the text
 			x := rectangle.x_position + gap
-			y := rectangle.y_position + gap
+			y := rectangle.y_position + gap + gap
 			fixed.set_item_position (rectangle_text, x, y)
 		end
 
@@ -316,6 +312,7 @@ feature {NONE} -- Implementation
 			gap: INTEGER
 			x, y: INTEGER
 			w, h: INTEGER
+			r: INTEGER		-- right edge of a control
 		do
 			gap := 4
 				-- Position `other_rectangle' relative to `rectangle'
@@ -325,16 +322,18 @@ feature {NONE} -- Implementation
 			y := rectangle.y_position + h
 			fixed.set_item_position (other_rectangle, x, y)
 			fixed.set_item_size (other_rectangle, rec_width, rec_height)
-				-- Other HSB labels and spinners
-			x := other_rectangle.x_position
+				-- Other HSB spinners, right justify so start from right side
 			y := other_rectangle.y_position + other_rectangle.height + gap
-			fixed.set_item_position (other_hue_spin, x, y)
-			x := other_hue_spin.x_position + other_hue_spin.width + gap
-			fixed.set_item_position (other_saturation_spin, x, y)
-			x := other_saturation_spin.x_position + other_saturation_spin.width + gap
-			fixed.set_item_position (other_brightness_spin, x, y)
-			x := other_brightness_spin.x_position + other_brightness_spin.width + gap
+			x := other_rectangle.x_position + other_rectangle.width
+			x := x - other_alpha_spin.width
 			fixed.set_item_position (other_alpha_spin, x, y)
+			x := other_alpha_spin.x_position - (other_brightness_spin.width + gap)
+			fixed.set_item_position (other_brightness_spin, x, y)
+			x := other_brightness_spin.x_position - (other_saturation_spin.width + gap)
+			fixed.set_item_position (other_saturation_spin, x, y)
+			x := other_saturation_spin.x_position - (other_hue_spin.width + gap)
+			fixed.set_item_position (other_hue_spin, other_hue_spin.width + gap, y)
+				-- Other HSB labels
 			x := other_hue_spin.x_position
 			y := other_hue_spin.y_position + other_hue_spin.height
 			fixed.set_item_position (other_hue_label, x, y)
@@ -348,15 +347,14 @@ feature {NONE} -- Implementation
 			y := other_alpha_spin.y_position + other_alpha_spin.height
 			fixed.set_item_position (other_alpha_label, x, y)
 				-- Position the text
-			x := other_rectangle.x_position + other_rectangle.width - other_rectangle_text.width - margin
-			y := other_rectangle.y_position + other_rectangle.height - other_rectangle_text.height - margin
+			x := other_rectangle.x_position + other_rectangle.width - other_rectangle_text.width - gap
+			y := other_rectangle.y_position + other_rectangle.height - (other_rectangle_text.height + margin + margin)
 			fixed.set_item_position (other_rectangle_text, x, y)
 		end
 
-	position_overlapped_rectangles
-			-- Position the `overlapped_rectangle' and the `other_overlapped_rectangle'
-			-- relative to `rectangle' and `other_rectangle' (i.e. show the overlapped
-			-- regions).
+	position_overlapped_rectangle
+			-- Position the `overlapped_rectangle' relative to `rectangle'
+			-- (i.e. show the overlapped area)
 		local
 			x, y, h, w: INTEGER
 			gap: INTEGER
@@ -368,22 +366,11 @@ feature {NONE} -- Implementation
 			w := rectangle.width - rectangle.width // overlap_ratio
 			h := rectangle.height - rectangle.height // overlap_ratio
 			fixed.set_item_position (overlapped_rectangle, x, y)
-			fixed.set_item_size (overlapped_rectangle, w // 2, h)
+			fixed.set_item_size (overlapped_rectangle, w, h)
 				-- Position the text
 			x := overlapped_rectangle.x_position + gap
-			y := overlapped_rectangle.y_position + gap
+			y := overlapped_rectangle.y_position + gap + gap
 			fixed.set_item_position (overlapped_rectangle_text, x, y)
-				-- Position the `other_overlapped_rectangle'
-			x := overlapped_rectangle.x_position + overlapped_rectangle.width
-			y := overlapped_rectangle.y_position
---			w := other_rectangle.x_position + other_rectangle.width - x
---			h := other_rectangle.y_position + other_rectangle.height
-			fixed.set_item_position (other_overlapped_rectangle, x, y)
-			fixed.set_item_size (other_overlapped_rectangle, w // 2, h)
-				-- Position the text
-			x := other_overlapped_rectangle.x_position + gap
-			y := other_overlapped_rectangle.y_position + gap
-			fixed.set_item_position (other_overlapped_rectangle_text, x, y)
 		end
 
 	add_actions
@@ -414,7 +401,7 @@ feature {NONE} -- Basic operations
 		local
 			c: HSB_COLOR
 		do
-			create c.set_with_ev_color (a_color)
+			create c.make_with_rgb (a_color.red, a_color.green, a_color.blue)
 			if a_rectangle = background then
 				background_hue_spin.set_value (c.hue)
 				background_saturation_spin.set_value (c.saturation)
@@ -449,8 +436,8 @@ feature {NONE} -- Basic operations
 			h := background_hue_spin.value
 			s := background_saturation_spin.value
 			b := background_brightness_spin.value
-			create background_color.set (h, s, b)
-			ev_col := background_color.as_ev_color
+			create background_color.make (h, s, b)
+			ev_col := as_ev_color (background_color)
 			background.set_background_color (ev_col)
 			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
 				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
@@ -461,8 +448,8 @@ feature {NONE} -- Basic operations
 				%B = " + int_formatter.formatted (background_color.brightness).out + "%N%
 				%a = " + int_formatter.formatted (background_color.alpha).out
 			background_text.set_text (str)
-			background_text.set_background_color (background_color.as_ev_color)
-			background_text.set_foreground_color (background_color.complement.as_ev_color)
+			background_text.set_background_color (as_ev_color (background_color))
+			background_text.set_foreground_color (as_ev_color (background_color.complement))
 				-- Need to update the color of the other two rectangles and overlap
 			update_rectangle_color (0)
 			update_other_color (0)
@@ -481,8 +468,9 @@ feature {NONE} -- Basic operations
 			s := rectangle_saturation_spin.value
 			b := rectangle_brightness_spin.value
 			a := rectangle_alpha_spin.value
-			rectangle_color.set_with_alpha (h, s, b, a)
-			ev_col := rectangle_color.over (background_color).as_ev_color
+			rectangle_color.set (h, s, b)
+			rectangle_color.set_alpha (a)
+			ev_col := as_ev_color (rectangle_color.over (background_color))
 			rectangle.set_background_color (ev_col)
 			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
 				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
@@ -494,7 +482,7 @@ feature {NONE} -- Basic operations
 				%a = " + int_formatter.formatted (rectangle_color.alpha).out
 			rectangle_text.set_text (str)
 			rectangle_text.set_background_color (ev_col)
-			rectangle_text.set_foreground_color (rectangle_color.complement.as_ev_color)
+			rectangle_text.set_foreground_color (as_ev_color (rectangle_color.complement))
 				-- Update the overlapping region's color
 			update_overlap
 		end
@@ -512,8 +500,9 @@ feature {NONE} -- Basic operations
 			s := other_saturation_spin.value
 			b := other_brightness_spin.value
 			a := other_alpha_spin.value
-			other_rectangle_color.set_with_alpha (h, s, b, a)
-			ev_col := other_rectangle_color.over (background_color).as_ev_color
+			other_rectangle_color.set (h, s, b)
+			other_rectangle_color.set_alpha (a)
+			ev_col := as_ev_color (other_rectangle_color.over (background_color))
 			other_rectangle.set_background_color (ev_col)
 			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
 				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
@@ -525,7 +514,7 @@ feature {NONE} -- Basic operations
 				%a = " + int_formatter.formatted (other_rectangle_color.alpha).out
 			other_rectangle_text.set_text (str)
 			other_rectangle_text.set_background_color (ev_col)
-			other_rectangle_text.set_foreground_color (other_rectangle_color.complement.as_ev_color)
+			other_rectangle_text.set_foreground_color (as_ev_color (other_rectangle_color.complement))
 				-- Update the overlapping region's color
 			update_overlap
 		end
@@ -538,7 +527,7 @@ feature {NONE} -- Basic operations
 		do
 				-- Calculate color using RGB formula in {HSB_COLOR}.over
 			overlapped_rectangle_color := other_rectangle_color.over (rectangle_color)
-			ev_col := overlapped_rectangle_color.as_ev_color
+			ev_col := as_ev_color (overlapped_rectangle_color)
 			overlapped_rectangle.set_background_color (ev_col)
 			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
 				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
@@ -550,22 +539,22 @@ feature {NONE} -- Basic operations
 				%a = " + int_formatter.formatted (overlapped_rectangle_color.alpha).out
 			overlapped_rectangle_text.set_text (str)
 			overlapped_rectangle_text.set_background_color (ev_col)
-			overlapped_rectangle_text.set_foreground_color (overlapped_rectangle_color.complement.as_ev_color)
-				-- Calculate color using HSB formula in {HSB_COLOR}.`hsb_over'
-			other_overlapped_rectangle_color := other_rectangle_color.hsb_over (rectangle_color)
-			ev_col := other_overlapped_rectangle_color.as_ev_color
-			other_overlapped_rectangle.set_background_color (ev_col)
-			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
-				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
-				%B = " + real_formatter.formatted (ev_col.blue).out + "%N%
-				% %N%
-				%H = " + int_formatter.formatted (other_overlapped_rectangle_color.hue).out + "%N%
-				%S = " + int_formatter.formatted (other_overlapped_rectangle_color.saturation).out + "%N%
-				%B = " + int_formatter.formatted (other_overlapped_rectangle_color.brightness).out + "%N%
-				%a = " + int_formatter.formatted (other_overlapped_rectangle_color.alpha).out
-			other_overlapped_rectangle_text.set_text (str)
-			other_overlapped_rectangle_text.set_background_color (ev_col)
-			other_overlapped_rectangle_text.set_foreground_color (overlapped_rectangle_color.complement.as_ev_color)
+			overlapped_rectangle_text.set_foreground_color (as_ev_color (overlapped_rectangle_color.complement))
+--				-- Calculate color using HSB formula in {HSB_COLOR}.`hsb_over'
+--			other_overlapped_rectangle_color := other_rectangle_color.hsb_over (rectangle_color)
+--			ev_col := as_ev_color (other_overlapped_rectangle_color)
+--			other_overlapped_rectangle.set_background_color (ev_col)
+--			str := "R = " + real_formatter.formatted (ev_col.red).out + "%N%
+--				%G = " + real_formatter.formatted (ev_col.green).out + "%N%
+--				%B = " + real_formatter.formatted (ev_col.blue).out + "%N%
+--				% %N%
+--				%H = " + int_formatter.formatted (other_overlapped_rectangle_color.hue).out + "%N%
+--				%S = " + int_formatter.formatted (other_overlapped_rectangle_color.saturation).out + "%N%
+--				%B = " + int_formatter.formatted (other_overlapped_rectangle_color.brightness).out + "%N%
+--				%a = " + int_formatter.formatted (other_overlapped_rectangle_color.alpha).out
+--			other_overlapped_rectangle_text.set_text (str)
+--			other_overlapped_rectangle_text.set_background_color (ev_col)
+--			other_overlapped_rectangle_text.set_foreground_color (as_ev_color (overlapped_rectangle_color.complement))
 		end
 
 feature {NONE} -- Contract support
@@ -587,7 +576,7 @@ feature {NONE} -- Implementation
 			create Result.make (0, {HSB_COLOR}.max_value)
 		end
 
-	margin: INTEGER = 20
+	margin: INTEGER = 10
 			-- To move controls away from a windodw edge
 
 	size_constant: INTEGER = 100
@@ -596,7 +585,7 @@ feature {NONE} -- Implementation
 	rec_width: INTEGER
 			-- The default width of the rectangles
 		once
-			Result := 3 * size_constant
+			Result := 4 * size_constant
 		end
 
 	rec_height: INTEGER
@@ -621,7 +610,7 @@ feature {NONE} -- Implementation
 		once
 			Result := margin + rec_height + rec_height // overlap_ratio + margin
 				-- Must account for height of the spin controls and labels
-			Result := Result + 4 * margin
+			Result := Result + 10 * margin
 		end
 
 feature {NONE} -- Implementation
@@ -750,21 +739,6 @@ feature {NONE} -- Implentation
 			-- The color obtained from blending the colors of
 			-- the `rectangle' and the `other_rectangle'
 
-feature {NONE} -- Implentation
-
-	other_overlapped_rectangle: EV_TEXT
-			-- Rectangle representing an area of overlap between the
-			-- `rectangle' and the `other_rectangle', displaying a
-			-- blended color calculated using RGB formula.
-			-- The left half of the overlapped region
-
-	other_overlapped_rectangle_text: EV_LABEL
-			-- Displays information about the `other_rectangle_color'
-
-	other_overlapped_rectangle_color: HSB_COLOR
-			-- The color obtained from blending the colors of
-			-- the `rectangle' and the `other_rectangle'
-
 feature {NONE} -- Implementation
 
 	real_formatter: FORMAT_DOUBLE
@@ -778,4 +752,5 @@ feature {NONE} -- Implementation
 		once
 			create Result.make (3)
 		end
+
 end

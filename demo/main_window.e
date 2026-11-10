@@ -41,7 +41,6 @@ feature {NONE} -- Initialization
 			create hsb_spectrum_view
 			create html_colors_view
 			create hsb_color_summations_view
-			create hsb_tweeker_view
 			create hsb_blender_view
 		end
 
@@ -63,50 +62,20 @@ feature {NONE} -- Initialization
 			h_split.extend (left_split)
 			h_split.extend (right_split)
 			left_split.extend (hsb_spectrum_view)
-			left_split.extend (html_colors_view)
-			right_split.extend (hsb_tweeker_view)
-			right_split.extend (hsb_blender_view)
+			left_split.extend (hsb_blender_view)
+			right_split.extend (html_colors_view)
 				-- Position scrollbars
 			html_colors_view.resize_if_necessary
-			hsb_spectrum_view.resize_if_necessary
-			hsb_color_summations_view.resize_if_necessary
+--			hsb_spectrum_view.resize_if_necessary
 --			hsb_blender_view.resize_if_necessary
 
-			test_naturals
-
+			hsb_spectrum_view.set_minimum_size (1100, 600)
+--			html_colors_view.set_minimum_size (400, 340)
+			hsb_blender_view.set_minimum_size (400, 580)
+--			set_size (1500, 1000)
+			set_position (100, 100)
 		end
 
-
-	test_naturals
-			-- Tries some math to see what we get
-		local
-			a, b, c: NATURAL_8
-			min, max, dist, min_dist, max_dist: NATURAL_8
-		do
-			print ("%N%N")
-			a := 250
-			b := 10
-			c := a + b
-			print (a.out + " + " + b.out + " = " + c.out + "%N")
-			a := 250
-			b := 10
-			c := b - a
-			print (b.out + " - " + a.out + " = " + c.out + "%N")
-
-
-			min := a.min (b)
-			max := a.max (b)
-			dist := max - min
-			min_dist := (max - min).min (min - max)
-			max_dist := (max - min).max (min - max)
-
-			print ("min = " + min.out + "%N")
-			print ("max = " + max.out + "%N")
-			print ("dist = " + dist.out + "%N")
-			print ("min_dist = " + min_dist.out + "%N")
-			print ("max_dist = " + max_dist.out + "%N")
-
-		end
 
 feature {NONE} -- Implementation, Close event
 
@@ -148,10 +117,6 @@ feature {NONE} -- Implementation / Constants
 
 	hsb_color_summations_view: HSB_COLOR_SUMMATIONS_VIEW
 			-- Shows the result of adding various colors together
-
-	hsb_tweeker_view: HSB_TWEEKER_VIEW
-			-- Has controls for changing hue, saturation, or brightness of
-			-- and {HSB_COLOR} to compair it to an {EV_COLOR}
 
 	hsb_blender_view: HSB_BLENDER_VIEW
 			-- Allows a color to placed over another color to
